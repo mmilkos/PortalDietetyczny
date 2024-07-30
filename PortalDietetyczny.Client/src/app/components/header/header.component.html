@@ -1,0 +1,26 @@
+<div class="container">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-0">
+    <a href="/" class="d-flex align-items-center col-3 mb-1 text-dark text-decoration-none" style="width: 100px">
+      <img style="height: 100px; width: 100px" [src]="logo" alt="">
+    </a>
+
+    <ul *ngIf="!isSmallScreen"
+      class="nav col-6 col-md-auto mb-2 justify-content-center mb-md-0 mx-auto">
+      <li><a routerLink="{{routes.start}}" class="nav-link px-2 link-dark"  routerLinkActive="currentPage">Start</a></li>
+      <li><a routerLink="{{routes.about}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">O nas</a></li>
+      <li><a routerLink="{{routes.recipes}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Przepisy</a></li>
+      <li><a routerLink="{{routes.diets}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Plany dietetyczne</a></li>
+      <li><a routerLink="{{routes.calculators}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Kalkulatory</a></li>
+      <li><a routerLink="{{routes.blog}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Blog</a></li>
+      <li><a routerLink="{{routes.consultations}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Konsultacje</a></li>
+      <li><p style="color: white">___</p></li>
+
+
+    </ul>
+    <ul class="nav col-6 col-md-auto mb-2 justify-content-center mb-md-0 mx-auto">
+      <li class="d-flex"><button type="button" class="btn btn-outline-dark me-4"><i class="fa-solid fa-cart-shopping"></i></button></li>
+      <li class="d-flex"><button type="button" class="btn btn-outline-dark me-2"><i class="fa-brands fa-instagram"></i></button></li>
+      <li class="d-flex"><button type="button" class="btn btn-outline-dark me-2"><i class="fa-brands fa-facebook"></i></button></li>
+    </ul>
+  </header>
+</div>

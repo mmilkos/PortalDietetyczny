@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.detailsCard
+{
+  border: 3px solid #85cd4f;
+  width: 50vh;
+  border-radius: 10px 20px 30px 40px;
+  text-align: center;
+  transition: background-color 0.5s ease;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+i
+{
+  margin: 20px;
+  font-size: 50px;
+  color: #5fa22e;
+}
+
+a
+{
+  color: #212529;
+  text-decoration: none;
+
+}
+
+.detailsCard:hover {
+  background-color: #5fa22e;
+  color: white;
+}
+
+.detailsCard:hover i {
+  color: white;
+}
+
+.learnMore
+{
+  color: #5fa22e;
+}
+
+.title
+{
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.content
+{
+  margin-top: 20px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+}
+@media (max-width: 430px) {
+  .detailsCard
+  {
+    width: 35vh;
+    margin-top: 1rem;
+  }
+}
+
