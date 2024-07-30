@@ -1,0 +1,25 @@
+<div class="container">
+  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-0">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <img style="height: 100px; width: 100px" [src]="logo" alt="">
+    </a>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li><a routerLink="{{routes.start}}" class="nav-link px-2 link-dark"  routerLinkActive="currentPage">Start</a></li>
+      <li><a routerLink="{{routes.about}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">O nas</a></li>
+      <li><a routerLink="{{routes.recipes}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Przepisy</a></li>
+      <li><a routerLink="{{routes.diets}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Plany dietetyczne</a></li>
+      <li><a routerLink="{{routes.calculators}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Kalkulatory</a></li>
+      <li><a routerLink="{{routes.blog}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Blog</a></li>
+      <li><a routerLink="{{routes.consultations}}" class="nav-link px-2 link-dark" routerLinkActive="currentPage">Konsultacje</a></li>
+    </ul>
+
+    <div class="col-md-3 text-end">
+      <button type="button" class="btn btn-outline-dark me-4"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button type="button" class="btn btn-outline-dark me-2"><i class="fa-brands fa-instagram"></i></button>
+      <button type="button" class="btn btn-outline-dark me-2"><i class="fa-brands fa-facebook"></i></button>
+    </div>
+
+  </header>
+</div>
+

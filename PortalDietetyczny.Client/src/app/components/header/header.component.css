@@ -1,0 +1,23 @@
+.vertical-separator {
+  border-left: 1px solid black;
+  height: auto;
+  margin: 0 10px; /* Adjust as needed */
+}
+
+.currentPage
+{
+  overflow: hidden;
+  position: relative;
+  border-bottom: 2px solid #5fa22e
+}
+
+.btn:hover {
+  background-color: #5fa22e;
+  border-color: white;
+}
+a
+{
+  padding: 0;
+  margin: 7px;
+}
+
