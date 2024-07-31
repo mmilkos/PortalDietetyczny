@@ -5,6 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
-export class FooterComponent {
+export class FooterComponent
+{
 
+  openLinkedin() {
+    window.open('https://www.linkedin.com/in/mateusz-milkowski2002/', '_blank');
+  }
 }

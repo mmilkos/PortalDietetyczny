@@ -11,19 +11,25 @@ export class HeaderComponent implements OnInit
 {
   public routes = RoutesEnum;
   logo = 'assets/logo.png';
-  public viewportWidth: number = 0;
-  public isSmallScreen: boolean = false;
+  public isBigScreen: boolean = false;
+  public instagram = "https://www.instagram.com/portaldietetyczny/"
+  public facebook = "https://www.facebook.com/gotowejadlospisy/"
 
   constructor(private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void
   {
-    this.viewportWidth = this.viewportScroller.getScrollPosition()[0];
-    window.onresize = () => {
-      this.viewportWidth = window.innerWidth;
-      this.isSmallScreen = window.innerWidth <= 431
-      console.log("Czy jest mały erkan; " + this.isSmallScreen)
-      console.log("Wielkosc erkanu " + this.viewportWidth)
-    }
+    window.addEventListener('resize', () => {
+      console.log(window.innerWidth);
+
+      this.isBigScreen = window.innerWidth <= 431;
+    });
+  }
+  openInstagram() {
+    window.open('https://www.instagram.com/portaldietetyczny/', '_blank');
+  }
+
+  openFacebook() {
+    window.open('https://www.facebook.com/gotowejadlospisy/', '_blank');
   }
 }
