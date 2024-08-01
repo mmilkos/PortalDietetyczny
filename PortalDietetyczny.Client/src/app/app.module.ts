@@ -14,6 +14,7 @@ import { DetailsGridComponent } from './components/details-grid/details-grid.com
 import { DetailsCardComponent } from './components/details-card/details-card.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
+import { AboutUsIntroComponent } from './components/about-us-intro/about-us-intro.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AboutUsComponent } from './components/pages/about-us/about-us.component
     DetailsGridComponent,
     DetailsCardComponent,
     FooterComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AboutUsIntroComponent
   ],
   imports: [
     BrowserModule,

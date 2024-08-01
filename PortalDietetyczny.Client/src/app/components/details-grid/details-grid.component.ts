@@ -9,16 +9,23 @@ import { Component, OnInit } from '@angular/core';
 export class DetailsGridComponent implements OnInit
 {
   public viewportWidth: number = 0;
-  public isSmallScreen: boolean = false;
-  constructor(private viewportScroller: ViewportScroller) { }
-
-  ngOnInit(): void
+  public isSmallScreen: boolean = true;
+  constructor(private viewportScroller: ViewportScroller)
   {
-    this.viewportWidth = this.viewportScroller.getScrollPosition()[0];
     window.onresize = () => {
       this.viewportWidth = window.innerWidth;
       this.isSmallScreen = window.innerWidth <= 431
     }
+    this.isSmallScreen = window.innerWidth <= 431
+  }
+
+  ngOnInit(): void
+  {
+    window.onresize = () => {
+      this.viewportWidth = window.innerWidth;
+      this.isSmallScreen = window.innerWidth <= 431
+    }
+    this.isSmallScreen = window.innerWidth <= 431
   }
 
 }
