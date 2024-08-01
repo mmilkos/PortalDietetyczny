@@ -6,5 +6,6 @@
   diets = "plany-dietetyczne",
   calculators = "kalkulatory",
   blog = "blog",
-  consultations = "konsultacje"
+  consultations = "konsultacje",
+  downloads = "do-pobrania"
 }

@@ -1,5 +1,7 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import {Router, RouterLink } from '@angular/router';
+import { RoutesEnum } from '../../enums/RoutesEnum';
 
 @Component({
   selector: 'app-details-grid',
@@ -8,24 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsGridComponent implements OnInit
 {
-  public viewportWidth: number = 0;
-  public isSmallScreen: boolean = true;
-  constructor(private viewportScroller: ViewportScroller)
-  {
-    window.onresize = () => {
-      this.viewportWidth = window.innerWidth;
-      this.isSmallScreen = window.innerWidth <= 431
-    }
-    this.isSmallScreen = window.innerWidth <= 431
+  public isSmallScreen: boolean = false;
+  public routes  = RoutesEnum;
+
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void
   {
-    window.onresize = () => {
-      this.viewportWidth = window.innerWidth;
-      this.isSmallScreen = window.innerWidth <= 431
-    }
-    this.isSmallScreen = window.innerWidth <= 431
+    window.addEventListener('resize', () => {
+      this.isSmallScreen = window.innerWidth <= 470;
+    });
+  }
+
+  navigateTo(url : string)
+  {
+    this.router.navigate([url])
   }
 
 }

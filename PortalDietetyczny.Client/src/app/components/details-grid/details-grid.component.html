@@ -1,13 +1,13 @@
 <div style="display: grid; place-items: center; width: 100%; background-color: white; border-top: 2px solid #d9d9d9;">
   <br>
   <div class="grid">
-    <app-details-card *ngIf="isSmallScreen" iconClass="fa-solid fa-house" title="start"></app-details-card>
-    <app-details-card *ngIf="isSmallScreen" iconClass="fa-solid fa-users" title="O nas"></app-details-card>
-    <app-details-card iconClass="fa-solid fa-plate-wheat" title="Przepisy"></app-details-card>
-    <app-details-card iconClass="fa-regular fa-clipboard" title="Plany dietetyczne"></app-details-card>
-    <app-details-card iconClass="fa-solid fa-calculator" title="Kalkulatory"></app-details-card>
-    <app-details-card iconClass="fa-solid fa-pen-to-square" title="Blog"></app-details-card>
-    <app-details-card iconClass="fa-solid fa-people-arrows" title="Konsultacje"></app-details-card>
-    <app-details-card iconClass="fa-solid fa-download" title="Materiały do pobrania"></app-details-card>
+    <app-details-card *ngIf="isSmallScreen" iconClass="fa-solid fa-house" title="start" (click)="navigateTo(routes.start)"></app-details-card>
+    <app-details-card *ngIf="isSmallScreen" iconClass="fa-solid fa-users" title="O nas" (click)="navigateTo(routes.about)"></app-details-card>
+    <app-details-card iconClass="fa-solid fa-plate-wheat" title="Przepisy" (click)="navigateTo(routes.recipes)"></app-details-card>
+    <app-details-card iconClass="fa-regular fa-clipboard" title="Plany dietetyczne" (click)="navigateTo(routes.diets)"></app-details-card>
+    <app-details-card iconClass="fa-solid fa-calculator" title="Kalkulatory" (click)="navigateTo(routes.calculators)"></app-details-card>
+    <app-details-card iconClass="fa-solid fa-pen-to-square" title="Blog" (click)="navigateTo(routes.blog)"></app-details-card>
+    <app-details-card iconClass="fa-solid fa-people-arrows" title="Konsultacje" (click)="navigateTo(routes.consultations)"></app-details-card>
+    <app-details-card iconClass="fa-solid fa-download" title="Materiały do pobrania" (click)="navigateTo(routes.downloads)"></app-details-card>
   </div>
 </div>

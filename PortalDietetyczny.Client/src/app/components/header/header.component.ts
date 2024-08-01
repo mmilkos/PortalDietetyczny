@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit
     window.addEventListener('resize', () => {
       console.log(window.innerWidth);
 
-      this.isBigScreen = window.innerWidth <= 431;
+      this.isBigScreen = window.innerWidth <= 1001;
     });
   }
   openInstagram() {

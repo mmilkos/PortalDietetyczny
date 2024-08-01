@@ -1,17 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-@media (max-width: 430px) {
-  .detailsCard
-  {
-    width: 35vh;
-    margin-top: 1rem;
-  }
-}
+
 
 .detailsCard
 {
   border: 3px solid #85cd4f;
-  width: 50vh;
+  width: 20vw;
+  max-width:  420px;
+  min-width: 200px;
   border-radius: 10px 20px 30px 40px;
   text-align: center;
   transition: background-color 0.5s ease;
@@ -20,6 +16,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  cursor: pointer;
 }
 
 i
@@ -64,4 +61,14 @@ a
   font-family: 'Inter', sans-serif;
 }
 
+@media (max-width: 470px) {
+  .detailsCard
+  {
+    max-width: 390px;
+    margin-top: 1rem;
+    padding: 0px;
+    width: 90vw;
+  }
+
+}
 

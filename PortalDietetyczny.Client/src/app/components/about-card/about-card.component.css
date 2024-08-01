@@ -5,20 +5,24 @@
   background-color: #f5f5f5;
   height: 70vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;  /* zmienione z 'center' na 'flex-start' */
   justify-content: center;
   border-top: 2px solid #d9d9d9;
+  width: 100vw;
+  padding-top: 8%; /* dodaj tyle paddingu, ile chcesz, aby elementy były przesunięte w dół */
 }
 
-@media (max-width:  768px)
+@media (max-width: 470px)
 {
+
   .name
   {
     color: #3f3f3f;
     font-family: 'Inter', sans-serif;
-    font-size: 2rem;
+    font-size: 1.6rem;
+
     font-weight: 600;
-    line-height: 16px;
+    line-height: 32px;
     margin-bottom: 50px;
   }
 
@@ -40,7 +44,7 @@
   {
 
     font-family: 'Inter', sans-serif;
-    font-size: 72px;
+    font-size: 48px;
     font-weight: 600;
     line-height: 16px;
     margin-bottom: 50px;

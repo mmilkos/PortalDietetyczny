@@ -1,8 +1,14 @@
 <div class="container">
   <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-0">
+
     <a href="/" class="d-flex align-items-center col-3 mb-1 text-dark text-decoration-none" style="width: 100px">
       <img style="height: 100px; width: 100px" [src]="logo" alt="">
     </a>
+
+    <div class="d-none d-xl-block" style="text-align: center;">
+      <h1 class="name"> Portal Dietetyczny</h1>
+      <p class="motto"> Nasza pasja - <span style="color: #5fa22e;">Twoje zdrowie</span> </p>
+    </div>
 
     <ul *ngIf="!isBigScreen"
       class="nav col-6 col-md-auto mb-2 justify-content-center mb-md-0 mx-auto">

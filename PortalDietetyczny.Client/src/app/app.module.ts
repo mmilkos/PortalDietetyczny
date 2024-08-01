@@ -15,6 +15,7 @@ import { DetailsCardComponent } from './components/details-card/details-card.com
 import { FooterComponent } from './components/footer/footer.component';
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { AboutUsIntroComponent } from './components/about-us-intro/about-us-intro.component';
+import { CalculatorsComponent } from './components/pages/calculators/calculators.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AboutUsIntroComponent } from './components/about-us-intro/about-us-intr
     DetailsCardComponent,
     FooterComponent,
     AboutUsComponent,
-    AboutUsIntroComponent
+    AboutUsIntroComponent,
+    CalculatorsComponent
   ],
   imports: [
     BrowserModule,

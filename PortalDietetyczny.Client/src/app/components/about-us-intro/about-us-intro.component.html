@@ -2,7 +2,7 @@
 
   <div style="width: 100vw"  class="section d-inline-flex justify-content-start align-items-start">
     <div class="row">
-      <div class="col" style="padding-left: 15vw">
+      <div class="col" [ngStyle]="{ 'padding-left': !isSmallScreen ? '15vw' : '0'}">
         <div class="welcome">
           <h1>Miło Cię widzieć na naszej stronie!</h1>
           <p>
@@ -20,8 +20,8 @@
           </p>
         </div>
       </div>
-      <div class="col">
-        <div class="photo"  *ngIf="!isBigScreen">
+      <div class="col" *ngIf="!isSmallScreen">
+        <div class="photo"  >
           <img src="assets/razem.JPG" alt="">
         </div>
       </div>
@@ -31,9 +31,9 @@
 
   <div style="width: 100vw" class="section d-inline-flex justify-content-start align-items-start" style="background-color: #FFFF;">
     <div class="row">
-      <div class="col" style="padding-left: 15vw" >
-        <div class="photo" *ngIf="!isBigScreen" >
-          <img src="assets/aga.png" alt="">
+      <div class="col-sm-7  " [ngStyle]="{ 'padding-left': !isSmallScreen ? '15vw' : '0'}" *ngIf="!isSmallScreen">
+        <div class="photo"  >
+          <img src="assets/agaTlo.JPG" alt="">
         </div>
       </div>
 
@@ -80,8 +80,8 @@
   </div>
 
   <div style="width: 100vw"  class="section d-inline-flex justify-content-start align-items-start">
-    <div class="row">
-      <div class="col" style="padding-left: 15vw">
+    <div class="row" [ngStyle]="{ 'padding-left': !isSmallScreen ? '16vw' : '0'}">
+      <div class="col" >
         <div class="welcome">
           <h1>Anna Juranek</h1>
           <p>
@@ -117,55 +117,12 @@
           </ul>
         </div>
       </div>
-      <div class="col">
-        <div class="photo" *ngIf="!isBigScreen">
-          <img src="assets/ania.png" alt="">
+      <div class="col" *ngIf="!isSmallScreen">
+        <div class="photo" >
+          <img src="assets/aniaTlo.JPG" alt="">
         </div>
       </div>
     </div>
   </div>
-
-<!--  <div class="section">
-    <div class="row"></div>
-
-    <div class="welcome">
-      <h1>Anna Juranek</h1>
-      <p>
-        Dietetyk kliniczny, psychodietetyk.
-
-        Absolwentka studiów magisterskich, ze specjalnością dietetyka kliniczna oraz psychodietetyka z elementami obesitologii.
-
-        Współautorka ebooków z przepisami dla osób z cukrzycą
-
-        https://nieslodze.com/sklep/
-
-        <a href="https://nieslodze.com/sklep/"> https://nieslodze.com/sklep/</a>
-      </p>
-      <p>
-        Dodatkowe kursy i szkolenia:
-
-        Społeczny Edukator Diabetologiczny, Fundacja dla Dzieci z Cukrzycą (2023)
-
-      </p>
-      <p>
-        Publikacje i artykuły:
-      </p>
-
-      <ul>
-        <li> <a href="https://diabetyk24.pl/blog-section/wywiady/pasjonatka-z-diabetyka24-zalozyla-portal-z-misja"  target="_blank">
-          https://diabetyk24.pl/blog-section/wywiady/pasjonatka-z-diabetyka24-zalozyla-portal-z-misja</a></li>
-        <li>
-          <a href="https://diabetyk24.pl/blog-section/o-cukrzycy/cukrzyca-ciazowa-co-to-jest-jak-zdiagnozowac"  target="_blank">
-            https://diabetyk24.pl/blog-section/o-cukrzycy/cukrzyca-ciazowa-co-to-jest-jak-zdiagnozowac</a></li>
-
-      </ul>
-    </div>
-
-    <div class="photo">
-      <img src="assets/ania.png" alt="">
-    </div>
-
-  </div>-->
-
 </div>
 

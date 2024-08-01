@@ -7,14 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutUsIntroComponent implements OnInit
 {
-  public isBigScreen: boolean = false;
+  public isSmallScreen: boolean = false;
 
   ngOnInit(): void
   {
     window.addEventListener('resize', () => {
-      console.log(window.innerWidth);
-
-      this.isBigScreen = window.innerWidth <= 431;
+      this.isSmallScreen = window.innerWidth <= 470;
     });
   }
 
