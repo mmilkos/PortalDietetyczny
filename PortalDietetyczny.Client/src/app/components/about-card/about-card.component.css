@@ -14,7 +14,7 @@
 {
   .name
   {
-
+    color: #3f3f3f;
     font-family: 'Inter', sans-serif;
     font-size: 2rem;
     font-weight: 600;
@@ -56,3 +56,4 @@
 
   }
 }
+
