@@ -1,0 +1,42 @@
+<div class="detailsCard">
+  <form [formGroup]="ppmForm">
+    <div class="container">
+      <div class="row">
+        <p class="title">Kalkulator PPM</p>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Waga w KG</label>
+          <input class="form-control" type="number" formControlName="weight" min="0">
+        </div>
+
+        <div class="col">
+          <label>Wzrost w cm</label>
+          <input class="form-control" type="number" formControlName="height" min="0">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Wiek w latach</label>
+          <input class="form-control" type="number" formControlName="age" min="0">
+        </div>
+
+        <div class="col">
+          <label>Płeć</label>
+          <select class="form-control" formControlName="gender">
+            <option [value]="0" >Kobieta</option>
+            <option [value]="1" >Mężczyzna</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="row m-1">
+        <label>Wynik</label>
+        <input disabled class="form-control" type="number" [value]="calculatedPpm">
+      </div>
+    </div>
+  </form>
+</div>

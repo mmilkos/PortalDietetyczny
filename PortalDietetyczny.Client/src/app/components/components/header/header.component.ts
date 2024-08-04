@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutesEnum } from '../../enums/RoutesEnum';
 import { ViewportScroller } from '@angular/common';
+import { RoutesEnum } from '../../../enums/RoutesEnum';
 
 @Component({
   selector: 'app-header',

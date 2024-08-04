@@ -7,9 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class DetailsCardComponent
 {
-  @Input() title: string | undefined;
-  @Input() content: string | undefined;
-  @Input() iconClass: string | undefined;
+  @Input() title: string;
+  @Input() content: string;
+  @Input() iconClass: string;
 
 }
 

@@ -61,6 +61,7 @@ p
   width: 100%;
   font-family: 'Inter', sans-serif;
   word-wrap: break-word;
+  line-height: 26px;
 }
 
 h1

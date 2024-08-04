@@ -1,7 +1,7 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {Router, RouterLink } from '@angular/router';
-import { RoutesEnum } from '../../enums/RoutesEnum';
+import { RoutesEnum } from '../../../enums/RoutesEnum';
 
 @Component({
   selector: 'app-details-grid',

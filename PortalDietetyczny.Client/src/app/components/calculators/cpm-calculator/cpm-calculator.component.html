@@ -1,0 +1,53 @@
+<div class="detailsCard">
+  <form [formGroup]="cpmForm">
+    <div class="container">
+      <div class="row">
+        <p class="title">Kalkulator CPM</p>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Waga w KG</label>
+          <input class="form-control" type="number" formControlName="weight" min="0">
+        </div>
+
+        <div class="col">
+          <label>Wzrost w cm</label>
+          <input class="form-control" type="number" formControlName="height" min="0">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Wiek w latach</label>
+          <input class="form-control" type="number" formControlName="age" min="0">
+        </div>
+
+        <div class="col">
+          <label>Płeć</label>
+          <select class="form-control" formControlName="gender">
+            <option [value]="0" >Kobieta</option>
+            <option [value]="1" >Mężczyzna</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label>Aktywność </label>
+          <select class="form-control" formControlName="activity">
+            <option [value]="1.2" >Brak aktywności</option>
+            <option [value]="1.4" >ok. 140 minut / tyg</option>
+            <option [value]="1.6" >ok. 280 minut / tyg</option>
+            <option [value]="1.8" >ok. 420 minut / tyg</option>
+            <option [value]="2" >ok. 560 minut / tyg</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="row m-1">
+        <label>Wynik</label>
+        <input disabled class="form-control" type="number" [value]="calculatedCpm">
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,28 @@
+<div class="detailsCard">
+  <form [formGroup]="whrForm">
+    <div class="container">
+      <div class="row">
+        <p class="title">Kalkulator WHR</p>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Obwód tali</label>
+          <input class="form-control" type="number" formControlName="waist" min="0">
+        </div>
+
+        <div class="col">
+          <label>Obwód biodra</label>
+          <input class="form-control" type="number" formControlName="hips" min="0">
+        </div>
+
+      </div>
+
+      <div class="row m-1">
+        <label>Wynik</label>
+        <input disabled class="form-control" type="number" [value]="calculatedWhr">
+      </div>
+    </div>
+  </form>
+</div>
+
