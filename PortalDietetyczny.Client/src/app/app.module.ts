@@ -23,6 +23,10 @@ import { CalculatorsGridComponent } from './components/grids/calculators-grid/ca
 import { CalculatorCardComponent } from './components/components/calculator-card/calculator-card.component';
 import { CpmCalculatorComponent } from './components/calculators/cpm-calculator/cpm-calculator.component';
 import { NmcCalculatorComponent } from './components/calculators/nmc-calculator/nmc-calculator.component';
+import { RecipesComponent } from './components/pages/recipes/recipes.component';
+import { RecipesGridComponent } from './components/grids/recipes-grid/recipes-grid.component';
+import { RecipeCardComponent } from './components/components/recipe-card/recipe-card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -45,6 +49,9 @@ import { NmcCalculatorComponent } from './components/calculators/nmc-calculator/
     CalculatorCardComponent,
     CpmCalculatorComponent,
     NmcCalculatorComponent,
+    RecipesComponent,
+    RecipesGridComponent,
+    RecipeCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,8 @@ import { NmcCalculatorComponent } from './components/calculators/nmc-calculator/
     MatSlideToggleModule,
     MatCardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()

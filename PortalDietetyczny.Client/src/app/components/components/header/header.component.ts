@@ -19,11 +19,7 @@ export class HeaderComponent implements OnInit
 
   ngOnInit(): void
   {
-    window.addEventListener('resize', () => {
-      console.log(window.innerWidth);
-
-      this.isBigScreen = window.innerWidth <= 1001;
-    });
+    window.addEventListener('resize', () => this.isBigScreen = window.innerWidth <= 1001);
   }
   openInstagram() {
     window.open('https://www.instagram.com/portaldietetyczny/', '_blank');
