@@ -6,6 +6,7 @@ import { PagedResult } from '../models/PagedResult';
 import { AddIngredientDto } from '../DTOs/AddIngredientDto';
 import { AddTagDto } from '../DTOs/AddTagDto';
 import {IngredientListDto, TagListDto} from '../DTOs/IdAndName';
+import { AddRecipeDto } from '../DTOs/AddRecipeDto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,12 @@ export class RecipesService
   apiUrl: string = "https://localhost:44317/api/recipes"
 
   constructor(private http: HttpClient) { }
+
+  addRecipe(recipe: AddRecipeDto): Observable<any>
+  {
+    console.log(recipe)
+    return this.http.post<any>(this.apiUrl, recipe);
+  }
 
   getRecipesPaged() : Observable<PagedResult<RecipePreviewDto>>
   {

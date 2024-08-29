@@ -13,7 +13,7 @@ using PortalDietetycznyAPI.Tests.Common;
 
 namespace PortalDietetycznyAPI.Tests._Commands;
 
-public class AddPhotoCommandHandlerTests : BaseTests
+/*public class AddPhotoCommandHandlerTests : BaseTests
 {
     [Fact(Skip = "Skip because its uploading a picture")]
     public async Task AddPhotoCommandHandler_Should_Return_Success_Result()
@@ -59,4 +59,4 @@ public class AddPhotoCommandHandlerTests : BaseTests
         result.Success.Should().BeTrue();
         photo.Should().NotBe(null);
     }
-}
+}*/

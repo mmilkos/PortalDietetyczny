@@ -7,7 +7,6 @@ using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.Domain.Resources;
 using PortalDietetycznyAPI.DTOs;
-using PortalDietetycznyAPI.Infrastructure.Repositories;
 
 namespace PortalDietetycznyAPI.Application._Commands;
 

@@ -9,5 +9,6 @@ public class AddRecipeDto
     public List<RecipeIngredientDto> Ingredients { get; set; }
     public NutritionInfo NutritionInfo { get; set; } 
     public string Instruction { get; set; }
-    public IFormFile? File { get; set; }
+    public string FileBytes { get; set; }
+    public string FileName { get; set; }
 }

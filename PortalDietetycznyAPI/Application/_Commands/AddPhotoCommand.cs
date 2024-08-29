@@ -11,11 +11,13 @@ namespace PortalDietetycznyAPI.Application._Commands;
 
 public class AddPhotoCommand : IRequest<OperationResult<Photo>>
 {
-    public IFormFile File { get; private set; }
+    public byte[] FileBytes { get; private set; }
+    public string FileName { get; private set; }
     
-    public AddPhotoCommand(IFormFile file)
+    public AddPhotoCommand(byte[] fileBytes, string fileName )
     {
-        File = file;
+        FileBytes = fileBytes;
+        FileName = fileName;
     }
 }
 
@@ -41,7 +43,7 @@ public class AddPhotoCommandHandler : IRequestHandler<AddPhotoCommand, Operation
     {
         var operationResult = new OperationResult<Photo>() { };
         
-        var file = request.File;
+        var file = GeneratePhoto(request.FileBytes, request.FileName);
 
         await using var stream = file.OpenReadStream();
 
@@ -84,4 +86,22 @@ public class AddPhotoCommandHandler : IRequestHandler<AddPhotoCommand, Operation
         
         return operationResult;
     }
+    
+    private FormFile GeneratePhoto(byte[] fileBytes, string fileName)
+    {
+        var stream = new MemoryStream(fileBytes);
+        var formFile = new FormFile(
+            baseStream: stream, 
+            baseStreamOffset: 0, 
+            length: fileBytes.Length,
+            name: "",
+            fileName: fileName)
+        {
+            Headers = new HeaderDictionary(),
+            ContentType = "image/jpeg"
+        };
+        
+        return formFile;
+    }
 }
+

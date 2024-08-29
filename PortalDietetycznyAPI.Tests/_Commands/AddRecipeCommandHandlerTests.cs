@@ -58,7 +58,6 @@ public class AddRecipeCommandHandlerTests : BaseTests
                 Kcal = 40,
                 Protein = 50
             },
-            File = null,
         };
 
         var command = new AddRecipeCommand(dto);

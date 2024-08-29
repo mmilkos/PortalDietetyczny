@@ -13,7 +13,9 @@
         <textarea id="instruction" formControlName="instruction" class="form-control" style="height: 150px" placeholder="Instrukcje"></textarea>
         <label for="instruction"> Sposób przygotowania</label>
       </div>
-
+      <label for="myFile" class="file-upload-button">Wybierz zdjęcie
+      </label>
+      <input class="mb-2 hidden" type="file" id="myFile" name="myFile" accept="image/png, image/jpeg" (change)="onFileSelected($event)">
       <div class="ingredient-form mb-3">
         <div class="fw-bold">Tagi</div>
 
@@ -130,6 +132,7 @@
         </div>
       </div>
 
+
       <div class="form-group mt-4 text-center">
         <button (click)="submitRecipe()" class="btn btn-primary w-100">Zapisz przepis</button>
       </div>
@@ -145,7 +148,5 @@
     <app-add-tag-form></app-add-tag-form>
     <button (click)="getTagsNames()" class="btn btn-warning m-1">Odśwież listę tagów</button>
   </div>
-
-
 </div>
 

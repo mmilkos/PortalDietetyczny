@@ -32,7 +32,9 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
         var result = new OperationResult<Unit>();
         var dto = request.Dto;
 
-        var photoResult = await GetPhoto(dto.File, cancellationToken);
+        var fileBytes = Convert.FromBase64String(dto.FileBytes);
+
+        var photoResult = await GetPhoto(fileBytes, dto.FileName , cancellationToken);
 
         if (photoResult.Success == false)
         {
@@ -68,9 +70,9 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
         return result;
     }
     
-    private async Task<OperationResult<Photo>> GetPhoto(IFormFile? file, CancellationToken cancellationToken)
+    private async Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
     {
-        if (file != null) return await _mediator.Send(new AddPhotoCommand(file), cancellationToken);
+        if (fileBytes.Length > 0) return await _mediator.Send(new AddPhotoCommand(fileBytes, fileName), cancellationToken);
 
         return new OperationResult<Photo>()
         {
