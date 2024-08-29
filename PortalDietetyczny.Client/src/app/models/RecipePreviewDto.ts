@@ -5,5 +5,6 @@
   kcal: number,
   fat: number,
   carb: number,
-  protein: number
+  protein: number,
+  photoUrl: string
 }

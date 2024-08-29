@@ -98,10 +98,22 @@ public class AddPhotoCommandHandler : IRequestHandler<AddPhotoCommand, Operation
             fileName: fileName)
         {
             Headers = new HeaderDictionary(),
-            ContentType = "image/jpeg"
+            ContentType = GetContentType(fileName)
         };
         
         return formFile;
     }
-}
 
+    private string GetContentType(string fileName)
+    {
+        var fileType = Path.GetExtension(fileName).ToLower();
+
+        switch (fileType)
+        {
+            case ".png":
+                return "image/png";
+            default:
+                return "image/jpeg";
+        }
+    }
+}

@@ -1,6 +1,9 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using PagedList;
+using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.Domain.Interfaces;
+using PortalDietetycznyAPI.DTOs;
 using PortalDietetycznyAPI.Infrastructure.Context;
 
 namespace PortalDietetycznyAPI.Infrastructure.Repositories;
@@ -49,5 +52,31 @@ public class PdRepository : IPDRepository
     public async Task<List<T>> GetAllEntitiesAsync<T>(Expression<Func<T, bool>> condition) where T : class
     { 
         return await _db.Set<T>().Where(condition).ToListAsync();
+    }
+
+    public async Task<IPagedList<Recipe>> GetRecipesPagedAsync(RecipesPreviewPageRequest dto)
+    {
+        var wantedTags = dto.TagsIds;
+        var wantedIngredient = dto.IngredientsIds;
+
+        var query = _db.Recipes
+            .Include(r => r.Photo)
+            .Include(r => r.RecipeTags)
+            .Include(r => r.Ingredients)
+            .Include(r => r.Photo)
+            .Where(recipe =>
+                (wantedTags.Count == 0 || recipe.RecipeTags.All(recipeTag =>
+                    wantedTags.Contains(recipeTag.TagId)))
+                &&
+                (wantedIngredient.Count == 0 || recipe.Ingredients.All(ingredient =>
+                    wantedIngredient.Contains(ingredient.IngredientId))));
+
+        var test = await query.ToListAsync();
+        
+
+
+        var list = await query.ToPagedListAsync(dto.PageNumber, dto.PageSize);
+        
+        return list;
     }
 }

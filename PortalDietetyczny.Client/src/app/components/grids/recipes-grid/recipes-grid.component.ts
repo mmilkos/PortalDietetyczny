@@ -19,7 +19,11 @@ export class RecipesGridComponent implements OnInit
   ngOnInit(): void
   {
     this.recipesService.getRecipesPaged().subscribe(
-      (response: PagedResult<RecipePreviewDto>)=> this.recipes = response.data,
+      (response: PagedResult<RecipePreviewDto>)=>
+      {
+        this.recipes = response.data
+        console.log(response)
+      } ,
       (error) => console.log(error))
   }
 

@@ -8,5 +8,5 @@ public class RecipePreviewDto
     public int Fat { get; set; }
     public int Carb { get; set; }
     public int Protein { get; set; }
-    
+    public string? PhotoUrl { get; set; }
 }

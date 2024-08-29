@@ -1,4 +1,7 @@
 ﻿using System.Linq.Expressions;
+using PagedList;
+using PortalDietetycznyAPI.Domain.Entities;
+using PortalDietetycznyAPI.DTOs;
 
 namespace PortalDietetycznyAPI.Domain.Interfaces;
 
@@ -12,6 +15,6 @@ public interface IPDRepository
     Task AddRangeAsync<T>(List<T> list) where T : class;
     Task UpdateAsync<T>(T entity) where T : class;
     Task<List<T>> GetAllEntitiesAsync<T>(Expression<Func<T, bool>> condition) where T : class;
-    
+    Task<IPagedList<Recipe>> GetRecipesPagedAsync(RecipesPreviewPageRequest dto);
     
 }

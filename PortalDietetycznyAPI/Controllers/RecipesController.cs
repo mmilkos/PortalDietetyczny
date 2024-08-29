@@ -18,34 +18,11 @@ public class RecipesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PagedResult<RecipePreviewDto>>> GetRecipesPaged()
+    public async Task<ActionResult<PagedResult<RecipePreviewDto>>> GetRecipesPaged(RecipesPreviewPageRequest? dto)
     {
-        var result = new PagedResult<RecipePreviewDto>()
-        {
-            PageNumber = 1,
-            TotalCount = 10,
-            Data = new List<RecipePreviewDto>()
-            {
-                new RecipePreviewDto()
-                {
-                    Id = 1,
-                    Kcal = 100,
-                    Name = "test 1",
-                    Carb = 101,
-                    Fat = 102,
-                    Protein = 103
-                },
-                new RecipePreviewDto()
-                {
-                    Id = 2,
-                    Kcal = 200,
-                    Name = "test 2",
-                    Carb = 201,
-                    Fat = 202,
-                    Protein = 203
-                },
-            }
-        };
+        dto.PageNumber = 1;
+        dto.PageSize = 5;
+        var result = await _mediator.Send(new GetRecipesPagedQuery(dto));
 
         return Ok(result);
     }

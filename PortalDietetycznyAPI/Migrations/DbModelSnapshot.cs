@@ -108,7 +108,7 @@ namespace PortalDietetycznyAPI.Migrations
                     b.Property<float>("HomeUnitValue")
                         .HasColumnType("real");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("IngredientId")
                         .HasColumnType("int");
 
                     b.Property<int>("RecipeId")
@@ -118,12 +118,12 @@ namespace PortalDietetycznyAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UnitValue")
-                        .HasColumnType("int");
+                    b.Property<float>("UnitValue")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("IngredientId");
 
                     b.HasIndex("RecipeId");
 
@@ -142,7 +142,7 @@ namespace PortalDietetycznyAPI.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("RecipeTag");
+                    b.ToTable("RecipeTags");
                 });
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Tag", b =>
@@ -235,7 +235,7 @@ namespace PortalDietetycznyAPI.Migrations
                 {
                     b.HasOne("PortalDietetycznyAPI.Domain.Entities.Ingredient", "Ingredient")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -11,7 +11,7 @@ using PortalDietetycznyAPI.Infrastructure.Context;
 namespace PortalDietetycznyAPI.Migrations
 {
     [DbContext(typeof(Db))]
-    [Migration("20240808222341_Init")]
+    [Migration("20240829232145_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -34,9 +34,12 @@ namespace PortalDietetycznyAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Ingredients");
                 });
@@ -118,8 +121,8 @@ namespace PortalDietetycznyAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UnitValue")
-                        .HasColumnType("int");
+                    b.Property<float>("UnitValue")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -142,7 +145,7 @@ namespace PortalDietetycznyAPI.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("RecipeTag");
+                    b.ToTable("RecipeTags");
                 });
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Tag", b =>

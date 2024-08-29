@@ -16,7 +16,7 @@ namespace PortalDietetycznyAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,7 +101,7 @@ namespace PortalDietetycznyAPI.Migrations
                     RecipeId = table.Column<int>(type: "int", nullable: false),
                     IngredientId = table.Column<int>(type: "int", nullable: false),
                     Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UnitValue = table.Column<int>(type: "int", nullable: false),
+                    UnitValue = table.Column<float>(type: "real", nullable: false),
                     HomeUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HomeUnitValue = table.Column<float>(type: "real", nullable: false)
                 },
@@ -123,7 +123,7 @@ namespace PortalDietetycznyAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecipeTag",
+                name: "RecipeTags",
                 columns: table => new
                 {
                     RecipeId = table.Column<int>(type: "int", nullable: false),
@@ -131,19 +131,25 @@ namespace PortalDietetycznyAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeTag", x => new { x.RecipeId, x.TagId });
+                    table.PrimaryKey("PK_RecipeTags", x => new { x.RecipeId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_RecipeTag_Recipes_RecipeId",
+                        name: "FK_RecipeTags_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RecipeTag_Tags_TagId",
+                        name: "FK_RecipeTags_Tags_TagId",
                         column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ingredients_Name",
+                table: "Ingredients",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_RecipeId",
@@ -155,7 +161,7 @@ namespace PortalDietetycznyAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeIngredients_IngredientId",
                 table: "RecipeIngredients",
-                column: "Id");
+                column: "IngredientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeIngredients_RecipeId",
@@ -163,8 +169,8 @@ namespace PortalDietetycznyAPI.Migrations
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeTag_TagId",
-                table: "RecipeTag",
+                name: "IX_RecipeTags_TagId",
+                table: "RecipeTags",
                 column: "TagId");
         }
 
@@ -178,7 +184,7 @@ namespace PortalDietetycznyAPI.Migrations
                 name: "RecipeIngredients");
 
             migrationBuilder.DropTable(
-                name: "RecipeTag");
+                name: "RecipeTags");
 
             migrationBuilder.DropTable(
                 name: "Users");
