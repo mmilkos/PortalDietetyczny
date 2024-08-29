@@ -7,5 +7,6 @@
   calculators = "kalkulatory",
   blog = "blog",
   consultations = "konsultacje",
-  downloads = "do-pobrania"
+  downloads = "do-pobrania",
+  adminPanel = "admin"
 }

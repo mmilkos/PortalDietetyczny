@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="addIngredients">
+      <label>Dodaj składnik do listy wszystkich składników</label>
+      <div class="d-flex flex-row">
+
+        <input matInput type="text" id="name" formControlName="name" class="form-control">
+        <button (click)="add()"> dodaj</button>
+      </div>
+    </form>
+  </div>
+</div>

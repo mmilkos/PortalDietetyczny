@@ -21,4 +21,16 @@
     <data name="InvalidCredentials" xml:space="preserve">
         <value>Niepoprawny login lub hasło</value>
     </data>
+    <data name="IngredientAlreadyInDb" xml:space="preserve">
+        <value>Ten składnik został już dodany do bazy danych</value>
+    </data>
+    <data name="TagAlreadyInDb" xml:space="preserve">
+        <value>Ten tag został już dodany</value>
+    </data>
+    <data name="CloudinaryError" xml:space="preserve">
+        <value>Błąd związany z serwisem przechowującym zdjęcia</value>
+    </data>
+    <data name="PhotoSavingError" xml:space="preserve">
+        <value>Wystąpił błąd przy próbie zapisu danych zdjecia do bazy</value>
+    </data>
 </root>

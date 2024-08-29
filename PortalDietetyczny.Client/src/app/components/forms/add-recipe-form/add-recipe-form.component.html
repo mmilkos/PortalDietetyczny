@@ -1,0 +1,151 @@
+<div class="d-flex flex-row">
+  <div class="card mx-auto" style="width: 80%; ">
+    <div class="card-header text-center" style="background-color: #007bff;">
+      <h3 class="mb-0">Formularz przepisu</h3>
+    </div>
+    <form [formGroup]="recipeForm" class="p-4">
+      <div class="form-floating mb-3">
+        <input type="text" id="recipeName" formControlName="recipeName" class="form-control" placeholder="Nazwa przepisu">
+        <label for="recipeName">Nazwa przepisu</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <textarea id="instruction" formControlName="instruction" class="form-control" style="height: 150px" placeholder="Instrukcje"></textarea>
+        <label for="instruction"> Sposób przygotowania</label>
+      </div>
+
+      <div class="ingredient-form mb-3">
+        <div class="fw-bold">Tagi</div>
+
+        <div class="chosen-ingredients mt-3">
+          <mat-chip-set>
+            <mat-chip *ngFor="let tag of selectedTags" (removed)="removeTag(tag)">
+              {{tag}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+
+        <div [formGroup]="tagsForm" class="d-grid gap-3">
+          <div class="d-md-flex gap-2">
+            <div class="form-floating flex-fill">
+              <select id="tagName" formControlName="tagName" class="form-select">
+                <option value="">Wybierz tag</option>
+                <option *ngFor="let tag of tagsNames" [ngValue]="tag">{{tag.name}}</option>
+              </select>
+              <label for="tagName"></label>
+            </div>
+
+            <div class="form-group mt-1">
+
+              <button (click)="addTag()" class="btn btn-primary m-1">Dodaj tag do przepisu</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="ingredient-form mb-3">
+        <div class="fw-bold">Składniki</div>
+
+        <div class="chosen-ingredients mt-3">
+          <mat-chip-set>
+            <mat-chip *ngFor="let ingredient of selectedIngredientsNames" (removed)="removeIngredient(ingredient)">
+              {{ingredient}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+
+        <div [formGroup]="ingredientForm" class="d-grid gap-3">
+
+          <div class="d-md-flex gap-2">
+            <div class="form-floating flex-fill">
+              <select id="ingredientName" formControlName="ingredientName" class="form-select">
+                <option value="">Wybierz składnik</option>
+                <option *ngFor="let ingredient of ingredientNames" [ngValue]="ingredient">{{ingredient.name}}</option>
+              </select>
+              <label for="ingredientName"></label>
+            </div>
+
+            <div class="form-floating flex-fill" style="max-width: 80px">
+              <input type="number" id="weightValue" formControlName="weightValue" class="form-control" placeholder="Waga">
+              <label for="weightValue">Waga</label>
+            </div>
+
+            <div class="form-floating flex-fill">
+              <select id="weightUnit" formControlName="weightUnit" class="form-select">
+                <option value="">Jednostka</option>
+                <option value="Kg">Kg</option>
+                <option value="G">G</option>
+              </select>
+              <label for="weightUnit">Jednostka wagowa</label>
+            </div>
+
+            <div class="form-floating flex-fill" style="max-width: 150px">
+              <input type="number" id="homeValue" formControlName="homeValue" class="form-control" placeholder="Wartość domowa">
+              <label for="homeValue">Wartość domowa</label>
+            </div>
+
+            <div class="form-floating flex-fill">
+              <input type="text" id="homeUnit" formControlName="homeUnit" class="form-control" placeholder="Jednostka domowa">
+              <label for="homeUnit">Jednostka domowa</label>
+            </div>
+          </div>
+
+          <div class="form-group mt-1">
+
+            <button (click)="addIngredient()" class="btn btn-primary m-1">Dodaj składnik do przepisu</button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <br>
+
+      <div class="nutrition-info mb-3">
+        <div class="fw-bold">Informacje o wartości odżywczej</div>
+        <div class="d-md-flex justify-content-around flex-wrap">
+          <div class="form-floating flex-fill p-1">
+            <input type="number" id="fiber" formControlName="fiber" class="form-control" placeholder="Błonnik">
+            <label for="fiber">Błonnik</label>
+          </div>
+          <div class="form-floating flex-fill p-1">
+            <input type="number" id="fat" formControlName="fat" class="form-control" placeholder="Tłuszcze">
+            <label for="fat">Tłuszcze</label>
+          </div>
+          <div class="form-floating flex-fill p-1">
+            <input type="number" id="carb" formControlName="carb" class="form-control" placeholder="Węglowodany">
+            <label for="carb">Węglowodany</label>
+          </div>
+          <div class="form-floating flex-fill p-1">
+            <input type="number" id="protein" formControlName="protein" class="form-control" placeholder="Białko">
+            <label for="protein">Białko</label>
+          </div>
+          <div class="form-floating flex-fill p-1">
+            <input type="number" id="kcal" formControlName="kcal" class="form-control" placeholder="Kcal">
+            <label for="kcal">Kcal</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-4 text-center">
+        <button (click)="submitRecipe()" class="btn btn-primary w-100">Zapisz przepis</button>
+      </div>
+
+    </form>
+  </div>
+
+
+  <div class="card mx-auto" style="width: 40%; ">
+    <app-ingredients-list></app-ingredients-list>
+    <button (click)="getIngredientsNames()" class="btn btn-warning m-1">Odśwież listę składników</button>
+    <br>
+    <app-add-tag-form></app-add-tag-form>
+    <button (click)="getTagsNames()" class="btn btn-warning m-1">Odśwież listę tagów</button>
+  </div>
+
+
+</div>
+

@@ -5,7 +5,7 @@ public class OperationResult<T>
     public bool Success { get; private set; } = true;
     public List<string> ErrorsList { get; }
     
-    public T Data { get; set; }
+    public T? Data { get; set; }
     
     public OperationResult()
     {
@@ -15,6 +15,16 @@ public class OperationResult<T>
     public void AddError(string error)
     {
         ErrorsList.Add(error);
+        Success = false;
+    }
+
+    public void AddErrorRange(List<String> errors)
+    {
+        foreach (var error in errors)
+        {
+            ErrorsList.Add(error);
+        }
+
         Success = false;
     }
 }

@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using PortalDietetycznyAPI.Application._Commands;
+using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.Infrastructure.Context;
 using PortalDietetycznyAPI.Infrastructure.Repositories;
@@ -24,7 +26,8 @@ public static class ServiceCollectionExtension
         var jwtIssuer = authentication.GetValue<string>("JwtIssuer");
         var jwtKey = authentication.GetValue<string>("JwtKey");
 
-        /*services.AddMediatR(typeof());*/
+        services.AddMediatR(typeof(AddIngredientCommand));
+        services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
 
         services.AddAuthentication(oprion =>
         {

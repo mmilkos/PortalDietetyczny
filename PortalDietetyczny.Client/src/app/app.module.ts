@@ -27,7 +27,15 @@ import { RecipesComponent } from './components/pages/recipes/recipes.component';
 import { RecipesGridComponent } from './components/grids/recipes-grid/recipes-grid.component';
 import { RecipeCardComponent } from './components/components/recipe-card/recipe-card.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AdminPanelComponent } from './components/pages/admin-panel/admin-panel.component';
+import { AddRecipeFormComponent } from './components/forms/add-recipe-form/add-recipe-form.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import { AddTagFormComponent } from './components/forms/add-tag-form/add-tag-form.component';
+import { IngredientsListComponent } from './components/forms/ingredients-list/ingredients-list.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -52,6 +60,10 @@ import { HttpClientModule } from '@angular/common/http';
     RecipesComponent,
     RecipesGridComponent,
     RecipeCardComponent,
+    AdminPanelComponent,
+    AddRecipeFormComponent,
+    IngredientsListComponent,
+    AddTagFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +73,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    FileUploadModule
   ],
   providers: [
     provideAnimationsAsync()

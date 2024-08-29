@@ -5,6 +5,7 @@ import { RoutesEnum } from './enums/RoutesEnum';
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { CalculatorsComponent } from './components/pages/calculators/calculators.component';
 import { RecipesComponent } from './components/pages/recipes/recipes.component';
+import { AdminPanelComponent } from './components/pages/admin-panel/admin-panel.component';
 
 const routes: Routes =
   [
@@ -12,6 +13,7 @@ const routes: Routes =
     {path: RoutesEnum.about, component: AboutUsComponent},
     {path: RoutesEnum.calculators, component: CalculatorsComponent},
     {path: RoutesEnum.recipes, component: RecipesComponent},
+    {path: RoutesEnum.adminPanel, component: AdminPanelComponent},
     {path: "**", component: StartComponent}
   ];
 

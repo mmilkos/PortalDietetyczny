@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,23 +20,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Domain\Resources\Errors.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Domain\Resources\ErrorsRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorsRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Domain\Resources\Errors.Designer.cs">
+    <Compile Update="Domain\Resources\ErrorsRes.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Errors.resx</DependentUpon>
+      <DependentUpon>ErrorsRes.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\_Commands\" />
-    <Folder Include="Application\_Queries\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

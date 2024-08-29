@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalDietetycznyAPI", "PortalDietetycznyAPI\PortalDietetycznyAPI.csproj", "{A3E90D18-A3EA-4922-993B-750DCB8130A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalDietetycznyAPI.Tests", "PortalDietetycznyAPI.Tests\PortalDietetycznyAPI.Tests.csproj", "{0BEB8724-1E64-4356-9D39-F1824E846CE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A3E90D18-A3EA-4922-993B-750DCB8130A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E90D18-A3EA-4922-993B-750DCB8130A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E90D18-A3EA-4922-993B-750DCB8130A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BEB8724-1E64-4356-9D39-F1824E846CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BEB8724-1E64-4356-9D39-F1824E846CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BEB8724-1E64-4356-9D39-F1824E846CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BEB8724-1E64-4356-9D39-F1824E846CE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

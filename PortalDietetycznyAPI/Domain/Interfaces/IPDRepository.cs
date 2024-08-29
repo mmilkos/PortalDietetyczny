@@ -9,4 +9,9 @@ public interface IPDRepository
 
     Task<bool> AnyAsync<T>() where T : class;
     Task AddAsync<T>(T entity) where T : class;
+    Task AddRangeAsync<T>(List<T> list) where T : class;
+    Task UpdateAsync<T>(T entity) where T : class;
+    Task<List<T>> GetAllEntitiesAsync<T>(Expression<Func<T, bool>> condition) where T : class;
+    
+    
 }

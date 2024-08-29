@@ -33,4 +33,21 @@ public class PdRepository : IPDRepository
         _db.Set<T>().Add(entity);
         await _db.SaveChangesAsync();
     }
+
+    public async Task AddRangeAsync<T>(List<T> list) where T : class
+    {
+        _db.Set<T>().AddRange(list);
+        await _db.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync<T>(T entity) where T : class
+    {
+        _db.Set<T>().Update(entity);
+        await _db.SaveChangesAsync();
+    }
+
+    public async Task<List<T>> GetAllEntitiesAsync<T>(Expression<Func<T, bool>> condition) where T : class
+    { 
+        return await _db.Set<T>().Where(condition).ToListAsync();
+    }
 }
