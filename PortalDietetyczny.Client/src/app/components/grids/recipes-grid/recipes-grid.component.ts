@@ -24,6 +24,7 @@ export class RecipesGridComponent implements OnInit
   ingredientSelections = new Map<number, boolean>();
 
   currentPage: number = 1;
+  totalPages: number
 
   constructor(private recipesService: RecipesService)
   {
@@ -53,6 +54,7 @@ export class RecipesGridComponent implements OnInit
       {
         this.recipes = response.data
         console.log(response)
+        this.totalPages = Math.ceil(response.totalCount / 6)
       } ,
       (error) => console.log(error))
   }
@@ -113,7 +115,10 @@ export class RecipesGridComponent implements OnInit
 
   nextPage()
   {
-    this.currentPage++;
+    if (this.currentPage + 1 <= this.totalPages) {
+      this.currentPage++;
+    }
+
     this.getRecipes({
       PageNumber: this.currentPage,
       PageSize: 6,
