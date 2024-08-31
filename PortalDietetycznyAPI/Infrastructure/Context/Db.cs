@@ -7,17 +7,20 @@ public class Db : DbContext
 {
     public Db(DbContextOptions<Db> options) : base(options) { }
     
-    public DbSet<Ingredient> Ingredients { get; set; }
-    public DbSet<Photo> Photos { get; set; }
-    public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
-    public DbSet<Recipe> Recipes { get; set; }
-    public DbSet<Tag> Tags { get; set; }
-    public DbSet<RecipeTag> RecipeTags { get; set; }
-    public DbSet<User> Users { get; set; }
+    public DbSet<Ingredient> Ingredients { get; init; }
+    public DbSet<Photo> Photos { get; init; }
+    public DbSet<RecipeIngredient> RecipeIngredients { get; init; }
+    public DbSet<Recipe> Recipes { get; init; }
+    public DbSet<Tag> Tags { get; init; }
+    public DbSet<RecipeTag> RecipeTags { get; init; }
+    public DbSet<User> Users { get; init; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Recipe>().OwnsOne(recipe => recipe.Nutrition);
+        
+        modelBuilder.Entity<Recipe>()
+            .HasIndex(p => p.Uid);
 
         modelBuilder.Entity<Ingredient>().HasIndex(e => e.Name).IsUnique();
 

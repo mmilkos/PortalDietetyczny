@@ -1,6 +1,6 @@
-<div class="recipeCard">
+<div class="recipeCard" (click)="navigateToRecipe()">
   <div class="flex-column">
-    <img [src]="info.photoUrl">
+    <img [src]="info.photoUrl" style="max-height: 320px">
     <br>
     <h2 class="title">{{info.name}}</h2>
   </div>

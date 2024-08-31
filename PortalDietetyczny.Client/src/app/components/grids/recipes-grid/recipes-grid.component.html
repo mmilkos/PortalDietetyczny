@@ -1,6 +1,41 @@
 <div style="display: grid; place-items: center; width: 100%; background-color: white; border-top: 2px solid #d9d9d9;">
+  <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+    <div class="btn-group" dropdown>
+      <button dropdownToggle type="button" class="btn btn-secondary dropdown-toggle">
+        Tagi <span class="caret"></span>
+      </button>
+      <ul *dropdownMenu class="dropdown-menu">
+        <li role="menuitem" *ngFor="let tag of tagsNames">
+          <label class="dropdown-item">
+            <input type="checkbox" [value]="tag.id" (change)="toggleTagSelection(tag.id, $event)">
+            {{tag.name}}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-group mr-3" dropdown>
+      <button dropdownToggle type="button" class="btn btn-secondary dropdown-toggle">
+        Składniki <span class="caret"></span>
+      </button>
+      <ul *dropdownMenu class="dropdown-menu">
+        <li role="menuitem" *ngFor="let ingredient of ingredientNames">
+          <label class="dropdown-item">
+            <input type="checkbox" [value]="ingredient.id" (change)="toggleIngredientsSelection(ingredient.id, $event)"> {{ingredient.name}}
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <button type="button" class="btn btn-secondary" style="margin-left: 2px" (click)="search()"> Szukaj </button>
+  </div>
   <br>
   <div class="grid">
     <app-recipe-card *ngFor="let card of recipes" [info]=card></app-recipe-card>
+  </div>
+
+  <div>
+    <button type="button" class="btn btn-secondary" (click)="previousPage()"> < </button>
+    <button type="button" class="btn btn-secondary" (click)="nextPage()"> > </button>
   </div>
 </div>

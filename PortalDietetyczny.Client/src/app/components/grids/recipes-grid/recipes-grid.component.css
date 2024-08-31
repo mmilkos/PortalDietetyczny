@@ -13,3 +13,9 @@
     gap: 1em;
   }
 }
+
+button
+{
+  background-color: #5fa22e;
+  margin: 10px;
+}

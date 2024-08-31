@@ -88,7 +88,16 @@ namespace PortalDietetycznyAPI.Migrations
                     b.Property<int?>("PhotoId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Uid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Uid");
 
                     b.ToTable("Recipes");
                 });

@@ -8,5 +8,5 @@
   blog = "blog",
   consultations = "konsultacje",
   downloads = "do-pobrania",
-  adminPanel = "admin"
+  adminPanel = "admin",
 }

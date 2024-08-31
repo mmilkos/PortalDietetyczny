@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RecipePreviewDto } from '../../../models/RecipePreviewDto';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,4 +11,14 @@ import { RecipePreviewDto } from '../../../models/RecipePreviewDto';
 export class RecipeCardComponent
 {
   @Input() info: RecipePreviewDto;
+
+  constructor(private router: Router) {
+  }
+
+  navigateToRecipe()
+  {
+    let link : string = this.router.url + "/" + this.info.url;
+    this.router.navigateByUrl(link)
+
+  }
 }

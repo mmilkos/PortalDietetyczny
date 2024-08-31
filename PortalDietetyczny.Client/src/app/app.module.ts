@@ -36,6 +36,7 @@ import {MatInputModule} from '@angular/material/input';
 import { AddTagFormComponent } from './components/forms/add-tag-form/add-tag-form.component';
 import { IngredientsListComponent } from './components/forms/ingredients-list/ingredients-list.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { RecipeDetailsComponent } from './components/components/recipe-details/recipe-details.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     AddRecipeFormComponent,
     IngredientsListComponent,
     AddTagFormComponent,
+    RecipeDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    FileUploadModule
+    FileUploadModule,
   ],
   providers: [
     provideAnimationsAsync()

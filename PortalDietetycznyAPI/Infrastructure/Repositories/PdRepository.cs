@@ -65,11 +65,9 @@ public class PdRepository : IPDRepository
             .Include(r => r.Ingredients)
             .Include(r => r.Photo)
             .Where(recipe =>
-                (wantedTags.Count == 0 || recipe.RecipeTags.All(recipeTag =>
-                    wantedTags.Contains(recipeTag.TagId)))
+                (wantedTags.Count == 0 || wantedTags.All(tagId => recipe.RecipeTags.Select(rt => rt.TagId).Contains(tagId)))
                 &&
-                (wantedIngredient.Count == 0 || recipe.Ingredients.All(ingredient =>
-                    wantedIngredient.Contains(ingredient.IngredientId))));
+                (wantedIngredient.Count == 0 || wantedIngredient.All(ingredientId => recipe.Ingredients.Select(i => i.IngredientId).Contains(ingredientId))));
 
         var test = await query.ToListAsync();
         

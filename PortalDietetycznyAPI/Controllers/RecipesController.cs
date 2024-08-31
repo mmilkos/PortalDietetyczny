@@ -17,16 +17,15 @@ public class RecipesController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<PagedResult<RecipePreviewDto>>> GetRecipesPaged(RecipesPreviewPageRequest? dto)
+    [HttpPost("paged")]
+    public async Task<ActionResult<PagedResult<RecipePreviewDto>>> GetRecipesPaged([FromBody] RecipesPreviewPageRequest dto)
     {
-        dto.PageNumber = 1;
-        dto.PageSize = 5;
         var result = await _mediator.Send(new GetRecipesPagedQuery(dto));
 
         return Ok(result);
     }
-
+    
+    [HttpPost]
     public async Task<ActionResult> AddRecipe([FromBody] AddRecipeDto dto)
     {
         var result = await _mediator.Send(new AddRecipeCommand(dto));

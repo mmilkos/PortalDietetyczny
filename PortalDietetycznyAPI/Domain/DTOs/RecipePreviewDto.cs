@@ -9,4 +9,5 @@ public class RecipePreviewDto
     public int Carb { get; set; }
     public int Protein { get; set; }
     public string? PhotoUrl { get; set; }
+    public string Url { get; set; }
 }

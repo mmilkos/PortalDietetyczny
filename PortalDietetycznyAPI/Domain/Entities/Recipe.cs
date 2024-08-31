@@ -2,6 +2,7 @@
 
 public class Recipe : Entity
 {
+   public int Uid { get; set; }
    public List<RecipeTag> RecipeTags { get; set; } = [];
    public string Name { get; set; }
    public NutritionInfo Nutrition { get; set; } = new NutritionInfo();
@@ -9,4 +10,5 @@ public class Recipe : Entity
    public string Instruction { get; set; }
    public int? PhotoId { get; set; }
    public Photo? Photo { get; set; }
+   public string Url { get; set; }
 }

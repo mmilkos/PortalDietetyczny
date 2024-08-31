@@ -54,7 +54,8 @@ public class GetRecipesPagedQueryHandler : IRequestHandler<GetRecipesPagedQuery,
                 Fat = r.Nutrition.Fat,
                 Carb = r.Nutrition.Carb,
                 Protein = r.Nutrition.Protein,
-                PhotoUrl = r.Photo?.Url
+                PhotoUrl = r.Photo?.Url,
+                Url = r.Url
             })
             .ToList();
 

@@ -6,5 +6,6 @@
   fat: number,
   carb: number,
   protein: number,
-  photoUrl: string
+  photoUrl: string,
+  url: string
 }

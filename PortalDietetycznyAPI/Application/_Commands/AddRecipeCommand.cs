@@ -42,13 +42,17 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
             return result;
         }
 
+        var uid = GenerateUid();
+
         var recipe = new Recipe
         {
+            Uid = uid,
             Name = dto.Name,
             Nutrition = dto.NutritionInfo,
             Instruction = dto.Instruction,
             PhotoId = photoResult.Data?.Id,
-            Photo = photoResult.Data
+            Photo = photoResult.Data,
+            Url = dto.Name.ToLower().Replace(' ', newChar: '-') + "-" + uid
         };
 
         await _repository.AddAsync(recipe);
@@ -128,5 +132,13 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
         }
 
         return recipeIngredients;
+    }
+
+    private int GenerateUid()
+    {
+        var now = DateTimeOffset.UtcNow;
+        var unixTimeSeconds =(int)now.ToUnixTimeSeconds();
+
+        return unixTimeSeconds;
     }
 }
