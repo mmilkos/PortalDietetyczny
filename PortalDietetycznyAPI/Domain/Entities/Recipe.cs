@@ -9,6 +9,6 @@ public class Recipe : Entity
    public List<RecipeIngredient> Ingredients { get; set; } = [];
    public string Instruction { get; set; }
    public int? PhotoId { get; set; }
-   public Photo? Photo { get; set; }
+   public RecipePhoto? Photo { get; set; }
    public string Url { get; set; }
 }

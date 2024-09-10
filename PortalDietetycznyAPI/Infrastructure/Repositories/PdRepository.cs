@@ -65,16 +65,43 @@ public class PdRepository : IPDRepository
             .Include(r => r.Ingredients)
             .Include(r => r.Photo)
             .Where(recipe =>
-                (wantedTags.Count == 0 || wantedTags.All(tagId => recipe.RecipeTags.Select(rt => rt.TagId).Contains(tagId)))
+                (wantedTags.Count == 0 || 
+                 wantedTags.All(tagId => recipe.RecipeTags.Select(rt => rt.TagId).Contains(tagId)))
                 &&
-                (wantedIngredient.Count == 0 || wantedIngredient.All(ingredientId => recipe.Ingredients.Select(i => i.IngredientId).Contains(ingredientId))));
-
-        var test = await query.ToListAsync();
+                (wantedIngredient.Count == 0 || 
+                 wantedIngredient.All(ingredientId => recipe.Ingredients.Select(i => i.IngredientId).Contains(ingredientId))));
         
-
-
         var list = await query.ToPagedListAsync(dto.PageNumber, dto.PageSize);
         
         return list;
+    }
+
+    public async Task<Recipe?> GetRecipe(int uid)
+    {
+        return await _db.Recipes.Where(r => r.Uid == uid)
+            .Include(r => r.RecipeTags)
+                .ThenInclude(rt => rt.Tag)
+            .Include(r => r.Nutrition)
+            .Include(r => r.Ingredients)
+                .ThenInclude(i => i.Ingredient)
+            .Include(r => r.Photo)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task<IPagedList<BlogPost>> GetBlogPostsPagedAsync(BlogPostsPreviewPageRequest dto)
+    {
+        var query = _db.BlogPosts.Include(bp => bp.Photo);
+
+        var list = await query.ToPagedListAsync(dto.PageNumber, dto.PageSize);
+
+        return list;
+    }
+
+    public async Task<BlogPost?> GetBlogPost(int uid)
+    {
+        return await _db.BlogPosts
+            .Include(bp => bp.Photo)
+            .Where(bp => bp.Uid == uid)
+            .FirstOrDefaultAsync();
     }
 }

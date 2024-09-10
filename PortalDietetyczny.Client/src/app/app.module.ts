@@ -37,6 +37,14 @@ import { AddTagFormComponent } from './components/forms/add-tag-form/add-tag-for
 import { IngredientsListComponent } from './components/forms/ingredients-list/ingredients-list.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { RecipeDetailsComponent } from './components/components/recipe-details/recipe-details.component';
+import { RecipeComponent } from './components/pages/recipe/recipe.component';
+import { AddBlogFormComponent } from './components/forms/add-blog-form/add-blog-form.component';
+import { QuillModule } from 'ngx-quill';
+import { BlogGridComponent } from './components/grids/blog-grid/blog-grid.component';
+import { BlogCardComponent } from './components/components/blog-card/blog-card.component';
+import { BlogDetailsComponent } from './components/components/blog-details/blog-details.component';
+import { BlogsComponent } from './components/pages/blogs/blogs.component';
+import { BlogComponent } from './components/pages/blog/blog.component';
 
 
 @NgModule({
@@ -66,6 +74,13 @@ import { RecipeDetailsComponent } from './components/components/recipe-details/r
     IngredientsListComponent,
     AddTagFormComponent,
     RecipeDetailsComponent,
+    RecipeComponent,
+    AddBlogFormComponent,
+    BlogGridComponent,
+    BlogCardComponent,
+    BlogDetailsComponent,
+    BlogsComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +96,7 @@ import { RecipeDetailsComponent } from './components/components/recipe-details/r
     MatIconModule,
     MatInputModule,
     FileUploadModule,
+    QuillModule.forRoot()
   ],
   providers: [
     provideAnimationsAsync()

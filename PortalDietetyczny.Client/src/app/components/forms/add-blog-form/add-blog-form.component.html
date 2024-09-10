@@ -1,0 +1,41 @@
+<div class="container" style="margin-top: 50px">
+
+  <div class="row">
+
+    <div class="col-md-8">
+      <div class="card-header text-center" style="background-color: #007bff;">
+        <h3 class="mb-0">Formularz bloga</h3>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <form>
+            <!-- Input for post title -->
+            <div class="form-group">
+              <label for="postTitle">Tytuł posta</label>
+              <input name="title" type="text" class="form-control" id="postTitle" placeholder="Wprowadź tytuł posta" [(ngModel)]="postName" >
+            </div>
+            <br>
+
+            <!-- File upload for post image -->
+            <div class="form-group">
+              <label>Zdjecie</label>
+              <br>
+
+              <input class="mb-2 hidden" type="file" id="myFile" name="myFile" accept="image/png, image/jpeg" (change)="onFileSelected($event)">
+            </div>
+            <br>
+
+            <!-- Quill editor for post content -->
+            <div class="form-group">
+              <label>Treść posta</label>
+              <quill-editor name="content" [(ngModel)]="postContent" class="quill-content"></quill-editor>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary float-right" (click)="Submit()">Dodaj post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

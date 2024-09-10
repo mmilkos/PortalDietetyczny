@@ -9,19 +9,21 @@ using PortalDietetycznyAPI.Domain.Resources;
 
 namespace PortalDietetycznyAPI.Application._Commands;
 
-public class AddPhotoCommand : IRequest<OperationResult<Photo>>
+public class AddRecipePhotoCommand : IRequest<OperationResult<RecipePhoto>>
 {
     public byte[] FileBytes { get; private set; }
     public string FileName { get; private set; }
+    public string FolderName { get; }
     
-    public AddPhotoCommand(byte[] fileBytes, string fileName )
+    public AddRecipePhotoCommand(byte[] fileBytes, string fileName, string folderName )
     {
         FileBytes = fileBytes;
         FileName = fileName;
+        FolderName = folderName;
     }
 }
 
-public class AddPhotoCommandHandler : IRequestHandler<AddPhotoCommand, OperationResult<Photo>>
+public class AddPhotoCommandHandler : PhotoGenerator, IRequestHandler<AddRecipePhotoCommand, OperationResult<RecipePhoto>>
 {
     private readonly Cloudinary _cloudinary;
     private readonly IPDRepository _repository;
@@ -39,9 +41,9 @@ public class AddPhotoCommandHandler : IRequestHandler<AddPhotoCommand, Operation
         
         _cloudinary = new Cloudinary(account);
     }
-    public async Task<OperationResult<Photo>> Handle(AddPhotoCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult<RecipePhoto>> Handle(AddRecipePhotoCommand request, CancellationToken cancellationToken)
     {
-        var operationResult = new OperationResult<Photo>() { };
+        var operationResult = new OperationResult<RecipePhoto>() { };
         
         var file = GeneratePhoto(request.FileBytes, request.FileName);
 
@@ -51,7 +53,7 @@ public class AddPhotoCommandHandler : IRequestHandler<AddPhotoCommand, Operation
         {
             File = new FileDescription(file.FileName, stream),
             Transformation = new Transformation().Height(500).Width(500).Crop("fill"),
-            Folder = "Recipes_photos"
+            Folder = request.FolderName
         };
 
         ImageUploadResult uploadResult;
@@ -66,7 +68,7 @@ public class AddPhotoCommandHandler : IRequestHandler<AddPhotoCommand, Operation
             return operationResult;
         }
 
-        var photo = new Photo()
+        var photo = new RecipePhoto()
         {
             PublicId = uploadResult.PublicId,
             Url = uploadResult.Url.ToString()
@@ -85,35 +87,5 @@ public class AddPhotoCommandHandler : IRequestHandler<AddPhotoCommand, Operation
         operationResult.Data = photo;
         
         return operationResult;
-    }
-    
-    private FormFile GeneratePhoto(byte[] fileBytes, string fileName)
-    {
-        var stream = new MemoryStream(fileBytes);
-        var formFile = new FormFile(
-            baseStream: stream, 
-            baseStreamOffset: 0, 
-            length: fileBytes.Length,
-            name: "",
-            fileName: fileName)
-        {
-            Headers = new HeaderDictionary(),
-            ContentType = GetContentType(fileName)
-        };
-        
-        return formFile;
-    }
-
-    private string GetContentType(string fileName)
-    {
-        var fileType = Path.GetExtension(fileName).ToLower();
-
-        switch (fileType)
-        {
-            case ".png":
-                return "image/png";
-            default:
-                return "image/jpeg";
-        }
     }
 }

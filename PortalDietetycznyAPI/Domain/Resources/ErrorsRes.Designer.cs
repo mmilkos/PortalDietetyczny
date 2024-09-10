@@ -60,7 +60,25 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Błąd związany z serwisem przechowującym zdjęcia.
+        ///   Looks up a localized string similar to Nie znaleziono postu o podanyn ID.
+        /// </summary>
+        public static string BlogPostNotFound {
+            get {
+                return ResourceManager.GetString("BlogPostNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd podczas zapisywania postu.
+        /// </summary>
+        public static string BlogPostSavingError {
+            get {
+                return ResourceManager.GetString("BlogPostSavingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd związany z serwisem przechowującym zdjęcia.
         /// </summary>
         public static string CloudinaryError {
             get {
@@ -96,11 +114,47 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie znaleziono przepisu o podanym ID.
+        /// </summary>
+        public static string RecipeNotFound {
+            get {
+                return ResourceManager.GetString("RecipeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd przy dodawaniu przepisu.
+        /// </summary>
+        public static string RecipeSavingError {
+            get {
+                return ResourceManager.GetString("RecipeSavingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd przy aktualizacji przepisu.
+        /// </summary>
+        public static string RecipeUpdateError {
+            get {
+                return ResourceManager.GetString("RecipeUpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ten tag został już dodany.
         /// </summary>
         public static string TagAlreadyInDb {
             get {
                 return ResourceManager.GetString("TagAlreadyInDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie znaleziono klucza API do TinyMCE.
+        /// </summary>
+        public static string TinyMceError {
+            get {
+                return ResourceManager.GetString("TinyMceError", resourceCulture);
             }
         }
     }

@@ -26,10 +26,7 @@ export class RecipesGridComponent implements OnInit
   currentPage: number = 1;
   totalPages: number
 
-  constructor(private recipesService: RecipesService)
-  {
-
-  }
+  constructor(private recipesService: RecipesService) {}
 
   ngOnInit(): void
   {
@@ -53,7 +50,6 @@ export class RecipesGridComponent implements OnInit
       (response: PagedResult<RecipePreviewDto>)=>
       {
         this.recipes = response.data
-        console.log(response)
         this.totalPages = Math.ceil(response.totalCount / 6)
       } ,
       (error) => console.log(error))

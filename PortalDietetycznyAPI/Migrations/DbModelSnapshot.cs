@@ -21,6 +21,67 @@ namespace PortalDietetycznyAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.BlogPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BlogPostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId")
+                        .IsUnique()
+                        .HasFilter("[BlogPostId] IS NOT NULL");
+
+                    b.ToTable("BlogPhotos");
+                });
+
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.BlogPost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PhotoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Uid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Uid");
+
+                    b.ToTable("BlogPosts");
+                });
+
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Ingredient", b =>
                 {
                     b.Property<int>("Id")
@@ -39,34 +100,6 @@ namespace PortalDietetycznyAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("Ingredients");
-                });
-
-            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Photo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipeId")
-                        .IsUnique()
-                        .HasFilter("[RecipeId] IS NOT NULL");
-
-                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Recipe", b =>
@@ -139,6 +172,34 @@ namespace PortalDietetycznyAPI.Migrations
                     b.ToTable("RecipeIngredients");
                 });
 
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.RecipePhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId")
+                        .IsUnique()
+                        .HasFilter("[RecipeId] IS NOT NULL");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.RecipeTag", b =>
                 {
                     b.Property<int>("RecipeId")
@@ -196,14 +257,14 @@ namespace PortalDietetycznyAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Photo", b =>
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.BlogPhoto", b =>
                 {
-                    b.HasOne("PortalDietetycznyAPI.Domain.Entities.Recipe", "Recipe")
+                    b.HasOne("PortalDietetycznyAPI.Domain.Entities.BlogPost", "BlogPost")
                         .WithOne("Photo")
-                        .HasForeignKey("PortalDietetycznyAPI.Domain.Entities.Photo", "RecipeId")
+                        .HasForeignKey("PortalDietetycznyAPI.Domain.Entities.BlogPhoto", "BlogPostId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.Navigation("Recipe");
+                    b.Navigation("BlogPost");
                 });
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Recipe", b =>
@@ -257,6 +318,16 @@ namespace PortalDietetycznyAPI.Migrations
                     b.Navigation("Ingredient");
                 });
 
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.RecipePhoto", b =>
+                {
+                    b.HasOne("PortalDietetycznyAPI.Domain.Entities.Recipe", "Recipe")
+                        .WithOne("Photo")
+                        .HasForeignKey("PortalDietetycznyAPI.Domain.Entities.RecipePhoto", "RecipeId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Recipe");
+                });
+
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.RecipeTag", b =>
                 {
                     b.HasOne("PortalDietetycznyAPI.Domain.Entities.Recipe", "Recipe")
@@ -274,6 +345,11 @@ namespace PortalDietetycznyAPI.Migrations
                     b.Navigation("Recipe");
 
                     b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.BlogPost", b =>
+                {
+                    b.Navigation("Photo");
                 });
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Recipe", b =>

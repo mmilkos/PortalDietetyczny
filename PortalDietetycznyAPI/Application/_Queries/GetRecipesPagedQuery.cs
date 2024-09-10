@@ -44,8 +44,6 @@ public class GetRecipesPagedQueryHandler : IRequestHandler<GetRecipesPagedQuery,
             return pagedResult;
         }
         
-        
-        
         pagedResult.Data = pagedRecipes.Select(r => new RecipePreviewDto
             {
                 Id = r.Id,
@@ -61,7 +59,6 @@ public class GetRecipesPagedQueryHandler : IRequestHandler<GetRecipesPagedQuery,
 
         pagedResult.TotalCount = pagedRecipes.TotalItemCount;
         pagedResult.PageNumber = pagedRecipes.PageNumber;
-       
         
         return pagedResult;
     }

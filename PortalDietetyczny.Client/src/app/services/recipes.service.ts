@@ -8,6 +8,7 @@ import { AddTagDto } from '../DTOs/AddTagDto';
 import {IngredientListDto, TagListDto} from '../DTOs/IdAndName';
 import { AddRecipeDto } from '../DTOs/AddRecipeDto';
 import { RecipesPreviewPageRequest } from '../DTOs/RecipesPreviewPageRequest';
+import { RecipeDetailsDto } from '../DTOs/RecipeDetailsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,8 @@ export class RecipesService
     return this.http.get<IngredientListDto>(this.apiUrl + '/ingredients');
   }
 
-
+  getRecipeDetails(uid: number): Observable<RecipeDetailsDto>
+  {
+    return this.http.get<RecipeDetailsDto>(this.apiUrl + `/${uid}`)
+  }
 }

@@ -1,0 +1,11 @@
+.photo
+{
+  margin: 10px;
+  border: 7px  #5fa22e solid;
+}
+
+button
+{
+  background-color: #5fa22e;
+  margin: 10px;
+}

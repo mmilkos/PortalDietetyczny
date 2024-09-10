@@ -1,1 +1,59 @@
-<p>recipe-details works!</p>
+<div class="container text-center" style="padding: 2rem; max-width: 60vw; background-color: #f5f5f5">
+
+  <!-- Tags Section -->
+  <div class="row mb-3">
+    <div class="col-12 d-flex flex-wrap justify-content-center">
+      <span *ngFor="let tag of recipeDetails?.recipeTags" class="mr-2">{{tag}}</span>
+    </div>
+  </div>
+
+  <!-- Title Section -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <h1 class="display-4" style="font-size: 2.5rem;">{{recipeDetails?.name}}</h1>
+    </div>
+  </div>
+
+  <!-- Image Section -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <img [src]="recipeDetails?.photoUrl" class="photo img-fluid mx-auto d-block">
+    </div>
+  </div>
+
+  <!-- Ingredients Section -->
+  <div class="row mb-3">
+    <div class="col-12 text-left mx-auto" style="max-width: 500px;">
+      <h3>Składniki</h3>
+      <ul class="list-unstyled">
+        <li *ngFor="let ingredient of recipeDetails?.ingredients" style="text-align: left">
+          {{ingredient.name}}: {{ingredient.unitValue}} {{ingredient.unit}} ({{ingredient.homeUnitValue}} {{ingredient.homeUnit}})
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Instructions Section -->
+  <div class="row mb-3">
+    <div class="col-12 text-left mx-auto" style="max-width: 500px;">
+      <h3>Sposób przygotowania</h3>
+      <p style="text-align: left">{{recipeDetails?.instruction}}</p>
+    </div>
+  </div>
+
+  <!-- Nutrition Section -->
+  <div class="row">
+    <div class="col-12 text-left mx-auto" style="max-width: 500px;">
+      <div style="text-align: left">
+        <div><b>Energia:</b> {{recipeDetails?.nutrition.kcal}} kcal</div>
+        <div><b>Białko:</b> {{recipeDetails?.nutrition.protein}} g</div>
+        <div><b>Tłuszcze:</b> {{recipeDetails?.nutrition.fat}} g</div>
+        <div><b>Węglowodany:</b> {{recipeDetails?.nutrition.carb}} g</div>
+        <div><b>Błonnik:</b> {{recipeDetails?.nutrition.fiber}} g</div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-secondary" (click)="previousPage()"> Powrót </button>
+
+</div>

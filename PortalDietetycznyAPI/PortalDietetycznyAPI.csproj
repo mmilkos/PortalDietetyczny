@@ -25,6 +25,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorsRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Resources\FoldersNamesRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FoldersNamesRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +36,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ErrorsRes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Resources\FoldersNamesRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FoldersNamesRes.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 

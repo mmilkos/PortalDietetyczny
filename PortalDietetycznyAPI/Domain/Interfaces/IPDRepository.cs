@@ -16,5 +16,8 @@ public interface IPDRepository
     Task UpdateAsync<T>(T entity) where T : class;
     Task<List<T>> GetAllEntitiesAsync<T>(Expression<Func<T, bool>> condition) where T : class;
     Task<IPagedList<Recipe>> GetRecipesPagedAsync(RecipesPreviewPageRequest dto);
-    
+    Task<Recipe?> GetRecipe(int uid);
+    Task<IPagedList<BlogPost>> GetBlogPostsPagedAsync(BlogPostsPreviewPageRequest dto);
+    Task<BlogPost?> GetBlogPost(int uid);
+
 }

@@ -17,12 +17,14 @@ public class RecipesController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("paged")]
-    public async Task<ActionResult<PagedResult<RecipePreviewDto>>> GetRecipesPaged([FromBody] RecipesPreviewPageRequest dto)
+    [HttpGet("{uid}")]
+    public async Task<ActionResult<RecipeDetailsDto>> GetRecipe([FromRoute] int uid)
     {
-        var result = await _mediator.Send(new GetRecipesPagedQuery(dto));
-
-        return Ok(result);
+       
+        var result = await _mediator.Send(new GetRecipeQuery(uid));
+        if (result.Success) return Ok(result.Data);
+        
+        return StatusCode(500, result.ErrorsList);
     }
     
     [HttpPost]
@@ -33,6 +35,14 @@ public class RecipesController : ControllerBase
         
         return StatusCode(500, result.ErrorsList);
     } 
+
+    [HttpPost("paged")]
+    public async Task<ActionResult<PagedResult<RecipePreviewDto>>> GetRecipesPaged([FromBody] RecipesPreviewPageRequest dto)
+    {
+        var result = await _mediator.Send(new GetRecipesPagedQuery(dto));
+
+        return Ok(result);
+    }
     
     [HttpPost("tags")]
     public async Task<ActionResult> AddTag([FromBody] AddTagDto dto)

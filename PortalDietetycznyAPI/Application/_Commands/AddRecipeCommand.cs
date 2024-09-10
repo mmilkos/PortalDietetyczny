@@ -1,7 +1,10 @@
-﻿using MediatR;
+﻿using System.Globalization;
+using System.Text;
+using MediatR;
 using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.Domain.Interfaces;
+using PortalDietetycznyAPI.Domain.Resources;
 using PortalDietetycznyAPI.DTOs;
 
 namespace PortalDietetycznyAPI.Application._Commands;
@@ -16,7 +19,7 @@ public class AddRecipeCommand : IRequest<OperationResult<Unit>>
     }
 }
 
-public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, OperationResult<Unit>>
+public class AddRecipeCommandHandler : IdentifierGenerator, IRequestHandler<AddRecipeCommand, OperationResult<Unit>>
 {
     private IPDRepository _repository;
     private IMediator _mediator;
@@ -44,6 +47,8 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
 
         var uid = GenerateUid();
 
+        var url = GenerateUrl(uid, dto.Name);
+
         var recipe = new Recipe
         {
             Uid = uid,
@@ -52,10 +57,18 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
             Instruction = dto.Instruction,
             PhotoId = photoResult.Data?.Id,
             Photo = photoResult.Data,
-            Url = dto.Name.ToLower().Replace(' ', newChar: '-') + "-" + uid
+            Url = url
         };
 
-        await _repository.AddAsync(recipe);
+        try
+        {
+            await _repository.AddAsync(recipe);
+        }
+        catch (Exception e)
+        {
+            result.AddError(ErrorsRes.RecipeSavingError);
+            return result;
+        }
 
         recipe.RecipeTags =  await GetRecipeTags(dto.TagsIds, recipe);
         
@@ -67,18 +80,18 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
         }
         catch (Exception e)
         {
-            result.AddError("Błąd przy update przepisu");
+            result.AddError(ErrorsRes.RecipeUpdateError);
             return result;
         }
         
         return result;
     }
     
-    private async Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
+    private async Task<OperationResult<RecipePhoto>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
     {
-        if (fileBytes.Length > 0) return await _mediator.Send(new AddPhotoCommand(fileBytes, fileName), cancellationToken);
+        if (fileBytes.Length > 0) return await _mediator.Send(new AddRecipePhotoCommand(fileBytes, fileName, FoldersNamesRes.Recipes_photos), cancellationToken);
 
-        return new OperationResult<Photo>()
+        return new OperationResult<RecipePhoto>()
         {
             Data = null
         };
@@ -122,9 +135,9 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
                 RecipeId = recipe.Id,
                 Ingredient = ingredient,
                 IngredientId = ingredientDto.Id,
-                Unit = ingredientDto.Unit,
+                Unit = ingredientDto.Unit.ToLower(),
                 UnitValue = ingredientDto.UnitValue,
-                HomeUnit = ingredientDto.HomeUnit,
+                HomeUnit = ingredientDto.HomeUnit.ToLower(),
                 HomeUnitValue = ingredientDto.HomeUnitValue
             };
 
@@ -132,13 +145,5 @@ public class AddRecipeCommandHandler : IRequestHandler<AddRecipeCommand, Operati
         }
 
         return recipeIngredients;
-    }
-
-    private int GenerateUid()
-    {
-        var now = DateTimeOffset.UtcNow;
-        var unixTimeSeconds =(int)now.ToUnixTimeSeconds();
-
-        return unixTimeSeconds;
     }
 }
