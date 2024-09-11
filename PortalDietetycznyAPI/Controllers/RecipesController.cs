@@ -17,11 +17,11 @@ public class RecipesController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("{uid}")]
-    public async Task<ActionResult<RecipeDetailsDto>> GetRecipe([FromRoute] int uid)
+    [HttpGet("{link}")]
+    public async Task<ActionResult<RecipeDetailsDto>> GetRecipe([FromRoute] string link)
     {
        
-        var result = await _mediator.Send(new GetRecipeQuery(uid));
+        var result = await _mediator.Send(new GetRecipeQuery(link));
         if (result.Success) return Ok(result.Data);
         
         return StatusCode(500, result.ErrorsList);

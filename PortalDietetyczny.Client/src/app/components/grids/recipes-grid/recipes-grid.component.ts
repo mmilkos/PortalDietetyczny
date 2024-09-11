@@ -13,7 +13,27 @@ import {RecipesPreviewPageRequest} from "../../../DTOs/RecipesPreviewPageRequest
 })
 export class RecipesGridComponent implements OnInit
 {
-  recipes: RecipePreviewDto[]
+
+  dummyRecipe: RecipePreviewDto =
+    {
+      id: null,
+      name: null,
+      kcal: null,
+      fat: null,
+      carb: null,
+      protein: null,
+      photoUrl: "https://res.cloudinary.com/dzohpx1mq/image/upload/v1726062320/Stock/hyui3cahzqmujvt1jlx5.gif",
+      url: ""
+    }
+  recipes: RecipePreviewDto[] =
+    [
+     this.dummyRecipe,
+     this.dummyRecipe,
+     this.dummyRecipe,
+     this.dummyRecipe,
+     this.dummyRecipe,
+     this.dummyRecipe,
+    ]
   tagsNames: IdAndName[] = [];
   ingredientNames: IdAndName[] = [];
 

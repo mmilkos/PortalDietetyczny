@@ -46,6 +46,9 @@ import { BlogsComponent } from './components/pages/blogs/blogs.component';
 import { BlogComponent } from './components/pages/blog/blog.component';
 import { ConsultationsComponent } from './components/pages/consultations/consultations.component';
 import { NavGridComponent } from './components/grids/nav-grid/nav-grid.component';
+import { ConsultationCardComponent } from './components/components/consultation-card/consultation-card.component';
+import { ConsultationGridComponent } from './components/grids/consultation-grid/consultation-grid.component';
+import { ConsultationIntroComponent } from './components/components/consultation-intro/consultation-intro.component';
 
 
 @NgModule({
@@ -82,7 +85,10 @@ import { NavGridComponent } from './components/grids/nav-grid/nav-grid.component
     BlogDetailsComponent,
     BlogsComponent,
     BlogComponent,
-    ConsultationsComponent
+    ConsultationsComponent,
+    ConsultationCardComponent,
+    ConsultationGridComponent,
+    ConsultationIntroComponent
   ],
   imports: [
     BrowserModule,

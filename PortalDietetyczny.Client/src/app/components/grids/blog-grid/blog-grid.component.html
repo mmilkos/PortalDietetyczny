@@ -1,4 +1,4 @@
-<div style="display: grid; place-items: center; width: 100%; background-color:  #f5f5f5; border-top: 2px solid #d9d9d9;">
+<div style="display: grid; place-items: center; width: 100%; background-color:  #f5f3ee; border-top: 2px solid #d9d9d9;">
   <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
 
   </div>
@@ -7,8 +7,9 @@
     <app-blog-card *ngFor="let card of posts" [info]=card></app-blog-card>
   </div>
 
-  <div>
+  <div class="d-flex">
     <button type="button" class="btn btn-secondary" (click)="previousPage()"> < </button>
+    <p style="padding-top: 15px">{{currentPage}}</p>
     <button type="button" class="btn btn-secondary" (click)="nextPage()"> > </button>
   </div>
 </div>

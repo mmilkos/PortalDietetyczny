@@ -38,10 +38,10 @@ public class BlogController : ControllerBase
         return StatusCode(500, result.Error);
     }
     
-    [HttpGet("{uid}")]
-    public async Task<ActionResult<BlogPostDetailsDto>> GetBlogPost([FromRoute] int uid)
+    [HttpGet("{link}")]
+    public async Task<ActionResult<BlogPostDetailsDto>> GetBlogPost([FromRoute] string link)
     {
-        var result = await _mediator.Send(new GetBlogPostQuery(uid));
+        var result = await _mediator.Send(new GetBlogPostQuery(link));
         if (result.Success) return Ok(result.Data);
         
         return StatusCode(500, result.ErrorsList);

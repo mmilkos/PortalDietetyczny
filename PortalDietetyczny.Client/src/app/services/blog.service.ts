@@ -26,7 +26,7 @@ export class BlogService
     return this.http.post<PagedResult<BlogPostPreviewDto>>(this.apiUrl + "/paged", params)
   }
 
-  getBlogPostDetails(uid: number): Observable<BlogPostDetailsDto>
+  getBlogPostDetails(uid: string): Observable<BlogPostDetailsDto>
   {
     return this.http.get<BlogPostDetailsDto>(this.apiUrl + `/${uid}`)
   }

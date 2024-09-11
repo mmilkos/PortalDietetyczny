@@ -1,3 +1,22 @@
 a {
   cursor: pointer;
 }
+.wrapper
+{
+  background-color: #f5f3ee;
+  height: 10vh;
+  display: flex;
+  align-items: flex-start;  /* zmienione z 'center' na 'flex-start' */
+  justify-content: center;
+  border-top: 2px solid #d9d9d9;
+  width: 100vw;
+  padding-top: 5vh;
+}
+span
+{
+  width: 1px;
+  height: 1px;
+  margin: 10px 10vw ;
+
+  color: #f5f3ee;
+}

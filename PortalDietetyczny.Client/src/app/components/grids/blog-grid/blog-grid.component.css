@@ -16,6 +16,11 @@
 
 button
 {
-  background-color: #5fa22e;
+  background-color: white;
+  color: black;
   margin: 10px;
+}
+
+.btn.btn-secondary:hover {
+  background-color: #5fa22e;
 }

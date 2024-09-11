@@ -11,12 +11,12 @@ import { Router } from '@angular/router';
 export class BlogDetailsComponent
 {
   postDetails: BlogPostDetailsDto;
-  uid: number
+  uid: string
 
   constructor(private blogService: BlogService, private router: Router)
   {
-    let link = this.router.url.split("-")
-    this.uid = parseInt(link[link.length - 1], 16)
+    let link = this.router.url.split("/")
+    this.uid = link[link.length - 1]
   }
 
   ngOnInit(): void

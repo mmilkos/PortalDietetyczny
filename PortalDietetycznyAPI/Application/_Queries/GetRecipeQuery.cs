@@ -9,11 +9,11 @@ namespace PortalDietetycznyAPI.Application._Queries;
 
 public class GetRecipeQuery : IRequest<OperationResult<RecipeDetailsDto>>
 {
-    internal int Uid;
+    internal string Url;
     
-    public GetRecipeQuery(int uid)
+    public GetRecipeQuery(string url)
     {
-        Uid = uid;
+        Url = url;
     }
 }
 
@@ -30,10 +30,12 @@ public class GetRecipeQueryHandler : IRequestHandler<GetRecipeQuery, OperationRe
     {
         var operationResult = new OperationResult<RecipeDetailsDto>()
         { };
-        
-        var recipe = await _repository.GetRecipe(request.Uid);
 
-        if (recipe == null)
+        var uid = int.Parse(request.Url.Split('-').Last(), System.Globalization.NumberStyles.HexNumber);
+        
+        var recipe = await _repository.GetRecipe(uid);
+
+        if (recipe == null || recipe.Url != request.Url)
         {
             operationResult.AddError(ErrorsRes.RecipeNotFound);
             return operationResult;

@@ -8,11 +8,11 @@ namespace PortalDietetycznyAPI.Application._Queries;
 
 public class GetBlogPostQuery : IRequest<OperationResult<BlogPostDetailsDto>>
 {
-    public int Uid { get; set; }
+    public string Url { get; private set; }
     
-    public GetBlogPostQuery(int uid)
+    public GetBlogPostQuery(string url)
     {
-        Uid = uid;
+        Url = url;
     }
 }
 
@@ -32,9 +32,11 @@ public class GetBlogPostQueryHandler : IRequestHandler<GetBlogPostQuery, Operati
             Data = new BlogPostDetailsDto()
         };
         
-        var blogPost = await _repository.GetBlogPost(request.Uid);
+        var uid = int.Parse(request.Url.Split('-').Last(), System.Globalization.NumberStyles.HexNumber);
         
-        if (blogPost == null)
+        var blogPost = await _repository.GetBlogPost(uid);
+        
+        if (blogPost == null || blogPost.Url != request.Url)
         {
             result.AddError(ErrorsRes.BlogPostNotFound);
             return result;

@@ -53,8 +53,8 @@ export class RecipesService
     return this.http.get<IngredientListDto>(this.apiUrl + '/ingredients');
   }
 
-  getRecipeDetails(uid: number): Observable<RecipeDetailsDto>
+  getRecipe(link: string): Observable<RecipeDetailsDto>
   {
-    return this.http.get<RecipeDetailsDto>(this.apiUrl + `/${uid}`)
+    return this.http.get<RecipeDetailsDto>(this.apiUrl + `/${link}`)
   }
 }
