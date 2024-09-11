@@ -9,6 +9,7 @@ import { AdminPanelComponent } from './components/pages/admin-panel/admin-panel.
 import { RecipeComponent } from './components/pages/recipe/recipe.component';
 import { BlogsComponent } from './components/pages/blogs/blogs.component';
 import { BlogComponent } from './components/pages/blog/blog.component';
+import { ConsultationsComponent } from './components/pages/consultations/consultations.component';
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes =
     {path: RoutesEnum.calculators, component: CalculatorsComponent},
     {path: RoutesEnum.blog, component: BlogsComponent},
     {path: RoutesEnum.blog + "/:postName", component: BlogComponent},
+    {path: RoutesEnum.consultations, component: ConsultationsComponent},
     {path: RoutesEnum.adminPanel, component: AdminPanelComponent},
     {path: "**", component: StartComponent}
   ];

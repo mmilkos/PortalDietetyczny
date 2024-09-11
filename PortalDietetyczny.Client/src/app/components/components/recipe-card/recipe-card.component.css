@@ -63,3 +63,8 @@ img
     min-height: 500px;
   }
 }
+
+span
+{
+  padding-right: 4px;
+}

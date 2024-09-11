@@ -4,11 +4,11 @@ import {Router, RouterLink } from '@angular/router';
 import { RoutesEnum } from '../../../enums/RoutesEnum';
 
 @Component({
-  selector: 'app-details-grid',
-  templateUrl: './details-grid.component.html',
-  styleUrl: './details-grid.component.css'
+  selector: 'app-nav-grid',
+  templateUrl: './nav-grid.component.html',
+  styleUrl: './nav-grid.component.css'
 })
-export class DetailsGridComponent implements OnInit
+export class NavGridComponent implements OnInit
 {
   public isSmallScreen: boolean = false;
   public routes  = RoutesEnum;

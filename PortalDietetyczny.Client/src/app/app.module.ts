@@ -15,7 +15,6 @@ import { PpmCalculatorComponent } from './components/calculators/ppm-calculator/
 import { WhrCalculatorComponent } from './components/calculators/whr-calculator/whr-calculator.component';
 import { HeaderComponent } from './components/components/header/header.component';
 import { AboutCardComponent } from './components/components/about-card/about-card.component';
-import { DetailsGridComponent } from './components/grids/details-grid/details-grid.component';
 import { DetailsCardComponent } from './components/components/details-card/details-card.component';
 import { FooterComponent } from './components/components/footer/footer.component';
 import { AboutUsIntroComponent } from './components/components/about-us-intro/about-us-intro.component';
@@ -45,6 +44,8 @@ import { BlogCardComponent } from './components/components/blog-card/blog-card.c
 import { BlogDetailsComponent } from './components/components/blog-details/blog-details.component';
 import { BlogsComponent } from './components/pages/blogs/blogs.component';
 import { BlogComponent } from './components/pages/blog/blog.component';
+import { ConsultationsComponent } from './components/pages/consultations/consultations.component';
+import { NavGridComponent } from './components/grids/nav-grid/nav-grid.component';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { BlogComponent } from './components/pages/blog/blog.component';
     HeaderComponent,
     StartComponent,
     AboutCardComponent,
-    DetailsGridComponent,
+    NavGridComponent,
     DetailsCardComponent,
     FooterComponent,
     AboutUsComponent,
@@ -80,7 +81,8 @@ import { BlogComponent } from './components/pages/blog/blog.component';
     BlogCardComponent,
     BlogDetailsComponent,
     BlogsComponent,
-    BlogComponent
+    BlogComponent,
+    ConsultationsComponent
   ],
   imports: [
     BrowserModule,
