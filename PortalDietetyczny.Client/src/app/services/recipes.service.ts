@@ -5,7 +5,7 @@ import { RecipePreviewDto } from '../models/RecipePreviewDto';
 import { PagedResult } from '../models/PagedResult';
 import { AddIngredientDto } from '../DTOs/AddIngredientDto';
 import { AddTagDto } from '../DTOs/AddTagDto';
-import {IngredientListDto, TagListDto} from '../DTOs/IdAndName';
+import { NamesListDto} from '../DTOs/IdAndName';
 import { AddRecipeDto } from '../DTOs/AddRecipeDto';
 import { RecipesPreviewPageRequest } from '../DTOs/RecipesPreviewPageRequest';
 import { RecipeDetailsDto } from '../DTOs/RecipeDetailsDto';
@@ -37,20 +37,30 @@ export class RecipesService
     return this.http.post<any>(this.apiUrl + '/ingredients', recipe);
   }
 
+  deleteIngredient(id: number): Observable<any>
+  {
+    return this.http.delete(this.apiUrl + `/ingredients/${id}`)
+  }
+
   addTag(tag: AddTagDto): Observable<any>
   {
     console.log(tag)
     return this.http.post<any>(this.apiUrl + '/tags', tag);
   }
 
-  getTags(): Observable<TagListDto>
+  getTags(): Observable<NamesListDto>
   {
-    return this.http.get<TagListDto>(this.apiUrl + '/tags');
+    return this.http.get<NamesListDto>(this.apiUrl + '/tags');
   }
 
-  getIngredients() : Observable<IngredientListDto>
+  deleteTag(id: number): Observable<any>
   {
-    return this.http.get<IngredientListDto>(this.apiUrl + '/ingredients');
+    return this.http.delete(this.apiUrl + `/tags/${id}`)
+  }
+
+  getIngredients() : Observable<NamesListDto>
+  {
+    return this.http.get<NamesListDto>(this.apiUrl + '/ingredients');
   }
 
   getRecipe(link: string): Observable<RecipeDetailsDto>

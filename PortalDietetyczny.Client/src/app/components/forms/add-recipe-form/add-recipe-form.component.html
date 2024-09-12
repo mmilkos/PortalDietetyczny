@@ -147,6 +147,31 @@
     <br>
     <app-add-tag-form></app-add-tag-form>
     <button (click)="getTagsNames()" class="btn btn-warning m-1">Odśwież listę tagów</button>
+
+    <div class="form-group mt-2">
+      <select id="tagToDelete" class="form-select" [(ngModel)]="selectedTagToDelete">
+        <option *ngFor="let tag of tagsNames" [value]="tag.id">{{tag.name}}</option>
+      </select>
+
+      <button (click)="deleteTag()" class="btn btn-danger w-100 mt-1">Usuń tag</button>
+    </div>
+
+
+    <div class="form-group mt-2">
+      <select id="ingredientToDelete" class="form-select" [(ngModel)]="selectedIngredientToDelete">
+        <option *ngFor="let ingredient of ingredientNames" [value]="ingredient.id">{{ingredient.name}}</option>
+      </select>
+
+      <button (click)="deleteIngredient()" class="btn btn-danger w-100 mt-1">Usuń składnik</button>
+    </div>
+
+    <div class="form-group mt-2">
+      <select id="ingredientToDelete" class="form-select" [(ngModel)]="selectedIngredientToDelete">
+        <option *ngFor="let ingredient of ingredientNames" [value]="ingredient.id">{{ingredient.name}}</option>
+      </select>
+
+      <button (click)="deleteIngredient()" class="btn btn-danger w-100 mt-1">Usuń składnik</button>
+    </div>
   </div>
 </div>
 <app-add-blog-form></app-add-blog-form>

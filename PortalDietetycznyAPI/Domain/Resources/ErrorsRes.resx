@@ -51,4 +51,7 @@
     <data name="BlogPostNotFound" xml:space="preserve">
         <value>Nie znaleziono postu o podanyn ID</value>
     </data>
+    <data name="BlogPostDeleteError" xml:space="preserve">
+        <value>Wystąpił błąd podczas usuwania posta</value>
+    </data>
 </root>

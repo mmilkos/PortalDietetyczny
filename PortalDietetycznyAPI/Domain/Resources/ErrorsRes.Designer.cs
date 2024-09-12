@@ -60,6 +60,15 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd podczas usuwania posta.
+        /// </summary>
+        public static string BlogPostDeleteError {
+            get {
+                return ResourceManager.GetString("BlogPostDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie znaleziono postu o podanyn ID.
         /// </summary>
         public static string BlogPostNotFound {

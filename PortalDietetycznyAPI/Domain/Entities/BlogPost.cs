@@ -8,5 +8,4 @@ public class BlogPost : Entity
     public int? PhotoId { get; set; }
     public BlogPhoto? Photo { get; set; }
     public string Url { get; set; }
-    
 }

@@ -18,6 +18,16 @@ public class BlogController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<NamesListDto>> GetBlogPostsList()
+    {
+        var result = await _mediator.Send(new GetBlogPostsQuery());
+
+        if (result.Success) return Ok(result.Data);
+        
+        return StatusCode(500, result.ErrorsList);
+    }
+
     [HttpPost]
     public async Task<ActionResult> PostPost([FromBody] AddBlogPostDto dto)
     {
@@ -46,4 +56,14 @@ public class BlogController : ControllerBase
         
         return StatusCode(500, result.ErrorsList);
     }
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<BlogPostDetailsDto>> DeleteBlogPost([FromRoute] int id)
+    {
+        var result = await _mediator.Send(new DeleteBlogPostQuery(id));
+        if (result.Success) return Ok(result.Data);
+        
+        return StatusCode(500, result.ErrorsList);
+    }
+    
 }

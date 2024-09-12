@@ -6,12 +6,12 @@ using PortalDietetycznyAPI.DTOs;
 
 namespace PortalDietetycznyAPI.Application._Queries;
 
-public class GetIngredientsQuery : IRequest<OperationResult<IngredientListDto>>
+public class GetIngredientsQuery : IRequest<OperationResult<NamesListDto>>
 {
     
 }
 
-public class GetIngredientsQueryHandler : IRequestHandler<GetIngredientsQuery, OperationResult<IngredientListDto>>
+public class GetIngredientsQueryHandler : IRequestHandler<GetIngredientsQuery, OperationResult<NamesListDto>>
 {
     private readonly IPDRepository _repository;
     
@@ -20,11 +20,11 @@ public class GetIngredientsQueryHandler : IRequestHandler<GetIngredientsQuery, O
         _repository = repository;
     }
     
-    public async Task<OperationResult<IngredientListDto>> Handle(GetIngredientsQuery request, CancellationToken cancellationToken)
+    public async Task<OperationResult<NamesListDto>> Handle(GetIngredientsQuery request, CancellationToken cancellationToken)
     {
-        var operationResult = new OperationResult<IngredientListDto>()
+        var operationResult = new OperationResult<NamesListDto>()
         {
-            Data = new IngredientListDto()
+            Data = new NamesListDto()
         };
 
         var ingredients = await _repository.GetAllEntitiesAsync<Ingredient>(i=> true);
@@ -37,7 +37,7 @@ public class GetIngredientsQueryHandler : IRequestHandler<GetIngredientsQuery, O
                 Name = ingredient.Name
             };
             
-            operationResult.Data.Ingredients.Add(dto);
+            operationResult.Data.Names.Add(dto);
         }
 
         return operationResult;

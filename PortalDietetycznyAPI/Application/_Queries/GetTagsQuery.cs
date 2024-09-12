@@ -7,12 +7,12 @@ using PortalDietetycznyAPI.Infrastructure.Repositories;
 
 namespace PortalDietetycznyAPI.Application._Queries;
 
-public class GetTagsQuery : IRequest<OperationResult<TagListDto>>
+public class GetTagsQuery : IRequest<OperationResult<NamesListDto>>
 {
     
 }
 
-public class GetTagsQueryHandler : IRequestHandler<GetTagsQuery, OperationResult<TagListDto>>
+public class GetTagsQueryHandler : IRequestHandler<GetTagsQuery, OperationResult<NamesListDto>>
 {
     private readonly IPDRepository _repository;
 
@@ -21,13 +21,13 @@ public class GetTagsQueryHandler : IRequestHandler<GetTagsQuery, OperationResult
         _repository = repository;
     }
     
-    public async Task<OperationResult<TagListDto>> Handle(GetTagsQuery request, CancellationToken cancellationToken)
+    public async Task<OperationResult<NamesListDto>> Handle(GetTagsQuery request, CancellationToken cancellationToken)
     {
-        var operationResult = new OperationResult<TagListDto>()
+        var operationResult = new OperationResult<NamesListDto>()
         {
-            Data = new TagListDto()
+            Data = new NamesListDto()
             {
-                Tags = new List<IdAndNameDto>()
+                Names = new List<IdAndNameDto>()
             }
         };
 
@@ -41,7 +41,7 @@ public class GetTagsQueryHandler : IRequestHandler<GetTagsQuery, OperationResult
                 Name = tag.Name
             };
             
-            operationResult.Data.Tags.Add(dto);
+            operationResult.Data.Names.Add(dto);
         }
 
         return operationResult;

@@ -6,6 +6,7 @@ import { PagedResult } from '../models/PagedResult';
 import { BlogPostPreviewDto } from '../DTOs/BlogPostPreviewDto';
 import { BlogPostsPreviewPageRequest } from '../DTOs/BlogPostsPreviewPageRequest';
 import { BlogPostDetailsDto } from '../DTOs/BlogPostDetailsDto';
+import { NamesListDto } from '../DTOs/IdAndName';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,17 @@ export class BlogService
   getBlogPostDetails(uid: string): Observable<BlogPostDetailsDto>
   {
     return this.http.get<BlogPostDetailsDto>(this.apiUrl + `/${uid}`)
+  }
+
+  getPosts(): Observable<NamesListDto>
+  {
+    return this.http.get<NamesListDto>(this.apiUrl)
+  }
+
+  deleteBlogPost(id: number): Observable<any>
+  {
+    console.log(this.apiUrl + `/${id}}`)
+    return this.http.delete(this.apiUrl + `/${id}`)
   }
 
 

@@ -35,6 +35,24 @@ public class RecipesController : ControllerBase
         
         return StatusCode(500, result.ErrorsList);
     } 
+    
+    /*[HttpGet]
+    public async Task<ActionResult> GetRecipes()
+    {
+        var result = await _mediator.Send(new );
+        if (result.Success) return Ok();
+        
+        return StatusCode(500, result.ErrorsList);
+    } */
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteRecipe(int id)
+    {
+        var result = await _mediator.Send(new DeleteRecipeCommand(id));
+        if (result.Success) return Ok();
+
+        return StatusCode(500, result.ErrorsList);
+    }
 
     [HttpPost("paged")]
     public async Task<ActionResult<PagedResult<RecipePreviewDto>>> GetRecipesPaged([FromBody] RecipesPreviewPageRequest dto)
@@ -55,7 +73,7 @@ public class RecipesController : ControllerBase
     
     [HttpGet("tags")]
     
-    public async Task<ActionResult<TagListDto>> GetTags()
+    public async Task<ActionResult<NamesListDto>> GetTags()
     {
         var result = await _mediator.Send(new GetTagsQuery());
         
@@ -63,7 +81,16 @@ public class RecipesController : ControllerBase
         
         return StatusCode(500, result.ErrorsList);
     }
-    
+
+    [HttpDelete("tags/{id}")]
+    public async Task<ActionResult> DeleteTag(int id)
+    {
+        var result = await _mediator.Send(new DeleteTagCommand(id));
+
+        if (result.Success) return Ok();
+
+        return StatusCode(500, result.ErrorsList);
+    }
 
     [HttpPost("ingredients")]
     public async Task<ActionResult> AddIngredient([FromBody] AddIngredientDto dto)
@@ -76,11 +103,21 @@ public class RecipesController : ControllerBase
     }
     
     [HttpGet("ingredients")]
-    public async Task<ActionResult<IngredientListDto>> GetIngredients()
+    public async Task<ActionResult<NamesListDto>> GetIngredients()
     {
         var result = await _mediator.Send(new GetIngredientsQuery());
 
         if (result.Success) return Ok(result.Data);
+
+        return StatusCode(500, result.ErrorsList);
+    }
+    
+    [HttpDelete("ingredients/{id}")]
+    public async Task<ActionResult> DeleteIngredient(int id)
+    {
+        var result = await _mediator.Send(new DeleteIngredientCommand(id));
+
+        if (result.Success) return Ok();
 
         return StatusCode(500, result.ErrorsList);
     }

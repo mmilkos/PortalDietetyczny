@@ -10,11 +10,11 @@ namespace PortalDietetycznyAPI.Application._Commands;
 
 public class DeletePhotoCommand : IRequest<OperationResult<DeletionResult>>
 {
-    public DeletePhotoDto Dto { get; private set; }
+    public string PublicID { get; private set; }
     
-    public DeletePhotoCommand(DeletePhotoDto dto)
+    public DeletePhotoCommand(string publicID)
     {
-        Dto = dto;
+        PublicID = publicID;
     }
 }
 
@@ -39,7 +39,7 @@ public class DeletePhotoCommandHandler : IRequestHandler<DeletePhotoCommand, Ope
     {
         var operationResult = new OperationResult<DeletionResult>();
         
-        var deleteParams = new DeletionParams(request.Dto.PublicId);
+        var deleteParams = new DeletionParams(request.PublicID);
 
         DeletionResult deletionResult;
 

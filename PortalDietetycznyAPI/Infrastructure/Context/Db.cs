@@ -25,7 +25,8 @@ public class Db : DbContext
         modelBuilder.Entity<Recipe>()
             .HasIndex(r => r.Uid);
 
-        modelBuilder.Entity<Ingredient>().HasIndex(e => e.Name).IsUnique();
+        modelBuilder.Entity<Ingredient>()
+            .HasIndex(e => e.Name).IsUnique();
 
         modelBuilder.Entity<Recipe>()
             .HasOne(r => r.Photo)
@@ -58,7 +59,7 @@ public class Db : DbContext
             .HasOne(rt => rt.Tag)
             .WithMany(t => t.RecipeTags)
             .HasForeignKey(rt => rt.TagId)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<BlogPost>()
             .HasIndex(bp => bp.Uid);

@@ -104,4 +104,17 @@ public class PdRepository : IPDRepository
             .Where(bp => bp.Uid == uid)
             .FirstOrDefaultAsync();
     }
+
+    public async Task DeleteAsync<T>(int id) where T : class
+    {
+        var entity = await _db.Set<T>().FindAsync(id);
+        _db.Set<T>().Remove(entity);
+        await _db.SaveChangesAsync();
+    }
+
+    public async Task DeleteRangeAsync<T>(List<T> list) where T : class
+    {
+        _db.Set<T>().RemoveRange(list);
+        await _db.SaveChangesAsync();
+    }
 }

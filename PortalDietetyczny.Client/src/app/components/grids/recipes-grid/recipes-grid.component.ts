@@ -80,7 +80,7 @@ export class RecipesGridComponent implements OnInit
     this.recipesService.getTags().subscribe(
       dto =>
       {
-        this.tagsNames = dto.tags;
+        this.tagsNames = dto.names;
       },
       error => console.log(error)
     )
@@ -91,7 +91,7 @@ export class RecipesGridComponent implements OnInit
     this.recipesService.getIngredients().subscribe(
       dto =>
       {
-        this.ingredientNames = dto.ingredients;
+        this.ingredientNames = dto.names;
         console.log(this.ingredientNames)
       },
       error => console.log(error)

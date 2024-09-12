@@ -3,12 +3,7 @@
   id: number;
   name: string;
 }
-export interface IngredientListDto
+export interface NamesListDto
 {
-  ingredients: IdAndName[];
-}
-
-export interface TagListDto
-{
-  tags: IdAndName[];
+  names: IdAndName[];
 }

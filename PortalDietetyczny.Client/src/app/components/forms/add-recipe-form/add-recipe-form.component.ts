@@ -22,6 +22,8 @@ export class AddRecipeFormComponent
   steps: string[];
   newStep: string= "";
   fileName: string = "";
+  selectedTagToDelete: number;
+  selectedIngredientToDelete: number;
 
   photo: string;
 
@@ -83,6 +85,13 @@ export class AddRecipeFormComponent
     this.ingredientForm.reset();
   }
 
+  deleteIngredient()
+  {
+    this.recipesService.deleteIngredient(this.selectedIngredientToDelete).subscribe(
+      (response)=>{},
+      (error) => console.log(error.error))
+  }
+
   removeIngredient(ingredient : any) {
     this.selectedIngredientsNames = this.selectedIngredientsNames.filter(i => i !== ingredient);
     this.addedIngredients = this.addedIngredients.filter(i => i.name !== ingredient)
@@ -93,7 +102,7 @@ export class AddRecipeFormComponent
     this.recipesService.getIngredients().subscribe(
       dto =>
       {
-        this.ingredientNames = dto.ingredients;
+        this.ingredientNames = dto.names;
         console.log(this.ingredientNames)
       },
       error => console.log(error)
@@ -113,9 +122,10 @@ export class AddRecipeFormComponent
   getTagsNames()
   {
     this.recipesService.getTags().subscribe(
-      dto =>
+      dto  =>
       {
-        this.tagsNames = dto.tags;
+        console.log("moje dto: ",  dto)
+        this.tagsNames = dto.names;
       },
       error => console.log(error)
     )
@@ -129,6 +139,13 @@ export class AddRecipeFormComponent
     this.selectedTags.push(tagName);
     this.selectedTagsIds.push(tagId)
     this.tagsForm.reset();
+  }
+
+  deleteTag()
+  {
+    this.recipesService.deleteTag(this.selectedTagToDelete).subscribe(
+      (response)=>{},
+      (error) => console.log(error.error))
   }
 
   removeTag(tag: string) {

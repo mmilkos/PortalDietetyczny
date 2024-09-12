@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { BlogService } from '../../../services/blog.service';
 import { AddBlogPostDto } from '../../../DTOs/AddBlogPostDto';
+import { IdAndName } from '../../../DTOs/IdAndName';
 
 @Component({
   selector: 'app-add-blog-form',
@@ -19,10 +20,15 @@ export class AddBlogFormComponent implements
 
   photo: string;
 
+  postNames: IdAndName[] = [];
+  selectedPostToDelete: number;
+
 
   constructor(private blogService: BlogService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
+    this.getPostNames()
   }
 
   ngAfterViewInit(): void {
@@ -61,5 +67,26 @@ export class AddBlogFormComponent implements
         ()=> {},
         (error)=> { console.log(error.error)}
       )
+  }
+
+  getPostNames()
+  {
+    this.blogService.getPosts().subscribe(
+      (response) =>
+      {
+        this.postNames = response.names
+        console.log(this.postNames)
+      },
+      (error) => { console.log(error.error) }
+    )
+  }
+
+  deletePost()
+  {
+    console.log(this.selectedPostToDelete)
+    this.blogService.deleteBlogPost(this.selectedPostToDelete).subscribe(
+      () => {},
+      (error) => { console.log(error.error) }
+    );
   }
 }

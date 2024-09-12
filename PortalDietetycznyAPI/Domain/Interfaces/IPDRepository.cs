@@ -19,5 +19,7 @@ public interface IPDRepository
     Task<Recipe?> GetRecipe(int uid);
     Task<IPagedList<BlogPost>> GetBlogPostsPagedAsync(BlogPostsPreviewPageRequest dto);
     Task<BlogPost?> GetBlogPost(int uid);
+    Task DeleteAsync<T>(int id) where T : class;
+    Task DeleteRangeAsync<T>(List<T> list) where T : class;
 
 }
