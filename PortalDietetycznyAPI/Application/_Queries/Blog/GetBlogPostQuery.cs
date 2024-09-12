@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Net;
+using MediatR;
 using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.Domain.Resources;
@@ -38,6 +39,7 @@ public class GetBlogPostQueryHandler : IRequestHandler<GetBlogPostQuery, Operati
         
         if (blogPost == null || blogPost.Url != request.Url)
         {
+            result.SetStatusCode(HttpStatusCode.NotFound);
             result.AddError(ErrorsRes.BlogPostNotFound);
             return result;
         }

@@ -31,6 +31,26 @@ export class RecipesService
     return this.http.post<PagedResult<RecipePreviewDto>>(this.apiUrl + "/paged", params)
   }
 
+  getRecipes(): Observable<NamesListDto>
+  {
+    return this.http.get<NamesListDto>(this.apiUrl);
+  }
+
+  getRecipe(link: string): Observable<RecipeDetailsDto>
+  {
+    return this.http.get<RecipeDetailsDto>(this.apiUrl + `/${link}`)
+  }
+
+  deleteRecipe(id: number): Observable<any>
+  {
+    return this.http.delete(this.apiUrl + `/${id}`)
+  }
+
+  getIngredients() : Observable<NamesListDto>
+  {
+    return this.http.get<NamesListDto>(this.apiUrl + '/ingredients');
+  }
+
   addIngredient(recipe: AddIngredientDto): Observable<any>
   {
     console.log(recipe)
@@ -58,13 +78,4 @@ export class RecipesService
     return this.http.delete(this.apiUrl + `/tags/${id}`)
   }
 
-  getIngredients() : Observable<NamesListDto>
-  {
-    return this.http.get<NamesListDto>(this.apiUrl + '/ingredients');
-  }
-
-  getRecipe(link: string): Observable<RecipeDetailsDto>
-  {
-    return this.http.get<RecipeDetailsDto>(this.apiUrl + `/${link}`)
-  }
 }

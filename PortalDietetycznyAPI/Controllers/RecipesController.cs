@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PortalDietetycznyAPI.Application._Commands;
 using PortalDietetycznyAPI.Application._Queries;
+using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.DTOs;
 
 namespace PortalDietetycznyAPI.Controllers;
@@ -24,7 +25,7 @@ public class RecipesController : ControllerBase
         var result = await _mediator.Send(new GetRecipeQuery(link));
         if (result.Success) return Ok(result.Data);
         
-        return StatusCode(500, result.ErrorsList);
+        return StatusCode(result.StatusCode, result.ErrorsList);
     }
     
     [HttpPost]
@@ -36,14 +37,14 @@ public class RecipesController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     } 
     
-    /*[HttpGet]
-    public async Task<ActionResult> GetRecipes()
+    [HttpGet]
+    public async Task<ActionResult<NamesListDto>> GetRecipes()
     {
-        var result = await _mediator.Send(new );
-        if (result.Success) return Ok();
+        var result = await _mediator.Send(new GetRecipesQuery() );
+        if (result.Success) return Ok(result.Data);
         
         return StatusCode(500, result.ErrorsList);
-    } */
+    } 
     
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteRecipe(int id)
@@ -75,7 +76,7 @@ public class RecipesController : ControllerBase
     
     public async Task<ActionResult<NamesListDto>> GetTags()
     {
-        var result = await _mediator.Send(new GetTagsQuery());
+        var result = await _mediator.Send(new GetTagsQuery(TagContext.Recipe));
         
         if (result.Success) return Ok(result.Data);
         

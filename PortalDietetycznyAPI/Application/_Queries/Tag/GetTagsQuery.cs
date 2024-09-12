@@ -9,7 +9,11 @@ namespace PortalDietetycznyAPI.Application._Queries;
 
 public class GetTagsQuery : IRequest<OperationResult<NamesListDto>>
 {
-    
+    public TagContext TagContext { get; private set; }
+    public GetTagsQuery(TagContext tagContext)
+    {
+        TagContext = tagContext;
+    }
 }
 
 public class GetTagsQueryHandler : IRequestHandler<GetTagsQuery, OperationResult<NamesListDto>>
@@ -31,7 +35,9 @@ public class GetTagsQueryHandler : IRequestHandler<GetTagsQuery, OperationResult
             }
         };
 
-        var tags = await _repository.GetAllEntitiesAsync<Tag>(t => true);
+        var tags = await _repository.GetAllEntitiesAsync<Tag>(t => 
+            request.TagContext == TagContext.Recipe ? t.RecipeTags.Any() : 
+            request.TagContext == TagContext.Diet ? t.DietTags.Any() : false);
 
         foreach (var tag in tags)
         {

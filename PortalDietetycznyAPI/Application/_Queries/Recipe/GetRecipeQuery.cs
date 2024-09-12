@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Net;
+using MediatR;
 using PagedList;
 using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Interfaces;
@@ -37,7 +38,9 @@ public class GetRecipeQueryHandler : IRequestHandler<GetRecipeQuery, OperationRe
 
         if (recipe == null || recipe.Url != request.Url)
         {
+            
             operationResult.AddError(ErrorsRes.RecipeNotFound);
+            operationResult.SetStatusCode(HttpStatusCode.NotFound);
             return operationResult;
         }
 

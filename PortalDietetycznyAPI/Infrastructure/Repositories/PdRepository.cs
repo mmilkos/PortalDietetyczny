@@ -105,9 +105,8 @@ public class PdRepository : IPDRepository
             .FirstOrDefaultAsync();
     }
 
-    public async Task DeleteAsync<T>(int id) where T : class
+    public async Task DeleteAsync<T>(T entity) where T : class
     {
-        var entity = await _db.Set<T>().FindAsync(id);
         _db.Set<T>().Remove(entity);
         await _db.SaveChangesAsync();
     }

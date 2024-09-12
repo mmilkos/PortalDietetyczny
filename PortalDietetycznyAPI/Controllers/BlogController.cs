@@ -25,7 +25,7 @@ public class BlogController : ControllerBase
 
         if (result.Success) return Ok(result.Data);
         
-        return StatusCode(500, result.ErrorsList);
+        return StatusCode(result.StatusCode, result.ErrorsList);
     }
 
     [HttpPost]
@@ -35,7 +35,7 @@ public class BlogController : ControllerBase
 
         if (result.Success) return Ok();
 
-        return StatusCode(500, result.ErrorsList);
+        return StatusCode(result.StatusCode, result.ErrorsList);
     }
     
     [HttpPost("paged")]
@@ -60,7 +60,7 @@ public class BlogController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult<BlogPostDetailsDto>> DeleteBlogPost([FromRoute] int id)
     {
-        var result = await _mediator.Send(new DeleteBlogPostQuery(id));
+        var result = await _mediator.Send(new DeleteBlogPostCommand(id));
         if (result.Success) return Ok(result.Data);
         
         return StatusCode(500, result.ErrorsList);

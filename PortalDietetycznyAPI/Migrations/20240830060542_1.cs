@@ -12,7 +12,7 @@ namespace PortalDietetycznyAPI.Migrations
         {
             migrationBuilder.AddColumn<string>(
                 name: "Url",
-                table: "Recipes",
+                table: "Recipe",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -23,7 +23,7 @@ namespace PortalDietetycznyAPI.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Url",
-                table: "Recipes");
+                table: "Recipe");
         }
     }
 }

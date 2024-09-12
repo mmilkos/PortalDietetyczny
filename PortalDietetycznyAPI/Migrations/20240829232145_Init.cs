@@ -24,7 +24,7 @@ namespace PortalDietetycznyAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recipes",
+                name: "Recipe",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -87,7 +87,7 @@ namespace PortalDietetycznyAPI.Migrations
                     table.ForeignKey(
                         name: "FK_Photos_Recipes_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "Recipes",
+                        principalTable: "Recipe",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                 });
@@ -117,7 +117,7 @@ namespace PortalDietetycznyAPI.Migrations
                     table.ForeignKey(
                         name: "FK_RecipeIngredients_Recipes_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "Recipes",
+                        principalTable: "Recipe",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -135,7 +135,7 @@ namespace PortalDietetycznyAPI.Migrations
                     table.ForeignKey(
                         name: "FK_RecipeTags_Recipes_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "Recipes",
+                        principalTable: "Recipe",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -193,7 +193,7 @@ namespace PortalDietetycznyAPI.Migrations
                 name: "Ingredients");
 
             migrationBuilder.DropTable(
-                name: "Recipes");
+                name: "Recipe");
 
             migrationBuilder.DropTable(
                 name: "Tags");

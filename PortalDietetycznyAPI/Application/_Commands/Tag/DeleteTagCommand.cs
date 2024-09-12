@@ -5,7 +5,7 @@ using PortalDietetycznyAPI.Domain.Interfaces;
 
 namespace PortalDietetycznyAPI.Application._Commands;
 
-public class DeleteTagCommand : IRequest<OperationResult<uint>>
+public class DeleteTagCommand : IRequest<OperationResult<Unit>>
 {
     public int TagId { get; private set; }
     
@@ -15,7 +15,7 @@ public class DeleteTagCommand : IRequest<OperationResult<uint>>
     }
 }
 
-public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand,OperationResult<uint>>
+public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand,OperationResult<Unit>>
 {
     private readonly IPDRepository _repository;
     
@@ -24,13 +24,14 @@ public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand,Operatio
         _repository = repository;
     }
     
-    public async Task<OperationResult<uint>> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult<Unit>> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
     {
-        var operationResult = new OperationResult<uint>();
+        var operationResult = new OperationResult<Unit>();
 
+        var tag = await _repository.FindEntityByConditionAsync<Tag>(t => t.Id == request.TagId);
         try
         {
-            await _repository.DeleteAsync<Tag>(request.TagId);
+            await _repository.DeleteAsync<Tag>(tag);
         }
         catch (Exception e)
         {

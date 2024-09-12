@@ -7,16 +7,21 @@ public class Db : DbContext
 {
     public Db(DbContextOptions<Db> options) : base(options) { }
     
-    public DbSet<Ingredient> Ingredients { get; init; }
-    public DbSet<RecipePhoto> Photos { get; init; }
-    public DbSet<RecipeIngredient> RecipeIngredients { get; init; }
     public DbSet<Recipe> Recipes { get; init; }
+    public DbSet<Ingredient> Ingredients { get; init; }
+    public DbSet<RecipeIngredient> RecipeIngredients { get; init; }
+    public DbSet<RecipePhoto> Photos { get; init; }
+    
     public DbSet<Tag> Tags { get; init; }
     public DbSet<RecipeTag> RecipeTags { get; init; }
     public DbSet<User> Users { get; init; }
     
     public DbSet<BlogPost> BlogPosts { get; init; }
     public DbSet<BlogPhoto> BlogPhotos { get; init; }
+    
+    public DbSet<Diet> Diets { get; set; }
+    public DbSet<DietPhoto> DietPhotos { get; set; }
+    public DbSet<DietTag> DietTags { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -69,5 +74,26 @@ public class Db : DbContext
             .WithOne(bPhoto => bPhoto.BlogPost)
             .HasForeignKey<BlogPhoto>(bp => bp.BlogPostId)
             .OnDelete(DeleteBehavior.SetNull);
+
+        modelBuilder.Entity<Diet>()
+            .HasOne(d => d.Photo)
+            .WithOne(dPhoto => dPhoto.Diet)
+            .HasForeignKey<DietPhoto>(dPhoto => dPhoto.DietId)
+            .OnDelete(DeleteBehavior.SetNull);
+        
+        modelBuilder.Entity<DietTag>()
+            .HasKey(dt => new { dt.DietId, dt.TagId }); 
+
+        modelBuilder.Entity<DietTag>()
+            .HasOne(dt => dt.Tag)
+            .WithMany(t => t.DietTags)
+            .HasForeignKey(dt => dt.TagId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<DietTag>()
+            .HasOne(dt => dt.Diet)
+            .WithMany(t => t.DietTags)
+            .HasForeignKey(dt => dt.DietId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

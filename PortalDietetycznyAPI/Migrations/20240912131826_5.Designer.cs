@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortalDietetycznyAPI.Infrastructure.Context;
 
@@ -10,9 +11,11 @@ using PortalDietetycznyAPI.Infrastructure.Context;
 namespace PortalDietetycznyAPI.Migrations
 {
     [DbContext(typeof(Db))]
-    partial class DbModelSnapshot : ModelSnapshot
+    [Migration("20240912131826_5")]
+    partial class _5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,9 +96,6 @@ namespace PortalDietetycznyAPI.Migrations
                     b.Property<string>("FileUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Kcal")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -202,7 +202,7 @@ namespace PortalDietetycznyAPI.Migrations
 
                     b.HasIndex("Uid");
 
-                    b.ToTable("Recipe");
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.RecipeIngredient", b =>
@@ -390,7 +390,7 @@ namespace PortalDietetycznyAPI.Migrations
 
                             b1.HasKey("RecipeId");
 
-                            b1.ToTable("Recipe");
+                            b1.ToTable("Recipes");
 
                             b1.WithOwner()
                                 .HasForeignKey("RecipeId");

@@ -5,34 +5,25 @@
 namespace PortalDietetycznyAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class _2 : Migration
+    public partial class _6 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "Uid",
-                table: "Recipe",
+                name: "Kcal",
+                table: "Diets",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Recipes_Uid",
-                table: "Recipe",
-                column: "Uid");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_Recipes_Uid",
-                table: "Recipe");
-
             migrationBuilder.DropColumn(
-                name: "Uid",
-                table: "Recipe");
+                name: "Kcal",
+                table: "Diets");
         }
     }
 }

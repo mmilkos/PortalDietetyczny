@@ -24,6 +24,8 @@ export class AddRecipeFormComponent
   fileName: string = "";
   selectedTagToDelete: number;
   selectedIngredientToDelete: number;
+  selectedRecipeToDelete: number;
+  recipeNames : IdAndName[] = []
 
   photo: string;
 
@@ -35,6 +37,7 @@ export class AddRecipeFormComponent
   {
     this.getIngredientsNames()
     this.getTagsNames()
+    this.getRecipeNames()
   }
 
 
@@ -152,6 +155,24 @@ export class AddRecipeFormComponent
     this.selectedTags = this.selectedTags.filter(t => t !== tag);
   }
 
+  getRecipeNames()
+  {
+    this.recipesService.getRecipes().subscribe(
+      dto  =>
+      {
+        this.recipeNames = dto.names;
+      },
+      error => console.log(error)
+    )
+  }
+
+  deleteRecipe()
+  {
+    this.recipesService.deleteRecipe(this.selectedRecipeToDelete).subscribe(
+      (response)=>{},
+      (error) => console.log(error.error))
+  }
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files[0];
@@ -192,9 +213,8 @@ export class AddRecipeFormComponent
       fileName: this.fileName
     };
 
-    console.log(addRecipeDto)
     this.recipesService.addRecipe(addRecipeDto).subscribe(
-      response => console.log("Dziala"),
+      response => {},
       error => console.log(error.error)
     )
   }

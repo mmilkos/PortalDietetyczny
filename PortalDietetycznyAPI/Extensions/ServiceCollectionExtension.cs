@@ -28,6 +28,7 @@ public static class ServiceCollectionExtension
 
         services.AddMediatR(typeof(AddIngredientCommand));
         services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
+        services.Configure<GithubSettings>(configuration.GetSection("GitHubSettings"));
 
         services.AddAuthentication(oprion =>
         {
