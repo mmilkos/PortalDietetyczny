@@ -67,7 +67,7 @@ public class AddRecipeCommandHandlerTests : BaseTests
         //Act
         var result = await handler.Handle(command, CancellationToken.None);
 
-        var recipeInDb = await _dbContext.Recipes
+        var recipeInDb = await _dbContext.Recipe
             .Include(r => r.Ingredients)
             .Include(r => r.RecipeTags)
             .ThenInclude(t => t.Tag)

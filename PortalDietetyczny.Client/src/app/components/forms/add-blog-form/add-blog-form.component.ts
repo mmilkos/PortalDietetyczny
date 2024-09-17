@@ -8,8 +8,8 @@ import { IdAndName } from '../../../DTOs/IdAndName';
   templateUrl: './add-blog-form.component.html',
   styleUrls: ['./add-blog-form.component.css']
 })
-export class AddBlogFormComponent implements
-  OnInit, AfterViewInit {
+export class AddBlogFormComponent implements OnInit
+{
   @ViewChild('editor')
   editorElement!: ElementRef;
   postContent: any;
@@ -29,9 +29,6 @@ export class AddBlogFormComponent implements
   ngOnInit(): void
   {
     this.getPostNames()
-  }
-
-  ngAfterViewInit(): void {
   }
 
   onFileSelected(event: Event): void {

@@ -49,6 +49,9 @@ import { NavGridComponent } from './components/grids/nav-grid/nav-grid.component
 import { ConsultationCardComponent } from './components/components/consultation-card/consultation-card.component';
 import { ConsultationGridComponent } from './components/grids/consultation-grid/consultation-grid.component';
 import { ConsultationIntroComponent } from './components/components/consultation-intro/consultation-intro.component';
+import { AddFileFormComponent } from './components/forms/add-file-form/add-file-form.component';
+import { DownloadsComponent } from './components/pages/downloads/downloads.component';
+import { DownloadsGridComponent } from './components/grids/downloads-grid/downloads-grid.component';
 
 
 @NgModule({
@@ -88,7 +91,10 @@ import { ConsultationIntroComponent } from './components/components/consultation
     ConsultationsComponent,
     ConsultationCardComponent,
     ConsultationGridComponent,
-    ConsultationIntroComponent
+    ConsultationIntroComponent,
+    AddFileFormComponent,
+    DownloadsComponent,
+    DownloadsGridComponent
   ],
   imports: [
     BrowserModule,

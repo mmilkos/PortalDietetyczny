@@ -1,12 +1,15 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
+using Dropbox.Api.Users;
+using Hangfire;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PortalDietetycznyAPI.Application._Commands;
-using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.Infrastructure.Context;
 using PortalDietetycznyAPI.Infrastructure.Repositories;
+using PortalDietetycznyAPI.Application.Services;
 
 namespace PortalDietetycznyAPI.Extensions;
 
@@ -22,13 +25,21 @@ public static class ServiceCollectionExtension
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         const string bearer = "Bearer";
+        var connectionString = configuration.GetConnectionString("Database");
         var authentication = configuration.GetSection("Auth");
         var jwtIssuer = authentication.GetValue<string>("JwtIssuer");
         var jwtKey = authentication.GetValue<string>("JwtKey");
-
+        
+        services.AddSingleton<IKeyService,KeyService>();
+        
         services.AddMediatR(typeof(AddIngredientCommand));
-        services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
-        services.Configure<GithubSettings>(configuration.GetSection("GitHubSettings"));
+        
+        services.AddHangfire(cfg =>
+        {
+            cfg.UseSqlServerStorage(connectionString);
+        });
+        
+        services.AddHangfireServer();
 
         services.AddAuthentication(oprion =>
         {

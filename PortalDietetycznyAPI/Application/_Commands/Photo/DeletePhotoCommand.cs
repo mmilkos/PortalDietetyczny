@@ -3,6 +3,7 @@ using CloudinaryDotNet.Actions;
 using MediatR;
 using Microsoft.Extensions.Options;
 using PortalDietetycznyAPI.Domain.Common;
+using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.Domain.Resources;
 using PortalDietetycznyAPI.DTOs;
 
@@ -20,24 +21,28 @@ public class DeletePhotoCommand : IRequest<OperationResult<DeletionResult>>
 
 public class DeletePhotoCommandHandler : IRequestHandler<DeletePhotoCommand, OperationResult<DeletionResult>>
 {
-    private readonly Cloudinary _cloudinary;
+    private readonly IKeyService _keyService;
     
-    public DeletePhotoCommandHandler(IOptions<CloudinarySettings> config)
+    public DeletePhotoCommandHandler(IKeyService keyService)
     {
-        var account = new Account()
-        {
-            Cloud = config.Value.CloudName,
-            ApiKey = config.Value.ApiKey,
-            ApiSecret = config.Value.ApiSecret
-        };
-        
-        _cloudinary = new Cloudinary(account);
-        
+        _keyService = keyService;
     }
     
     public async Task<OperationResult<DeletionResult>> Handle(DeletePhotoCommand request, CancellationToken cancellationToken)
     {
         var operationResult = new OperationResult<DeletionResult>();
+        
+        var settings = await _keyService.GetCloudinarySettingsAsync();
+        
+        var account = new Account()
+        {
+            Cloud = settings.CloudName,
+            ApiKey = settings.ApiKey,
+            ApiSecret = settings.ApiSecret
+        };
+        
+        var cloudinary = new Cloudinary(account);
+        
         
         var deleteParams = new DeletionParams(request.PublicID);
 
@@ -45,7 +50,7 @@ public class DeletePhotoCommandHandler : IRequestHandler<DeletePhotoCommand, Ope
 
         try
         {
-            deletionResult = await _cloudinary.DestroyAsync(deleteParams);
+            deletionResult = await cloudinary.DestroyAsync(deleteParams);
         }
         catch (Exception e)
         {

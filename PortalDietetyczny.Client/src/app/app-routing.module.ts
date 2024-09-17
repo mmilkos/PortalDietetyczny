@@ -10,6 +10,7 @@ import { RecipeComponent } from './components/pages/recipe/recipe.component';
 import { BlogsComponent } from './components/pages/blogs/blogs.component';
 import { BlogComponent } from './components/pages/blog/blog.component';
 import { ConsultationsComponent } from './components/pages/consultations/consultations.component';
+import { DownloadsComponent } from './components/pages/downloads/downloads.component';
 
 
 
@@ -24,6 +25,7 @@ const routes: Routes =
     {path: RoutesEnum.blog + "/:postName", component: BlogComponent},
     {path: RoutesEnum.consultations, component: ConsultationsComponent},
     {path: RoutesEnum.adminPanel, component: AdminPanelComponent},
+    {path: RoutesEnum.downloads, component: DownloadsComponent},
     {path: "**", component: StartComponent}
   ];
 

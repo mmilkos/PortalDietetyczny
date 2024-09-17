@@ -48,7 +48,7 @@ namespace PortalDietetycznyAPI.Tests._Commands;
         var options = _provider.GetRequiredService<IOptions<CloudinarySettings>>();
         
         var command = new AddRecipePhotoCommand(formFile);
-        var handler = new AddPhotoCommandHandler(options, repository);
+        var handler = new UploadPhotoCommandHandler(options, repository);
 
         // Act
         var result = await handler.Handle(command, CancellationToken.None);

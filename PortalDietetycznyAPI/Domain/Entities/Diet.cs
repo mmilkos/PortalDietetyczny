@@ -8,4 +8,6 @@ public class Diet : Entity
     public int PhotoId { get; set; }
     public DietPhoto Photo { get; set; }
     public List<DietTag> DietTags { get; set; }
+    public StoredFile File { get; set; }
+    public int StoredFileId { get; set; }
 }

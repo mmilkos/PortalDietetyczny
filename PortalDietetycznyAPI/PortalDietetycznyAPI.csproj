@@ -9,6 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
+    <PackageReference Include="Dropbox.Api" Version="7.0.0" />
+    <PackageReference Include="Flurl.Http" Version="4.0.2" />
+    <PackageReference Include="Hangfire" Version="1.8.14" />
+    <PackageReference Include="Hangfire.MediatR" Version="1.0.0" />
+    <PackageReference Include="Hangfire.Unity" Version="3.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0-preview.6.24327.4" />
@@ -16,6 +21,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="X.PagedList" Version="1.24.1.320" />
   </ItemGroup>
@@ -28,6 +34,10 @@
     <EmbeddedResource Update="Domain\Resources\FoldersNamesRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FoldersNamesRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Resources\SecretsNamesRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SecretsNamesRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -42,9 +52,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>FoldersNamesRes.resx</DependentUpon>
     </Compile>
+    <Compile Update="Domain\Resources\SecretsNamesRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SecretsNamesRes.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\Token\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

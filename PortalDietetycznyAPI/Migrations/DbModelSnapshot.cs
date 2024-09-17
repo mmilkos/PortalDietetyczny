@@ -104,7 +104,12 @@ namespace PortalDietetycznyAPI.Migrations
                     b.Property<int>("PhotoId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StoredFileId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StoredFileId");
 
                     b.ToTable("Diets");
                 });
@@ -285,6 +290,33 @@ namespace PortalDietetycznyAPI.Migrations
                     b.ToTable("RecipeTags");
                 });
 
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.StoredFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DropboxId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FileType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Files");
+                });
+
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -335,6 +367,17 @@ namespace PortalDietetycznyAPI.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("BlogPost");
+                });
+
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Diet", b =>
+                {
+                    b.HasOne("PortalDietetycznyAPI.Domain.Entities.StoredFile", "File")
+                        .WithMany()
+                        .HasForeignKey("StoredFileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("File");
                 });
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.DietPhoto", b =>

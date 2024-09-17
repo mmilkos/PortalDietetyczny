@@ -59,7 +59,7 @@ public class PdRepository : IPDRepository
         var wantedTags = dto.TagsIds;
         var wantedIngredient = dto.IngredientsIds;
 
-        var query = _db.Recipes
+        var query = _db.Recipe
             .Include(r => r.Photo)
             .Include(r => r.RecipeTags)
             .Include(r => r.Ingredients)
@@ -78,7 +78,7 @@ public class PdRepository : IPDRepository
 
     public async Task<Recipe?> GetRecipe(int uid)
     {
-        return await _db.Recipes.Where(r => r.Uid == uid)
+        return await _db.Recipe.Where(r => r.Uid == uid)
             .Include(r => r.RecipeTags)
                 .ThenInclude(rt => rt.Tag)
             .Include(r => r.Nutrition)

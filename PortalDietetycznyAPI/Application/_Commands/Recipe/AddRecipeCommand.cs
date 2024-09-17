@@ -45,6 +45,12 @@ public class AddRecipeCommandHandler : IdentifierGenerator, IRequestHandler<AddR
             return result;
         }
 
+        var photo = new RecipePhoto()
+        {
+            PublicId = photoResult.Data.PublicId,
+            Url = photoResult.Data.Url
+        };
+
         var uid = GenerateUid();
 
         var url = GenerateUrl(uid, dto.Name);
@@ -55,8 +61,8 @@ public class AddRecipeCommandHandler : IdentifierGenerator, IRequestHandler<AddR
             Name = dto.Name,
             Nutrition = dto.NutritionInfo,
             Instruction = dto.Instruction,
-            PhotoId = photoResult.Data?.Id,
-            Photo = photoResult.Data,
+            PhotoId = photo.Id,
+            Photo = photo,
             Url = url
         };
 
@@ -87,11 +93,11 @@ public class AddRecipeCommandHandler : IdentifierGenerator, IRequestHandler<AddR
         return result;
     }
     
-    private async Task<OperationResult<RecipePhoto>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
+    private async Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
     {
-        if (fileBytes.Length > 0) return await _mediator.Send(new AddRecipePhotoCommand(fileBytes, fileName, FoldersNamesRes.Recipes_photos), cancellationToken);
+        if (fileBytes.Length > 0) return await _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Recipes_photos), cancellationToken);
 
-        return new OperationResult<RecipePhoto>()
+        return new OperationResult<Photo>()
         {
             Data = null
         };

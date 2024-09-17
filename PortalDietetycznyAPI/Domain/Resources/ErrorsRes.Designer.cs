@@ -96,6 +96,42 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd z serwisem przechowującym pliki.
+        /// </summary>
+        public static string DropboxUploadError {
+            get {
+                return ResourceManager.GetString("DropboxUploadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd podczas usuwania pliku.
+        /// </summary>
+        public static string FileDeletingError {
+            get {
+                return ResourceManager.GetString("FileDeletingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie znaleziono pliku o podanym ID.
+        /// </summary>
+        public static string FileNotFound {
+            get {
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd podczas zapisywania pliku do bazy.
+        /// </summary>
+        public static string FileSavingError {
+            get {
+                return ResourceManager.GetString("FileSavingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ten składnik został już dodany do bazy danych.
         /// </summary>
         public static string IngredientAlreadyInDb {
@@ -114,7 +150,7 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wystąpił błąd przy próbie zapisu danych zdjecia do bazy.
+        ///   Looks up a localized string similar to Wystąpił błąd przy próbie zapisu zdjecia do bazy.
         /// </summary>
         public static string PhotoSavingError {
             get {
@@ -132,7 +168,7 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wystąpił błąd przy dodawaniu przepisu.
+        ///   Looks up a localized string similar to Wystąpił błąd przy zapisywaniu  przepisu do bazy.
         /// </summary>
         public static string RecipeSavingError {
             get {
@@ -155,15 +191,6 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         public static string TagAlreadyInDb {
             get {
                 return ResourceManager.GetString("TagAlreadyInDb", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nie znaleziono klucza API do TinyMCE.
-        /// </summary>
-        public static string TinyMceError {
-            get {
-                return ResourceManager.GetString("TinyMceError", resourceCulture);
             }
         }
     }

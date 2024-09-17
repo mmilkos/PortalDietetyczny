@@ -9,13 +9,14 @@ using PortalDietetycznyAPI.Domain.Resources;
 
 namespace PortalDietetycznyAPI.Application._Commands;
 
-public class AddRecipePhotoCommand : IRequest<OperationResult<RecipePhoto>>
+public class UploadPhotoCommand : IRequest<OperationResult<Photo>>
 {
     public byte[] FileBytes { get; private set; }
     public string FileName { get; private set; }
-    public string FolderName { get; }
     
-    public AddRecipePhotoCommand(byte[] fileBytes, string fileName, string folderName )
+    public string FolderName { get; private set; }
+    
+    public UploadPhotoCommand(byte[] fileBytes, string fileName, string folderName)
     {
         FileBytes = fileBytes;
         FileName = fileName;
@@ -23,27 +24,29 @@ public class AddRecipePhotoCommand : IRequest<OperationResult<RecipePhoto>>
     }
 }
 
-public class AddPhotoCommandHandler : PhotoGenerator, IRequestHandler<AddRecipePhotoCommand, OperationResult<RecipePhoto>>
+public class UploadPhotoCommandHandler : PhotoGenerator, IRequestHandler<UploadPhotoCommand, OperationResult<Photo>>
 {
-    private readonly Cloudinary _cloudinary;
-    private readonly IPDRepository _repository;
-
-    public AddPhotoCommandHandler(IOptions<CloudinarySettings> config, IPDRepository repository)
+    private readonly IKeyService _keyService;
+    public UploadPhotoCommandHandler(IKeyService keyService)
     {
-        _repository = repository;
+        _keyService = keyService;
+    }
+    
+    public async Task<OperationResult<Photo>> Handle(UploadPhotoCommand request, CancellationToken cancellationToken)
+    {
+        var settings = await _keyService.GetCloudinarySettingsAsync();
         
         var account = new Account()
         {
-            Cloud = config.Value.CloudName,
-            ApiKey = config.Value.ApiKey,
-            ApiSecret = config.Value.ApiSecret
+            Cloud = settings.CloudName,
+            ApiKey = settings.ApiKey,
+            ApiSecret = settings.ApiSecret
         };
         
-        _cloudinary = new Cloudinary(account);
-    }
-    public async Task<OperationResult<RecipePhoto>> Handle(AddRecipePhotoCommand request, CancellationToken cancellationToken)
-    {
-        var operationResult = new OperationResult<RecipePhoto>() { };
+        var cloudinary = new Cloudinary(account);
+        
+        
+        var operationResult = new OperationResult<Photo>() { };
         
         var file = GeneratePhoto(request.FileBytes, request.FileName);
 
@@ -60,30 +63,20 @@ public class AddPhotoCommandHandler : PhotoGenerator, IRequestHandler<AddRecipeP
 
         try
         { 
-            uploadResult = await _cloudinary.UploadAsync(uploadParams);
+            uploadResult = await cloudinary.UploadAsync(uploadParams);
         }
         catch (Exception e)
         {
             operationResult.AddError(ErrorsRes.CloudinaryError);
             return operationResult;
         }
-
-        var photo = new RecipePhoto()
+        
+        var photo = new Photo()
         {
             PublicId = uploadResult.PublicId,
             Url = uploadResult.Url.ToString()
         };
 
-        try
-        {
-            await _repository.AddAsync(photo);
-        }
-        catch (Exception e)
-        {
-            operationResult.AddError(ErrorsRes.PhotoSavingError);
-            return operationResult;
-        }
-        
         operationResult.Data = photo;
         
         return operationResult;

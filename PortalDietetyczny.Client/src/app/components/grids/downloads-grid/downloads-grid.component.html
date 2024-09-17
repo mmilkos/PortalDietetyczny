@@ -1,0 +1,12 @@
+<div class="container d-flex justify-content-center align-items-center" style="padding: 150px; background-color: #f5f3ee">
+  <div style="width: 100vw">
+    <div class="row" *ngFor="let file of files" style="border-bottom: 1px solid lightgray; padding-top: 20px">
+      <div class="col-sm-7">
+        <h1>{{file.name}}</h1>
+      </div>
+      <div class="col-sm-5" style="text-align: right; ">
+        <button type="button" class="btn btn-secondary" (click)="getDownloadableFile(file.id)"><i class="fas fa-download"></i> Pobierz teraz</button>
+      </div>
+    </div>
+  </div>
+</div>

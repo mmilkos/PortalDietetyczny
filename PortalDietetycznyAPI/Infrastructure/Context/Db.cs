@@ -7,7 +7,7 @@ public class Db : DbContext
 {
     public Db(DbContextOptions<Db> options) : base(options) { }
     
-    public DbSet<Recipe> Recipes { get; init; }
+    public DbSet<Recipe> Recipe { get; init; }
     public DbSet<Ingredient> Ingredients { get; init; }
     public DbSet<RecipeIngredient> RecipeIngredients { get; init; }
     public DbSet<RecipePhoto> Photos { get; init; }
@@ -22,6 +22,7 @@ public class Db : DbContext
     public DbSet<Diet> Diets { get; set; }
     public DbSet<DietPhoto> DietPhotos { get; set; }
     public DbSet<DietTag> DietTags { get; set; }
+    public DbSet<StoredFile> Files { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -80,6 +81,10 @@ public class Db : DbContext
             .WithOne(dPhoto => dPhoto.Diet)
             .HasForeignKey<DietPhoto>(dPhoto => dPhoto.DietId)
             .OnDelete(DeleteBehavior.SetNull);
+
+        modelBuilder.Entity<Diet>()
+            .HasOne(d => d.File)
+            .WithMany(); 
         
         modelBuilder.Entity<DietTag>()
             .HasKey(dt => new { dt.DietId, dt.TagId }); 
@@ -95,5 +100,9 @@ public class Db : DbContext
             .WithMany(t => t.DietTags)
             .HasForeignKey(dt => dt.DietId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<StoredFile>()
+            .HasIndex(f => f.Name)
+            .IsUnique();
     }
 }

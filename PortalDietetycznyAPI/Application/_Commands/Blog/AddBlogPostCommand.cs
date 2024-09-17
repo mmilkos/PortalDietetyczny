@@ -30,17 +30,33 @@ public class AddBlogPostCommandHandler : IdentifierGenerator, IRequestHandler<Ad
     
     public async Task<OperationResult<Unit>> Handle(AddBlogPostCommand request, CancellationToken cancellationToken)
     {
-        var result = new OperationResult<Unit>();
+        var operationResult = new OperationResult<Unit>();
         var dto = request.Dto;
 
         var fileBytes = Convert.FromBase64String(dto.FileBytes);
 
         var photoResult = await GetPhoto(fileBytes, dto.FileName , cancellationToken);
 
+        var blogPhoto = new BlogPhoto()
+        {
+            PublicId = photoResult.Data.PublicId,
+            Url = photoResult.Data.Url
+        };
+        
+        try
+        {
+            await _repository.AddAsync(blogPhoto);
+        }
+        catch (Exception e)
+        {
+            operationResult.AddError(ErrorsRes.PhotoSavingError);
+            return operationResult;
+        }
+
         if (photoResult.Success == false)
         {
-            result.AddErrorRange(photoResult.ErrorsList);
-            return result;
+            operationResult.AddErrorRange(photoResult.ErrorsList);
+            return operationResult;
         }
         
         var uid = GenerateUid();
@@ -52,8 +68,8 @@ public class AddBlogPostCommandHandler : IdentifierGenerator, IRequestHandler<Ad
             Uid = uid,
             Title = dto.Title,
             Content = dto.Content,
-            PhotoId = photoResult.Data?.Id,
-            Photo = photoResult.Data,
+            PhotoId = blogPhoto.Id,
+            Photo = blogPhoto,
             Url = url
         };
         
@@ -63,18 +79,18 @@ public class AddBlogPostCommandHandler : IdentifierGenerator, IRequestHandler<Ad
         }
         catch (Exception e)
         {
-            result.AddError(ErrorsRes.BlogPostSavingError);
-            return result;
+            operationResult.AddError(ErrorsRes.BlogPostSavingError);
+            return operationResult;
         }
 
-        return result;
+        return operationResult;
     }
     
-    private async Task<OperationResult<BlogPhoto>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
+    private async Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
     {
-        if (fileBytes.Length > 0) return await _mediator.Send(new AddBlogPhotoCommand(fileBytes, fileName), cancellationToken);
+        if (fileBytes.Length > 0) return await _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Blog_photos), cancellationToken);
 
-        return new OperationResult<BlogPhoto>()
+        return new OperationResult<Photo>()
         {
             Data = null
         };

@@ -1,6 +1,12 @@
-﻿using MediatR;
+﻿using System.Reflection.Metadata;
+using CloudinaryDotNet.Actions;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PortalDietetycznyAPI.Application._Commands;
+using PortalDietetycznyAPI.Application._Commands.Files;
+using PortalDietetycznyAPI.Application._Queries;
+using PortalDietetycznyAPI.Domain.Common;
+using PortalDietetycznyAPI.Domain.Enums;
 using PortalDietetycznyAPI.DTOs;
 
 namespace PortalDietetycznyAPI.Controllers;
@@ -18,11 +24,26 @@ public class DietsController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<ActionResult> AddDiet([FromBody] AddRecipeDto dto)
+    public async Task<ActionResult> AddDiet()
     {
-        var result = await _mediator.Send(new AddRecipeCommand(dto));
+        var dto = new AddFileDto();
+
+        dto.FileType = FileType.Diet;
+        
+        var result = await _mediator.Send(new UploadFileCommand(dto));
         if (result.Success) return Ok();
         
         return StatusCode(500, result.ErrorsList);
     } 
+    
+    [HttpGet]
+    public async Task<ActionResult<NamesListDto>> GetTags()
+    {
+        var result = await _mediator.Send(new GetTagsQuery(TagContext.Diet));
+        
+        if (result.Success) return Ok(result.Data);
+        
+        return StatusCode(500, result.ErrorsList);
+    }
 }
+

@@ -31,19 +31,16 @@
         <value>Wystąpił błąd związany z serwisem przechowującym zdjęcia</value>
     </data>
     <data name="PhotoSavingError" xml:space="preserve">
-        <value>Wystąpił błąd przy próbie zapisu danych zdjecia do bazy</value>
+        <value>Wystąpił błąd przy próbie zapisu zdjecia do bazy</value>
     </data>
     <data name="RecipeSavingError" xml:space="preserve">
-        <value>Wystąpił błąd przy dodawaniu przepisu</value>
+        <value>Wystąpił błąd przy zapisywaniu  przepisu do bazy</value>
     </data>
     <data name="RecipeUpdateError" xml:space="preserve">
         <value>Wystąpił błąd przy aktualizacji przepisu</value>
     </data>
     <data name="RecipeNotFound" xml:space="preserve">
         <value>Nie znaleziono przepisu o podanym ID</value>
-    </data>
-    <data name="TinyMceError" xml:space="preserve">
-        <value>Nie znaleziono klucza API do TinyMCE</value>
     </data>
     <data name="BlogPostSavingError" xml:space="preserve">
         <value>Wystąpił błąd podczas zapisywania postu</value>
@@ -53,5 +50,17 @@
     </data>
     <data name="BlogPostDeleteError" xml:space="preserve">
         <value>Wystąpił błąd podczas usuwania posta</value>
+    </data>
+    <data name="DropboxUploadError" xml:space="preserve">
+        <value>Wystąpił błąd z serwisem przechowującym pliki</value>
+    </data>
+    <data name="FileSavingError" xml:space="preserve">
+        <value>Błąd podczas zapisywania pliku do bazy</value>
+    </data>
+    <data name="FileNotFound" xml:space="preserve">
+        <value>Nie znaleziono pliku o podanym ID</value>
+    </data>
+    <data name="FileDeletingError" xml:space="preserve">
+        <value>Wystąpił błąd podczas usuwania pliku</value>
     </data>
 </root>
