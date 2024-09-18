@@ -43,7 +43,8 @@ public class AddTagCommandHandler : IRequestHandler<AddTagCommand, OperationResu
         
         var tag = new Tag()
         {
-            Name = request.Dto.Name
+            Name = request.Dto.Name,
+            Context = request.Dto.Context
         };
 
         try

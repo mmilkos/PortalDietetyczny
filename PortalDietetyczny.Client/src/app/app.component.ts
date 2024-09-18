@@ -6,18 +6,10 @@ import { AccountService } from './services/account.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'PortalDietetyczny.Client';
 
   constructor(private accountService : AccountService) {}
 
-  ngOnInit(): void
-  {
-    this.accountService.startApp().subscribe(
-      ()=>
-      {
-        console.log("Application has started")
-      },
-      error => console.log(error.error))
-  }
+
 }

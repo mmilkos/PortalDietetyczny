@@ -19,7 +19,7 @@ export class BlogService
   addBlogPost(post: AddBlogPostDto): Observable<any>
   {
     console.log(post)
-    return this.http.post<any>(this.apiUrl, post);
+    return this.http.post<any>(this.apiUrl, post, {withCredentials: true});
   }
 
   getBlogPostsPaged(params: BlogPostsPreviewPageRequest ) : Observable<PagedResult<BlogPostPreviewDto>>

@@ -1,6 +1,7 @@
 using Hangfire;
 using MediatR;
 using PortalDietetycznyAPI.Extensions;
+using PortalDietetycznyAPI.Infrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+/*
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<AccountSeeder>();
+await seeder.SeedAsync();
+*/
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -25,11 +32,14 @@ if (app.Environment.IsDevelopment())
 const string origin = "http://localhost:4200";
 app.UseCors(options => options
     .AllowAnyMethod()
-    .AllowAnyHeader().WithOrigins(origin)
+    .AllowCredentials()
+    .AllowAnyHeader()
+    .WithOrigins(origin)
     .WithExposedHeaders("Content-Disposition"));
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortalDietetycznyAPI.Application._Commands;
 using PortalDietetycznyAPI.Application._Queries;
@@ -28,6 +29,7 @@ public class RecipesController : ControllerBase
         return StatusCode(result.StatusCode, result.ErrorsList);
     }
     
+    /*[Authorize]*/
     [HttpPost]
     public async Task<ActionResult> AddRecipe([FromBody] AddRecipeDto dto)
     {
@@ -46,6 +48,7 @@ public class RecipesController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     } 
     
+    /*[Authorize]*/
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteRecipe(int id)
     {
@@ -63,6 +66,7 @@ public class RecipesController : ControllerBase
         return Ok(result);
     }
     
+    /*[Authorize]*/
     [HttpPost("tags")]
     public async Task<ActionResult> AddTag([FromBody] AddTagDto dto)
     {
@@ -73,7 +77,6 @@ public class RecipesController : ControllerBase
     }
     
     [HttpGet("tags")]
-    
     public async Task<ActionResult<NamesListDto>> GetTags()
     {
         var result = await _mediator.Send(new GetTagsQuery(TagContext.Recipe));
@@ -83,6 +86,7 @@ public class RecipesController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     }
 
+    /*[Authorize]*/
     [HttpDelete("tags/{id}")]
     public async Task<ActionResult> DeleteTag(int id)
     {
@@ -92,7 +96,8 @@ public class RecipesController : ControllerBase
 
         return StatusCode(500, result.ErrorsList);
     }
-
+    
+    /*[Authorize]*/
     [HttpPost("ingredients")]
     public async Task<ActionResult> AddIngredient([FromBody] AddIngredientDto dto)
     {

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RecipesService } from '../../../services/recipes.service';
 import {FormControl, FormGroup } from '@angular/forms';
-import { AddTagDto } from '../../../DTOs/AddTagDto';
+import {AddTagDto, TagContext} from '../../../DTOs/AddTagDto';
 
 @Component({
   selector: 'app-add-tag-form',
@@ -10,6 +10,7 @@ import { AddTagDto } from '../../../DTOs/AddTagDto';
 })
 export class AddTagFormComponent
 {
+  @Input() tagContext: TagContext;
   constructor(private recipesService: RecipesService) {}
 
   addIngredients = new FormGroup(
@@ -21,8 +22,10 @@ export class AddTagFormComponent
   {
     var ingredient: AddTagDto =
       {
-        Name: this.addIngredients.get("name").value
+        Name: this.addIngredients.get("name").value,
+        context: this.tagContext
       }
+
 
     console.log(ingredient)
 

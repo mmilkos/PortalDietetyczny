@@ -14,4 +14,11 @@ public class User : Entity
         PasswordHash = passwordHash;
         PasswordSalt = passwordSalt;
     }
+
+    public void ChangeCredentials(string userName, byte[] passwordHash, byte[] passwordSalt)
+    {
+        UserName = userName;
+        PasswordHash = passwordHash;
+        PasswordSalt = passwordSalt;
+    }
 }

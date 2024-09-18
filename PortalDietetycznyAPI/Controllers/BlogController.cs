@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using PortalDietetycznyAPI.Application._Commands;
@@ -27,7 +28,7 @@ public class BlogController : ControllerBase
         
         return StatusCode(result.StatusCode, result.ErrorsList);
     }
-
+    
     [HttpPost]
     public async Task<ActionResult> PostPost([FromBody] AddBlogPostDto dto)
     {

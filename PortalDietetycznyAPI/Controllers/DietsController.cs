@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata;
 using CloudinaryDotNet.Actions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortalDietetycznyAPI.Application._Commands;
 using PortalDietetycznyAPI.Application._Commands.Files;

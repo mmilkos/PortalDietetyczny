@@ -60,7 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Token\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

@@ -36,7 +36,7 @@ public class UploadPhotoCommandHandler : PhotoGenerator, IRequestHandler<UploadP
     {
         var settings = await _keyService.GetCloudinarySettingsAsync();
         
-        var account = new Account()
+        var account = new CloudinaryDotNet.Account()
         {
             Cloud = settings.CloudName,
             ApiKey = settings.ApiKey,

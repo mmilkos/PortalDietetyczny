@@ -9,4 +9,5 @@
   consultations = "konsultacje",
   downloads = "do-pobrania",
   adminPanel = "admin",
+  login = "login"
 }

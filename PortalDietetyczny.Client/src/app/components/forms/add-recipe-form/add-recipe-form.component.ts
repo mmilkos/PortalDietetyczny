@@ -5,6 +5,7 @@ import { RecipesService } from '../../../services/recipes.service';
 import { IdAndName } from '../../../DTOs/IdAndName';
 import {FileItem, FileUploader } from 'ng2-file-upload';
 import { AddRecipeDto, NutritionInfo, RecipeIngredientDto } from '../../../DTOs/AddRecipeDto';
+import { TagContext } from '../../../DTOs/AddTagDto';
 @Component({
   selector: 'app-add-recipe-form',
   templateUrl: './add-recipe-form.component.html',
@@ -12,6 +13,7 @@ import { AddRecipeDto, NutritionInfo, RecipeIngredientDto } from '../../../DTOs/
 })
 export class AddRecipeFormComponent
 {
+  tagContextRecipe: TagContext = TagContext.Recipe;
   recipeForm: FormGroup;
   ingredientForm: FormGroup;
   tagsForm: FormGroup;
@@ -127,8 +129,9 @@ export class AddRecipeFormComponent
     this.recipesService.getTags().subscribe(
       dto  =>
       {
-        console.log("moje dto: ",  dto)
+
         this.tagsNames = dto.names;
+        console.log(this.tagsNames)
       },
       error => console.log(error)
     )
@@ -161,6 +164,7 @@ export class AddRecipeFormComponent
       dto  =>
       {
         this.recipeNames = dto.names;
+        console.log(this.recipeNames)
       },
       error => console.log(error)
     )

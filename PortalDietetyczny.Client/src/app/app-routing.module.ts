@@ -11,6 +11,7 @@ import { BlogsComponent } from './components/pages/blogs/blogs.component';
 import { BlogComponent } from './components/pages/blog/blog.component';
 import { ConsultationsComponent } from './components/pages/consultations/consultations.component';
 import { DownloadsComponent } from './components/pages/downloads/downloads.component';
+import { LoginComponent } from './components/pages/login/login.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes =
     {path: RoutesEnum.consultations, component: ConsultationsComponent},
     {path: RoutesEnum.adminPanel, component: AdminPanelComponent},
     {path: RoutesEnum.downloads, component: DownloadsComponent},
+    {path: RoutesEnum.login, component: LoginComponent},
     {path: "**", component: StartComponent}
   ];
 

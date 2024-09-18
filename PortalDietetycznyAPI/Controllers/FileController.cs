@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortalDietetycznyAPI.Application._Commands.Files;
 using PortalDietetycznyAPI.Application._Queries.Files;
@@ -18,6 +19,7 @@ public class FileController : ControllerBase
         _mediator = mediator;
     }
     
+    /*[Authorize]*/
     [HttpPost]
     public async Task<ActionResult> AddFile([FromBody] AddFileDto dto)
     {
@@ -49,7 +51,7 @@ public class FileController : ControllerBase
     }
     
     [HttpPost("{id}")]
-    public async Task<ActionResult> GetSummaryFile([FromRoute] int id)
+    public async Task<ActionResult> GetFile([FromRoute] int id)
     {
         var result = await _mediator.Send(new GetFileQuery(id));
 

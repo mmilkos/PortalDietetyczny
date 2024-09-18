@@ -15,6 +15,7 @@ public class KeyService : IKeyService
     private static DateTime? _dropboxTokenExpirationDate;
 
     private static CloudinarySettings? _cloudinarySettings;
+    private static PortalSettings? _portalSettings;
 
     private readonly IMediator _mediator;
 
@@ -73,5 +74,17 @@ public class KeyService : IKeyService
         _cloudinarySettings = result.Data;
 
         return _cloudinarySettings;
+    }
+
+    public async Task<PortalSettings> GetPortalSettings()
+    {
+        OperationResult<PortalSettings> result;
+
+        if (_portalSettings != null) return  _portalSettings;
+        
+        result = await _mediator.Send(new GetPortalSettingsQuery());
+        _portalSettings = result.Data;
+
+        return _portalSettings;
     }
 }

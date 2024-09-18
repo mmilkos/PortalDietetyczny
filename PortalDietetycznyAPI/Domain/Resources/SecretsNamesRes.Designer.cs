@@ -112,5 +112,32 @@ namespace PortalDietetycznyAPI.Domain.Resources {
                 return ResourceManager.GetString("DropboxSettings_RefreshToken", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JwtExpireHours.
+        /// </summary>
+        internal static string PortalSettings_JwtExpireHours {
+            get {
+                return ResourceManager.GetString("PortalSettings_JwtExpireHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JwtIssuer.
+        /// </summary>
+        internal static string PortalSettings_JwtIssuer {
+            get {
+                return ResourceManager.GetString("PortalSettings_JwtIssuer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JwtKey.
+        /// </summary>
+        internal static string PortalSettings_JwtKey {
+            get {
+                return ResourceManager.GetString("PortalSettings_JwtKey", resourceCulture);
+            }
+        }
     }
 }

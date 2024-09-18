@@ -52,6 +52,7 @@ import { ConsultationIntroComponent } from './components/components/consultation
 import { AddFileFormComponent } from './components/forms/add-file-form/add-file-form.component';
 import { DownloadsComponent } from './components/pages/downloads/downloads.component';
 import { DownloadsGridComponent } from './components/grids/downloads-grid/downloads-grid.component';
+import { LoginComponent } from './components/pages/login/login.component';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { DownloadsGridComponent } from './components/grids/downloads-grid/downlo
     ConsultationIntroComponent,
     AddFileFormComponent,
     DownloadsComponent,
-    DownloadsGridComponent
+    DownloadsGridComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

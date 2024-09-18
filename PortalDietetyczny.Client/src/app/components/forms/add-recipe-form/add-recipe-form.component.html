@@ -145,7 +145,7 @@
     <app-ingredients-list></app-ingredients-list>
     <button (click)="getIngredientsNames()" class="btn btn-warning m-1">Odśwież listę składników</button>
     <br>
-    <app-add-tag-form></app-add-tag-form>
+    <app-add-tag-form [tagContext]="tagContextRecipe"></app-add-tag-form>
     <button (click)="getTagsNames()" class="btn btn-warning m-1">Odśwież listę tagów</button>
 
     <div class="form-group mt-2">

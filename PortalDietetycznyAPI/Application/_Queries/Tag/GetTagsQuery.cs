@@ -4,6 +4,7 @@ using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.DTOs;
 using PortalDietetycznyAPI.Infrastructure.Repositories;
+using static PortalDietetycznyAPI.Domain.Common.TagContext;
 
 namespace PortalDietetycznyAPI.Application._Queries;
 
@@ -35,9 +36,18 @@ public class GetTagsQueryHandler : IRequestHandler<GetTagsQuery, OperationResult
             }
         };
 
-        var tags = await _repository.GetAllEntitiesAsync<Tag>(t => 
-            request.TagContext == TagContext.Recipe ? t.RecipeTags.Any() : 
-            request.TagContext == TagContext.Diet ? t.DietTags.Any() : false);
+        var xd = request.TagContext;
+
+        List<Tag> tags;
+
+        if (request.TagContext == TagContext.Diet)
+        {
+            tags = await _repository.GetAllEntitiesAsync<Tag>(tag => tag.Context == TagContext.Diet);
+        }
+        else
+        {
+            tags = await _repository.GetAllEntitiesAsync<Tag>(tag => tag.Context == TagContext.Recipe);
+        }
 
         foreach (var tag in tags)
         {
