@@ -74,27 +74,6 @@ public class UploadFileCommandHandler : IRequestHandler<UploadFileCommand, Opera
         operationResult.Data = file;
 
         return operationResult;
-
-        /*using (dbx)
-        {
-            try
-            {
-                var response = await dbx.Files.DownloadAsync(id);
-                var metadata = response.Response;
-
-                using (var fileStream = File.Create(@"C:\Users\matmi\Desktop\TEST\" + metadata.Name + ".pdf"))
-                {
-                    var stream = await response.GetContentAsStreamAsync();
-                    await stream.CopyToAsync(fileStream);
-                }
-
-                Console.WriteLine("Plik pobrany pomyślnie!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Błąd podczas pobierania pliku: {ex.Message}");
-            }
-        }*/
     }
 
     private async Task<string> UploadToDropBoxAsync(byte[] fileBytes, string filePath, DropboxClient dbc)

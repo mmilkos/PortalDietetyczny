@@ -28,7 +28,6 @@
     font-size: 20px;
   }
 
-  /* New */
   div {
     &:last-child {
       display: flex;

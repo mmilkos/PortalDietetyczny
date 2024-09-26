@@ -32,8 +32,7 @@ public class KeyService : IKeyService
     
     public AccessTokenDto GetVaultToken()
     {
-        var token = _VaultToken;
-        return token;
+        return _VaultToken;
     }
 
     private async Task<AccessTokenDto> GetVaultTokenAsync()

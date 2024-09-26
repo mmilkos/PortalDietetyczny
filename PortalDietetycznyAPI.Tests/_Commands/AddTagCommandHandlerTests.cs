@@ -19,7 +19,8 @@ public class AddTagCommandHandlerTests : BaseTests
 
         var dto = new AddTagDto()
         {
-            Name = "Test"
+            Name = "Test",
+            Context = TagContext.Diet
         };
         
         var command = new AddTagCommand(dto);
@@ -34,5 +35,6 @@ public class AddTagCommandHandlerTests : BaseTests
         result.Success.Should().BeTrue();
         tagInDb.Should().NotBeNull();
         tagInDb.Name.Should().Be(dto.Name);
+        tagInDb.Context.Should().Be(dto.Context);
     }
 }

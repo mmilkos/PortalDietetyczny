@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using MediatR;
 using PortalDietetycznyAPI.Domain.Common;
+using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.Domain.Resources;
 using PortalDietetycznyAPI.DTOs;
@@ -35,7 +36,9 @@ public class GetBlogPostQueryHandler : IRequestHandler<GetBlogPostQuery, Operati
         
         var uid = int.Parse(request.Url.Split('-').Last(), System.Globalization.NumberStyles.HexNumber);
         
-        var blogPost = await _repository.GetBlogPost(uid);
+        var blogPost = await _repository.FindEntityByConditionAsync<BlogPost>(
+            condition: bp => bp.Uid == uid,
+            include: bp => bp.Photo);
         
         if (blogPost == null || blogPost.Url != request.Url)
         {

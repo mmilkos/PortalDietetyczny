@@ -12,6 +12,7 @@ using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.Infrastructure.Context;
 using PortalDietetycznyAPI.Infrastructure.Repositories;
 using PortalDietetycznyAPI.Application.Services;
+using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Infrastructure.Seeders;
 
 namespace PortalDietetycznyAPI.Extensions;
@@ -36,6 +37,8 @@ public static class ServiceCollectionExtension
         var jwtKey = authentication.GetValue<string>("JwtKey");
         
         services.AddSingleton<IKeyService,KeyService>();
+
+        services.Configure<HashicorpSettings>(configuration.GetSection("hashicorpSettings"));
 
         services.AddTransient<IPostConfigureOptions<JwtBearerOptions>, PostConfigureService>();
         

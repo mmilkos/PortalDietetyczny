@@ -24,4 +24,7 @@
     <data name="Blog_photos" xml:space="preserve">
         <value>Blog_photos</value>
     </data>
+    <data name="Diets_photos" xml:space="preserve">
+        <value>Diets_photos</value>
+    </data>
 </root>

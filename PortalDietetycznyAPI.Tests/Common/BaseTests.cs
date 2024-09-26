@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Moq;
 using PortalDietetycznyAPI.Application._Commands;
 using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Interfaces;
@@ -19,12 +20,14 @@ public class BaseTests : IDisposable
     protected readonly IMediator _mediator;
     private IDbContextTransaction _transaction;
     protected CloudinarySettings CloudinarySettings { get; set; }
+    protected  Mock<IMediator> mediatorMock;
     
     protected readonly IServiceProvider _provider;
     public IConfiguration Configuration { get; }
     
     public BaseTests()
     {
+        mediatorMock = new Mock<IMediator>();
         var configBuilder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory()) // use the output directory as the base path
             .AddJsonFile("appsettings.json", optional: false);

@@ -41,7 +41,7 @@ public class AccountController(IMediator mediator, IKeyService keyService) : Con
     [Authorize]
     */
     [HttpPost()]
-    public async Task<ActionResult> IsLoggedIn()
+    public async Task<ActionResult> Authorize()
     {
         return Ok();
     }

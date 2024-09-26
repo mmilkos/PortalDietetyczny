@@ -34,7 +34,7 @@ public class GetDropboxTokenCommandHandler : IRequestHandler<GetDropboxTokenComm
 
         var accessToken = accessTokenObject.Access_token;
         
-        var secrets = await "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/b80cc314-17b8-4aec-bfbb-292009a2c14b/projects/90c9452b-ef85-4be7-8a94-28be805e8bc1/apps/testapp/open"
+        var secrets = await "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/0c4adf14-4d4f-4df0-bf0f-2b87ee2a0a1f/projects/88aa0b2e-1fb8-4721-91bf-f1d209b4d74a/apps/DropBoxSettings/open"
             .WithOAuthBearerToken(accessToken)
             .GetAsync(cancellationToken: cancellationToken)
             .ReceiveJson<SecretResponseDto>();

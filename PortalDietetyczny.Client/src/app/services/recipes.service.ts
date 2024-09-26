@@ -21,13 +21,11 @@ export class RecipesService
 
   addRecipe(recipe: AddRecipeDto): Observable<any>
   {
-    console.log(recipe)
     return this.http.post<any>(this.apiUrl, recipe);
   }
 
   getRecipesPaged(params: RecipesPreviewPageRequest) : Observable<PagedResult<RecipePreviewDto>>
   {
-    console.log(params);
     return this.http.post<PagedResult<RecipePreviewDto>>(this.apiUrl + "/paged", params)
   }
 
@@ -64,7 +62,6 @@ export class RecipesService
 
   addTag(tag: AddTagDto): Observable<any>
   {
-    console.log(tag)
     return this.http.post<any>(this.apiUrl + '/tags', tag);
   }
 

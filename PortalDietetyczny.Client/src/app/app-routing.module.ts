@@ -12,6 +12,8 @@ import { BlogComponent } from './components/pages/blog/blog.component';
 import { ConsultationsComponent } from './components/pages/consultations/consultations.component';
 import { DownloadsComponent } from './components/pages/downloads/downloads.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { DietsComponent } from './components/pages/diets/diets.component';
+import { CartComponent } from './components/pages/cart/cart.component';
 
 
 
@@ -21,6 +23,7 @@ const routes: Routes =
     {path: RoutesEnum.about, component: AboutUsComponent},
     {path: RoutesEnum.recipes, component: RecipesComponent},
     {path: RoutesEnum.recipes + "/:recipeName", component: RecipeComponent},
+    {path: RoutesEnum.diets, component: DietsComponent},
     {path: RoutesEnum.calculators, component: CalculatorsComponent},
     {path: RoutesEnum.blog, component: BlogsComponent},
     {path: RoutesEnum.blog + "/:postName", component: BlogComponent},
@@ -28,6 +31,7 @@ const routes: Routes =
     {path: RoutesEnum.adminPanel, component: AdminPanelComponent},
     {path: RoutesEnum.downloads, component: DownloadsComponent},
     {path: RoutesEnum.login, component: LoginComponent},
+    {path: RoutesEnum.shopping_cart, component: CartComponent},
     {path: "**", component: StartComponent}
   ];
 

@@ -1,6 +1,9 @@
 ﻿using FluentAssertions;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using PortalDietetycznyAPI.Application._Commands;
+using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.DTOs;
 using PortalDietetycznyAPI.Infrastructure.Repositories;
@@ -44,9 +47,9 @@ public class AddRecipeCommandHandlerTests : BaseTests
             Ingredients = [new RecipeIngredientDto()
             {
                 Id = ingredient.Id,
-                Unit = "Kg",
+                Unit = "kg",
                 UnitValue = 1.5f,
-                HomeUnit = "Szklanka",
+                HomeUnit = "szklanka",
                 HomeUnitValue = 2.5f
                 
             }],
@@ -58,11 +61,27 @@ public class AddRecipeCommandHandlerTests : BaseTests
                 Kcal = 40,
                 Protein = 50
             },
+            FileName = "test",
+            FileBytes = ""
         };
+        
+        
+
+        var response = new OperationResult<Photo>()
+        {
+            Data = new Photo()
+            {
+                PublicId = "test1",
+                Url = "Test2"
+            }
+        };
+
+        mediatorMock.Setup(x => x.Send(It.IsAny<UploadPhotoCommand>(),
+            It.IsAny<CancellationToken>())).ReturnsAsync(response);
 
         var command = new AddRecipeCommand(dto);
 
-        var handler = new AddRecipeCommandHandler(repository, _mediator);
+        var handler = new AddRecipeCommandHandler(repository, mediatorMock.Object);
         
         //Act
         var result = await handler.Handle(command, CancellationToken.None);

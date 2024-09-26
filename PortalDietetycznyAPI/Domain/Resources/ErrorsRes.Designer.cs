@@ -96,6 +96,24 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd podczas usuwania diety.
+        /// </summary>
+        public static string DietDeleteError {
+            get {
+                return ResourceManager.GetString("DietDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd podczas zapisywania diety do bazy.
+        /// </summary>
+        public static string DietSavingError {
+            get {
+                return ResourceManager.GetString("DietSavingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wystąpił błąd z serwisem przechowującym pliki.
         /// </summary>
         public static string DropboxUploadError {
@@ -128,6 +146,15 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         public static string FileSavingError {
             get {
                 return ResourceManager.GetString("FileSavingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niepoprawny login lub hasło.
+        /// </summary>
+        public static string IncorrectCredentials {
+            get {
+                return ResourceManager.GetString("IncorrectCredentials", resourceCulture);
             }
         }
         
@@ -191,6 +218,15 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         public static string TagAlreadyInDb {
             get {
                 return ResourceManager.GetString("TagAlreadyInDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd przy pobieraniu tokena z krypty.
+        /// </summary>
+        public static string TokenError {
+            get {
+                return ResourceManager.GetString("TokenError", resourceCulture);
             }
         }
     }

@@ -40,7 +40,7 @@ public class DeleteBlogPostCommandHandler : IRequestHandler<DeleteBlogPostComman
             return operationResult;
         }
         
-        var blogPost = await _repository.FindEntityByConditionAsync<BlogPost>(bp => bp.Id == photo.BlogPostId);
+        var blogPost = await _repository.FindEntityByConditionAsync<BlogPost>(bp => bp.Id == request.PostId);
 
         try
         {

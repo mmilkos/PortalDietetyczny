@@ -94,13 +94,8 @@ public class AddRecipeCommandHandler : IdentifierGenerator, IRequestHandler<AddR
     }
     
     private async Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
-    {
-        if (fileBytes.Length > 0) return await _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Recipes_photos), cancellationToken);
-
-        return new OperationResult<Photo>()
-        {
-            Data = null
-        };
+    { 
+        return await _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Recipes_photos), cancellationToken);
     }
 
     private async Task<List<RecipeTag>> GetRecipeTags(List<int> tagsIds, Recipe recipe)

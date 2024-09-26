@@ -63,4 +63,16 @@
     <data name="FileDeletingError" xml:space="preserve">
         <value>Wystąpił błąd podczas usuwania pliku</value>
     </data>
+    <data name="DietSavingError" xml:space="preserve">
+        <value>Błąd podczas zapisywania diety do bazy</value>
+    </data>
+    <data name="IncorrectCredentials" xml:space="preserve">
+        <value>Niepoprawny login lub hasło</value>
+    </data>
+    <data name="DietDeleteError" xml:space="preserve">
+        <value>Wystąpił błąd podczas usuwania diety</value>
+    </data>
+    <data name="TokenError" xml:space="preserve">
+        <value>Błąd przy pobieraniu tokena z krypty</value>
+    </data>
 </root>

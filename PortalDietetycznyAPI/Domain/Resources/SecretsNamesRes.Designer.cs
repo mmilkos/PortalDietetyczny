@@ -60,7 +60,7 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ApiKey.
+        ///   Looks up a localized string similar to Api_key.
         /// </summary>
         internal static string CloudinarySettings_ApiKey {
             get {
@@ -69,7 +69,7 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ApiSecret.
+        ///   Looks up a localized string similar to Api_secret.
         /// </summary>
         internal static string CloudinarySettings_ApiSecret {
             get {
@@ -78,7 +78,7 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CloudName.
+        ///   Looks up a localized string similar to Cloud_name.
         /// </summary>
         internal static string CloudinarySettings_CloudName {
             get {
@@ -87,7 +87,7 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DropboxSettings_AppKey.
+        ///   Looks up a localized string similar to App_key.
         /// </summary>
         internal static string DropboxSettings_AppKey {
             get {
@@ -96,7 +96,7 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DropboxSettings_AppSecret.
+        ///   Looks up a localized string similar to App_secret.
         /// </summary>
         internal static string DropboxSettings_AppSecret {
             get {
@@ -105,7 +105,7 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DropboxSettings_RefreshToken.
+        ///   Looks up a localized string similar to Refresh_token.
         /// </summary>
         internal static string DropboxSettings_RefreshToken {
             get {

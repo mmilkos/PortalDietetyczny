@@ -1,18 +1,18 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-4">
-      <h2>Login</h2>
+      <h2>Logowanie</h2>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="form-group">
           <label for="login">Login</label>
-          <input formControlName="login" type="text" class="form-control" id="login" >
+          <input formControlName="login" type="text" class="form-control" id="login" maxlength="254">
         </div>
         <div class="form-group">
           <label for="inputPassword">Hasło</label>
-          <input  type="password" formControlName="password" class="form-control" id="inputPassword" >
+          <input  type="password" formControlName="password" class="form-control" id="inputPassword" maxlength="254">
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary" (click)="login()">Zaloguj</button>
       </form>
     </div>
   </div>

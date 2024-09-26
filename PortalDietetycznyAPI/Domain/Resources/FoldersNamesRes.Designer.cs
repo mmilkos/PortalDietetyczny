@@ -69,6 +69,15 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diets_photos.
+        /// </summary>
+        internal static string Diets_photos {
+            get {
+                return ResourceManager.GetString("Diets_photos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recipes_photos.
         /// </summary>
         internal static string Recipes_photos {

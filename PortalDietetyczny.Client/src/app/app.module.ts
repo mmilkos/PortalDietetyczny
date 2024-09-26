@@ -53,6 +53,13 @@ import { AddFileFormComponent } from './components/forms/add-file-form/add-file-
 import { DownloadsComponent } from './components/pages/downloads/downloads.component';
 import { DownloadsGridComponent } from './components/grids/downloads-grid/downloads-grid.component';
 import { LoginComponent } from './components/pages/login/login.component';
+import { AddDietFormComponent } from './components/forms/add-diet-form/add-diet-form.component';
+import { DietsComponent } from './components/pages/diets/diets.component';
+import { DietsGridComponent } from './components/grids/diets-grid/diets-grid.component';
+import { DietCardComponent } from './components/components/diet-card/diet-card.component';
+import { CartComponent } from './components/pages/cart/cart.component';
+import { ShopGridComponent } from './components/grids/shop-grid/shop-grid.component';
+import { CartCardComponent } from './components/components/cart-card/cart-card.component';
 
 
 @NgModule({
@@ -96,7 +103,14 @@ import { LoginComponent } from './components/pages/login/login.component';
     AddFileFormComponent,
     DownloadsComponent,
     DownloadsGridComponent,
-    LoginComponent
+    LoginComponent,
+    AddDietFormComponent,
+    DietsComponent,
+    DietsGridComponent,
+    DietCardComponent,
+    CartComponent,
+    ShopGridComponent,
+    CartCardComponent
   ],
   imports: [
     BrowserModule,

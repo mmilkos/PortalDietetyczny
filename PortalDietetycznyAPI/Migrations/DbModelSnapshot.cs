@@ -90,10 +90,6 @@ namespace PortalDietetycznyAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FileUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Kcal")
                         .HasColumnType("int");
 
@@ -102,6 +98,9 @@ namespace PortalDietetycznyAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PhotoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.Property<int>("StoredFileId")

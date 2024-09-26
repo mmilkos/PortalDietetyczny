@@ -1,0 +1,11 @@
+<div class="recipeCard">
+  <div class="flex-column">
+    <img [src]="info.photoUrl" style="max-height: 320px">
+    <br>
+    <h2 class="title">{{info.name}}</h2>
+    <p> {{info.kcal}} kcal</p>
+    <p> {{info.price / 100}} ZŁ</p>
+    <button class="btn" (click)="addToCart()">Dodaj do koszyka</button>
+  </div>
+
+</div>

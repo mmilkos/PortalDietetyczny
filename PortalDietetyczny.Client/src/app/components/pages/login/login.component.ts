@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
-import {FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginUserRequestDto } from '../../../DTOs/LoginUserRequestDto';
 
 @Component({
@@ -16,8 +16,8 @@ export class LoginComponent
   }
 
   loginForm = new FormGroup({
-    login: new FormControl(''),
-    password: new FormControl('')
+    login: new FormControl(null, [Validators.maxLength(254), Validators.required]),
+    password: new FormControl(null, [Validators.maxLength(254), Validators.required])
   });
 
   login()

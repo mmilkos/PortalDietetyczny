@@ -9,5 +9,6 @@
   consultations = "konsultacje",
   downloads = "do-pobrania",
   adminPanel = "admin",
-  login = "login"
+  login = "login",
+  shopping_cart = "koszyk"
 }

@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.Domain.Interfaces;
+using PortalDietetycznyAPI.Domain.Resources;
 using PortalDietetycznyAPI.DTOs;
 
 namespace PortalDietetycznyAPI.Application._Commands.Account;
@@ -47,7 +48,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
             using var hmac = new HMACSHA512();
             
             var user = new User(
-                userName: request.Dto.Username, 
+                userName: request.Dto.Username.ToLower(), 
                 passwordHash: hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Dto.Password)),
                 passwordSalt: hmac.Key);
             
@@ -57,11 +58,11 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
 
         var settings = await _keyService.GetPortalSettings();
         
-        var account = await _repository.FindEntityByConditionAsync<User>(u => u.UserName == request.Dto.Username);
+        var account = await _repository.FindEntityByConditionAsync<User>(u => u.UserName == request.Dto.Username.ToLower());
         
         if (account == null)
         {
-            operationResult.AddError("Niepoprawny login lub hasło");
+            operationResult.AddError(ErrorsRes.IncorrectCredentials);
             return operationResult;
         }
 
@@ -69,7 +70,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
 
         if (isCorrectPassword == false)
         {
-            operationResult.AddError("Niepoprawny login lub hasło");
+            operationResult.AddError(ErrorsRes.IncorrectCredentials);
             return operationResult;
         }
 

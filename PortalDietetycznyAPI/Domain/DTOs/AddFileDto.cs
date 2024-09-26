@@ -4,7 +4,6 @@ namespace PortalDietetycznyAPI.DTOs;
 
 public class AddFileDto
 {
-    public string Name { get; set; }
     public string FileBytes { get; set; }
     public string FileName { get;  set; }
 

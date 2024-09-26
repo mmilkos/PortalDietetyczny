@@ -1,7 +1,9 @@
 ﻿using Flurl;
 using Flurl.Http;
 using MediatR;
+using Microsoft.Extensions.Options;
 using PortalDietetycznyAPI.Domain.Common;
+using PortalDietetycznyAPI.Domain.Resources;
 using PortalDietetycznyAPI.DTOs;
 
 namespace PortalDietetycznyAPI.Application._Queries.Tokens;
@@ -15,11 +17,13 @@ public class GetVaultTokenQueryHandler : IRequestHandler<GetVaultTokenQuery, Ope
 {
     private readonly string _clientId;
     private readonly string _clientSecret;
+    private readonly HashicorpSettings _settings;
     
-    public GetVaultTokenQueryHandler()
+    public GetVaultTokenQueryHandler(IOptions<HashicorpSettings> settings)
     {
         _clientId = Environment.GetEnvironmentVariable("clientId");
         _clientSecret = Environment.GetEnvironmentVariable("clientSecret");
+        _settings = settings.Value;
     }
     public async Task<OperationResult<AccessTokenDto>> Handle(GetVaultTokenQuery request, CancellationToken cancellationToken)
     {
@@ -29,19 +33,19 @@ public class GetVaultTokenQueryHandler : IRequestHandler<GetVaultTokenQuery, Ope
 
         try
         {
-            response = await "https://auth.idp.hashicorp.com"
+            response = await _settings.Url
                 .AppendPathSegment("oauth2/token")
-                .WithHeader("Content-Type", "application/x-www-form-urlencoded")
+                .WithHeader(_settings.headerName, _settings.headerValue)
                 .PostUrlEncodedAsync(new {
                     client_id = _clientId,
                     client_secret = _clientSecret,
-                    grant_type = "client_credentials",
-                    audience = "https://api.hashicorp.cloud"
-                }).ReceiveJson<AccessTokenDto>();
+                    grant_type = _settings.GrantType,
+                    audience = _settings.Audience
+                }, cancellationToken: cancellationToken).ReceiveJson<AccessTokenDto>();
         }
         catch (Exception e)
         {
-            operationResult.AddError("Błąd przy pobieraniu tokena z krypty");
+            operationResult.AddError(ErrorsRes.TokenError);
             return operationResult;
         }
 

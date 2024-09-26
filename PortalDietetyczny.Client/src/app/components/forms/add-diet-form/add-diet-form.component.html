@@ -1,0 +1,97 @@
+<div class="d-flex flex-row">
+  <div class="card mx-auto" style="width: 80%; ">
+    <div class="card-header text-center" style="background-color: #007bff;">
+      <h3 class="mb-0">Formularz diety</h3>
+    </div>
+    <form [formGroup]="dietForm" class="p-4">
+      <div class="form-floating mb-3">
+        <input type="text" id="dietName" formControlName="dietName" class="form-control" placeholder="Nazwa przepisu">
+        <label for="dietName">Nazwa diety</label>
+      </div>
+      <label for="photo" class="file-upload-button">Wybierz zdjęcie
+      </label>
+      <input class="mb-2 hidden" type="file" id="photo" name="myFile" accept="image/png, image/jpeg" (change)="onPhotoSelected($event)">
+
+        <div class="form-group">
+          <label>Plik</label>
+          <input class="mb-2 hidden" type="file" id="file" name="file" accept=".pdf" (change)="onFileSelected($event)">
+        </div>
+      <div class="ingredient-form mb-3">
+        <div class="fw-bold">Tagi</div>
+
+        <div class="chosen-ingredients mt-3">
+          <mat-chip-set>
+            <mat-chip *ngFor="let tag of selectedTags" (removed)="removeTag(tag)">
+              {{tag}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+
+        <div [formGroup]="tagsForm" class="d-grid gap-3">
+          <div class="d-md-flex gap-2">
+            <div class="form-floating flex-fill">
+              <select id="tagName" formControlName="tagName" class="form-select">
+                <option value="">Wybierz tag</option>
+                <option *ngFor="let tag of tagsNames" [ngValue]="tag">{{tag.name}}</option>
+              </select>
+              <label for="tagName"></label>
+            </div>
+
+            <div class="form-group mt-1">
+
+              <button (click)="addTag()" class="btn btn-primary m-1">Dodaj tag do diety</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="nutrition-info mb-3">
+        <div class="fw-bold">Informacje o wartości odżywczej</div>
+
+          <div class="form-floating flex-fill p-1">
+            <input type="number" id="kcal" formControlName="kcal" class="form-control" placeholder="Kcal">
+            <label for="kcal">Kcal</label>
+          </div>
+
+        <div class="form-floating flex-fill p-1">
+          <input type="number" step="0.01" id="price" formControlName="price" class="form-control" placeholder="Cena">
+          <label for="kcal">Cena</label>
+        </div>
+      </div>
+
+
+      <!--ROBIE REGEXA ZEBY SRAWDZIC CZY CENA JEST OKEJ PODANA
+      NA RAZIE NIE DZIAŁA !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      -->
+      <div class="form-group mt-4 text-center">
+        <button [disabled]="dietForm.invalid" (click)="submitDiet()" class="btn btn-primary w-100">Zapisz dietę</button>
+      </div>
+
+    </form>
+  </div>
+
+
+  <div class="card mx-auto" style="width: 40%; ">
+    <app-add-tag-form [tagContext]="tagContextDiet"></app-add-tag-form>
+    <button (click)="getTagsNames()" class="btn btn-warning m-1">Odśwież listę tagów</button>
+
+    <div class="form-group mt-2">
+      <select id="tagToDelete" class="form-select" [(ngModel)]="selectedTagToDelete">
+        <option *ngFor="let tag of tagsNames" [value]="tag.id">{{tag.name}}</option>
+      </select>
+
+      <button (click)="deleteTag()" class="btn btn-danger w-100 mt-1">Usuń tag</button>
+    </div>
+
+
+    <div class="form-group mt-2">
+      <select id="dietToDelete" class="form-select" [(ngModel)]="selectedDietToDelete">
+        <option *ngFor="let diet of dietsNames" [value]="diet.id">{{diet.name}}</option>
+      </select>
+
+      <button  (click)="deleteDiet()" class="btn btn-danger w-100 mt-1">Usuń dietę</button>
+    </div>
+  </div>
+</div>
+

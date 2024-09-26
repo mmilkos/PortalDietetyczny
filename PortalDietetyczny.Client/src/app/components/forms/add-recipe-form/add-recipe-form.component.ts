@@ -108,7 +108,6 @@ export class AddRecipeFormComponent
       dto =>
       {
         this.ingredientNames = dto.names;
-        console.log(this.ingredientNames)
       },
       error => console.log(error)
     )
@@ -131,7 +130,6 @@ export class AddRecipeFormComponent
       {
 
         this.tagsNames = dto.names;
-        console.log(this.tagsNames)
       },
       error => console.log(error)
     )

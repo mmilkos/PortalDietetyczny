@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { RecipesService } from '../../../services/recipes.service';
 import {FormControl, FormGroup } from '@angular/forms';
 import {AddTagDto, TagContext} from '../../../DTOs/AddTagDto';
+import { DietsService } from '../../../services/diets.service';
 
 @Component({
   selector: 'app-add-tag-form',
@@ -11,7 +12,7 @@ import {AddTagDto, TagContext} from '../../../DTOs/AddTagDto';
 export class AddTagFormComponent
 {
   @Input() tagContext: TagContext;
-  constructor(private recipesService: RecipesService) {}
+  constructor(private recipesService: RecipesService, private dietService: DietsService) {}
 
   addIngredients = new FormGroup(
     {
@@ -26,12 +27,20 @@ export class AddTagFormComponent
         context: this.tagContext
       }
 
+      if (this.tagContext == TagContext.Recipe)
+      {
+        this.recipesService.addTag(ingredient).subscribe(
+          (response)=> this.addIngredients.reset(),
+          (error) => console.log(error)
+        )
+      }
 
-    console.log(ingredient)
-
-    this.recipesService.addTag(ingredient).subscribe(
-      (response)=> this.addIngredients.reset(),
-      (error) => console.log(error)
-    )
+    if (this.tagContext == TagContext.Diet)
+    {
+      this.dietService.addTag(ingredient).subscribe(
+        (response)=> this.addIngredients.reset(),
+        (error) => console.log(error)
+      )
+    }
   }
 }
