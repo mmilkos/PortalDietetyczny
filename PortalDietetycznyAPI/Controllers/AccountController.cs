@@ -31,7 +31,7 @@ public class AccountController(IMediator mediator, IKeyService keyService) : Con
     }
     
     [HttpPost("logout")]
-    public async Task<ActionResult> Logout()
+    public ActionResult Logout()
     {
        Response.Cookies.Delete("JwtToken");
        return Ok();
@@ -41,7 +41,7 @@ public class AccountController(IMediator mediator, IKeyService keyService) : Con
     [Authorize]
     */
     [HttpPost()]
-    public async Task<ActionResult> Authorize()
+    public ActionResult Authorize()
     {
         return Ok();
     }

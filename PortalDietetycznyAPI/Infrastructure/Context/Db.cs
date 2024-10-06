@@ -23,7 +23,9 @@ public class Db : DbContext
     public DbSet<DietPhoto> DietPhotos { get; set; }
     public DbSet<DietTag> DietTags { get; set; }
     public DbSet<StoredFile> Files { get; set; }
-    
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<Invoice> Invoices { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Recipe>().OwnsOne(recipe => recipe.Nutrition);
@@ -104,5 +106,22 @@ public class Db : DbContext
         modelBuilder.Entity<StoredFile>()
             .HasIndex(f => f.Name)
             .IsUnique();
+
+        modelBuilder.Entity<Order>()
+            .HasMany(o => o.OrderedDiets)
+            .WithOne()
+            .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<Order>().HasOne<Invoice>(o => o.Invoice)
+            .WithOne()
+            .HasForeignKey<Order>(o => o.InvoiceId);
+        
+        modelBuilder.Entity<Invoice>().OwnsOne<InvoiceParty>(i => i.Buyer);
+        modelBuilder.Entity<Invoice>().OwnsOne<InvoiceParty>(i => i.Seller);
+
+        modelBuilder.Entity<Invoice>()
+            .HasMany(i => i.Diets)
+            .WithOne()
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

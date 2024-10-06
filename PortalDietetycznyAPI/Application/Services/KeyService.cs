@@ -16,6 +16,7 @@ public class KeyService : IKeyService
 
     private static CloudinarySettings? _cloudinarySettings;
     private static PortalSettings? _portalSettings;
+    private static AutopaySettings? _autopaySettings;
 
     private readonly IMediator _mediator;
 
@@ -85,5 +86,17 @@ public class KeyService : IKeyService
         _portalSettings = result.Data;
 
         return _portalSettings;
+    }
+
+    public async Task<AutopaySettings> GetAutopaySettings()
+    {
+        OperationResult<AutopaySettings> result;
+
+        if (_autopaySettings != null) return _autopaySettings;
+
+        result = await _mediator.Send(new GetAutopaySettingsQuery());
+        _autopaySettings = result.Data;
+
+        return _autopaySettings;
     }
 }

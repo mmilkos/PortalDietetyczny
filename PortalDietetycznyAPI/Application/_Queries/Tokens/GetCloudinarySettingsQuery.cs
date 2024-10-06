@@ -28,8 +28,6 @@ public class GetCloudinarySettingsQueryHandler : IRequestHandler<GetCloudinarySe
         
         var accessTokenDto = _keyService.GetVaultToken();
         
-        
-
         var secrets =
             await
                 "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/0c4adf14-4d4f-4df0-bf0f-2b87ee2a0a1f/projects/88aa0b2e-1fb8-4721-91bf-f1d209b4d74a/apps/CloudinarySettings/open"

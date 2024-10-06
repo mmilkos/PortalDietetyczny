@@ -75,4 +75,7 @@
     <data name="TokenError" xml:space="preserve">
         <value>Błąd przy pobieraniu tokena z krypty</value>
     </data>
+    <data name="OrderSavingError" xml:space="preserve">
+        <value>Wystąpił błąd podczas próby złożenia zamówienia</value>
+    </data>
 </root>

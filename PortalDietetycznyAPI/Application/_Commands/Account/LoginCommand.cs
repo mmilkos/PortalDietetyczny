@@ -26,7 +26,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
 {
     private readonly IPDRepository _repository;
     private readonly IKeyService _keyService;
-    
+ 
 
     public LoginCommandHandler(IPDRepository repository, IKeyService keyService)
     {
@@ -70,6 +70,8 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
 
         if (isCorrectPassword == false)
         {
+            var path = @"/Logs.txt";
+            File.WriteAllText(path, "test");
             operationResult.AddError(ErrorsRes.IncorrectCredentials);
             return operationResult;
         }
@@ -83,20 +85,21 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
     
     private bool CheckCredentials(User? user, LoginUserRequestDto loginRequestDto)
     {
+        var isValid = true;
         if (user == null) return false;
         
         using var hmac = new HMACSHA512(user.PasswordSalt);
         var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginRequestDto.Password));
         
-        for (int i = 0; i < computedHash.Length; i++)
+        for (var i = 0; i < computedHash.Length; i++)
         {
             if (computedHash[i] != user.PasswordHash[i])
             {
-                return false;
+                isValid = false;
             }
         }
 
-        return true;
+        return isValid;
     }
     
     private JwtTokenDto GenerateJwtToken(User user, PortalSettings settings)

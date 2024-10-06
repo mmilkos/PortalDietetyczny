@@ -36,8 +36,8 @@ public class DeleteRecipeCommandHandler : IRequestHandler<DeleteRecipeCommand, O
         try
         {
             await _mediator.Send(new DeletePhotoCommand(recipe.Photo.PublicId));
-            await _repository.DeleteAsync(recipe);
-            await _repository.DeleteAsync(recipe.Photo);
+            await _repository.DeleteAsync<Recipe>(recipe.Id);
+            await _repository.DeleteAsync<RecipePhoto>(recipe.Photo.Id);
         }
         catch (Exception e)
         {

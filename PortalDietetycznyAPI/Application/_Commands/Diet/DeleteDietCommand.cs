@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PortalDietetycznyAPI.Application._Commands.Files;
 using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.Domain.Interfaces;
@@ -32,6 +33,7 @@ public class DeleteDietCommandHandler : IRequestHandler<DeleteDietCommand,Operat
         var operationResult = new OperationResult<Unit>();
 
         var photo = await _repository.FindEntityByConditionAsync<DietPhoto>(bp => bp.DietId == request.DietId);
+        
 
         var photoResult = await _mediator.Send(new DeletePhotoCommand(photo.PublicId), cancellationToken);
 
@@ -42,11 +44,20 @@ public class DeleteDietCommandHandler : IRequestHandler<DeleteDietCommand,Operat
         }
         
         var diet = await _repository.FindEntityByConditionAsync<Diet>(d => d.Id == request.DietId);
+        
+        var fileResult = await _mediator.Send(new DeleteFileCommand(diet.StoredFileId));
+        
+        if (fileResult.Success == false)
+        {
+            operationResult.AddErrorRange(fileResult.ErrorsList);
+            return operationResult;
+        }
 
         try
         {
-            await _repository.DeleteAsync(diet);
-            await _repository.DeleteAsync(photo);
+            await _repository.DeleteAsync<Diet>(request.DietId);
+            await _repository.DeleteAsync<DietPhoto>(photo.Id);
+            await _repository.DeleteAsync<StoredFile>(diet.StoredFileId);
         }
         catch (Exception e)
         {

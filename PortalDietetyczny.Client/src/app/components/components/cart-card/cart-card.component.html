@@ -1,13 +1,16 @@
-<div class="wrapper container">
+<div class="wrapper container" >
   <div class="row" style="width: 100%">
     <div class="col">
-      Dieta z niskim IG
+      <img style="height: 10vh;" class="mb-1" [src]="info.photoUrl" alt="">
     </div>
-    <div class="col">
-      Column
+    <div class="col-4 d-flex align-items-center ">
+      <p> {{info.name}}</p>
     </div>
-    <div class="col">
-      Column
+    <div class="col d-flex align-items-center ">
+      <p> {{info.price / 100}} zł</p>
+    </div>
+    <div class="col d-flex align-items-center mb-2 m">
+      <button *ngIf="!isSummary" (click)="delete()" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can"></i></button>
     </div>
   </div>
 </div>

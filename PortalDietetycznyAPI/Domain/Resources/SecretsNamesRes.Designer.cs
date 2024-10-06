@@ -60,6 +60,24 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Api_id.
+        /// </summary>
+        internal static string AutopaySettings_ApiId {
+            get {
+                return ResourceManager.GetString("AutopaySettings_ApiId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Api_key.
+        /// </summary>
+        internal static string AutopaySettings_ApiKey {
+            get {
+                return ResourceManager.GetString("AutopaySettings_ApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Api_key.
         /// </summary>
         internal static string CloudinarySettings_ApiKey {

@@ -1,12 +1,8 @@
-﻿using System.Reflection;
-using System.Text;
-using Dropbox.Api.Users;
-using Hangfire;
+﻿using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using PortalDietetycznyAPI.Application._Commands;
 using PortalDietetycznyAPI.Domain.Interfaces;
 using PortalDietetycznyAPI.Infrastructure.Context;
@@ -32,9 +28,6 @@ public static class ServiceCollectionExtension
     {
         const string bearer = "Bearer";
         var connectionString = configuration.GetConnectionString("Database");
-        var authentication = configuration.GetSection("Auth");
-        var jwtIssuer = authentication.GetValue<string>("JwtIssuer");
-        var jwtKey = authentication.GetValue<string>("JwtKey");
         
         services.AddSingleton<IKeyService,KeyService>();
 

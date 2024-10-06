@@ -30,6 +30,9 @@ public class GetCartSummaryQueryHandler : IRequestHandler<GetCartSummaryQuery, O
         var operationResult = new OperationResult<CartSummaryResponse>()
         {
             Data = new CartSummaryResponse()
+            {
+                Products = new List<CartProduct>(),
+            }
         };
 
         var selectedIds = request.Dto.ProductsIds;
@@ -50,6 +53,10 @@ public class GetCartSummaryQueryHandler : IRequestHandler<GetCartSummaryQuery, O
             
             operationResult.Data.Products.Add(cartProduct);
         }
+
+        var priceSum = operationResult.Data.Products.Select(p => p.Price).Sum();
+        
+        operationResult.Data.Total = priceSum;
 
         return operationResult;
     }

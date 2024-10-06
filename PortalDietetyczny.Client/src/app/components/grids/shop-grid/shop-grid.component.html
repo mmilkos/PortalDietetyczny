@@ -1,8 +1,60 @@
 
-<div style="display: grid; place-items: center; width: 100%; background-color: #f5f3ee; border-top: 2px solid #d9d9d9;">
-  <h1>Koszyk</h1>
+<div class="pb-3 d-flex flex-column justify-content-center w-100" style="place-items: center; background-color: #f5f3ee; border-top: 2px solid #d9d9d9;">
   <br>
-  <div class="grid">
-    <app-cart-card></app-cart-card>
+  <h1 *ngIf="!summary">Koszyk</h1>
+  <h1 *ngIf="summary">Podsumowanie</h1>
+  <br>
+   <h2 *ngIf="!products?.length">Twój koszyk jest pusty</h2>
+  <form [formGroup]="orderForm" class="d-flex flex-row container h-100 w-20" style="width: 60vw" *ngIf="summary">
+    <div class="form-floating mb-3 w-100">
+      <input type="email" id="email" name="email" class="form-control w-25" placeholder="Adres e-mail" >
+      <label for="email">Adres e-mail</label>
+      <br>
+      <button [ngClass]="{'btn-success': invoice, 'btn-secondary' : !invoice}" class="btn" (click)="toggleInvoice()">Chcę fakturę</button>
+      <ng-container *ngIf="invoice">
+      <p>DAJ FAKTURE</p>
+      </ng-container>
+    </div>
+  </form>
+  <div class="grid" *ngIf="products?.length">
+    <div class="wrapper container">
+      <div class="row w-100">
+        <div class="col">
+        </div>
+        <div class="col-4">
+          Nazwa
+        </div>
+        <div class="col">
+          Cena
+        </div>
+        <div *ngIf="!summary" class="col">
+          Akcja
+        </div>
+        <div *ngIf="summary" class="col">
+
+        </div>
+      </div>
+    </div>
+
+    <app-cart-card *ngFor="let product of products" [info]="product" [isSummary]="summary"></app-cart-card>
+    <div *ngIf="products?.length" class="wrapper container h-100">
+      <div class="row w-100">
+        <div class="col">
+        </div>
+        <div class="col-4 d-flex align-items-center">
+        </div>
+        <div class="col d-flex align-items-center">
+          <p> Razem: {{total}} zł</p>
+        </div>
+        <div class="col d-flex align-items-center">
+          <button *ngIf="summary" [disabled]="!products?.length" class="btn btn-outline-secondary h-100" (click)="toggleSummary()">Wróć do koszyka </button>
+
+          <button *ngIf="!summary" [disabled]="!products?.length" class="btn btn-outline-success h-100" (click)="toggleSummary()">Podsumowanie </button>
+        </div>
+        <div class="col d-flex align-items-center">
+          <button *ngIf="summary" [disabled]="!products?.length" class="btn btn-outline-success h-100" (click)="toggleSummary()">Płatność </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

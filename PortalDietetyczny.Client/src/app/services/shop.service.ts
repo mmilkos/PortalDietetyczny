@@ -8,10 +8,12 @@ import {CartSummaryRequest, CartSummaryResponse} from '../DTOs/CartSummaryRespon
 })
 export class ShopService {
   apiUrl: string = "https://localhost:44317/api/shop/"
-  productsIds : number[] = []
   constructor(private http : HttpClient)
   {
-    sessionStorage.setItem('productIds', JSON.stringify(this.productsIds));
+    let list : number[] = []
+    if (sessionStorage.getItem('productIds') === null)
+      sessionStorage.setItem('productIds', JSON.stringify(list));
+
   }
 
   getCartSummary(ids: CartSummaryRequest): Observable<CartSummaryResponse>
@@ -25,9 +27,19 @@ export class ShopService {
 
     list.push(id)
 
-    let newList = [...new Set(list)]
+    list = [...new Set(list)]
 
-    sessionStorage.setItem("productIds", JSON.stringify(newList));
+    sessionStorage.setItem("productIds", JSON.stringify(list));
+  }
+
+  removeFromIdsList(id: number)
+  {
+    let list : number[] = this.getIdsList()
+    list = list.filter(item => item !== id);
+
+    sessionStorage.setItem("productIds", JSON.stringify(list));
+
+    location.reload()
   }
 
   getIdsList(): number[]

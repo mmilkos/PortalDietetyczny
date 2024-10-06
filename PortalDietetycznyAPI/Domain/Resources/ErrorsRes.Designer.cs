@@ -177,6 +177,15 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd podczas próby złożenia zamówienia.
+        /// </summary>
+        public static string OrderSavingError {
+            get {
+                return ResourceManager.GetString("OrderSavingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wystąpił błąd przy próbie zapisu zdjecia do bazy.
         /// </summary>
         public static string PhotoSavingError {

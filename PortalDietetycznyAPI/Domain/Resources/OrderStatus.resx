@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="AUTHORIZED" xml:space="preserve">
+        <value>AUTHORIZED</value>
+    </data>
+    <data name="REJECTED" xml:space="preserve">
+        <value>REJECTED</value>
+    </data>
+    <data name="REJECTED_BY_USER" xml:space="preserve">
+        <value>REJECTED_BY_USER</value>
+    </data>
+    <data name="INCORRECT_AMOUNT" xml:space="preserve">
+        <value>INCORRECT_AMOUNT</value>
+    </data>
+    <data name="EXPIRED" xml:space="preserve">
+        <value>EXPIRED</value>
+    </data>
+    <data name="CANCELLED" xml:space="preserve">
+        <value>CANCELLED</value>
+    </data>
+    <data name="ANOTHER_ERROR" xml:space="preserve">
+        <value>ANOTHER_ERROR</value>
+    </data>
+    <data name="CONNECTION_ERROR" xml:space="preserve">
+        <value>CONNECTION_ERROR</value>
+    </data>
+    <data name="CARD_LIMIT_EXCEEDED" xml:space="preserve">
+        <value>CARD_LIMIT_EXCEEDED</value>
+    </data>
+    <data name="SECURITY_ERROR" xml:space="preserve">
+        <value>SECURITY_ERROR</value>
+    </data>
+    <data name="DO_NOT_HONOR" xml:space="preserve">
+        <value>DO_NOT_HONOR</value>
+    </data>
+    <data name="THREEDS_NEGATIVE" xml:space="preserve">
+        <value>THREEDS_NEGATIVE</value>
+    </data>
+    <data name="CARD_EXPIRED" xml:space="preserve">
+        <value>CARD_EXPIRED</value>
+    </data>
+    <data name="INCORRECT_CARD_NUMBER" xml:space="preserve">
+        <value>INCORRECT_CARD_NUMBER</value>
+    </data>
+    <data name="FRAUD_SUSPECT" xml:space="preserve">
+        <value>FRAUD_SUSPECT</value>
+    </data>
+    <data name="STOP_RECURRING" xml:space="preserve">
+        <value>STOP_RECURRING</value>
+    </data>
+    <data name="VOID" xml:space="preserve">
+        <value>VOID</value>
+    </data>
+    <data name="UNCLASSIFIED" xml:space="preserve">
+        <value>UNCLASSIFIED</value>
+    </data>
+    <data name="INSUFFICIENT_FUNDS" xml:space="preserve">
+        <value>INSUFFICIENT_FUNDS</value>
+    </data>
+    <data name="LIMIT_EXCEEDED" xml:space="preserve">
+        <value>LIMIT_EXCEEDED</value>
+    </data>
+    <data name="BAD_PIN" xml:space="preserve">
+        <value>BAD_PIN</value>
+    </data>
+    <data name="ISSUER_DECLINED" xml:space="preserve">
+        <value>ISSUER_DECLINED</value>
+    </data>
+    <data name="USER_DECLINED" xml:space="preserve">
+        <value>USER_DECLINED</value>
+    </data>
+    <data name="SEC_DECLINED" xml:space="preserve">
+        <value>SEC_DECLINED</value>
+    </data>
+    <data name="TIMEOUT" xml:space="preserve">
+        <value>TIMEOUT</value>
+    </data>
+    <data name="AM_TIMEOUT" xml:space="preserve">
+        <value>AM_TIMEOUT</value>
+    </data>
+    <data name="USER_TIMEOUT" xml:space="preserve">
+        <value>USER_TIMEOUT</value>
+    </data>
+    <data name="PENDING" xml:space="preserve">
+        <value>PENDING</value>
+    </data>
+    <data name="CREATED" xml:space="preserve">
+        <value>CREATED</value>
+    </data>
+</root>

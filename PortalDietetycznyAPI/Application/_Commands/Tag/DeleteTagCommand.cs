@@ -27,11 +27,10 @@ public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand,Operatio
     public async Task<OperationResult<Unit>> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
     {
         var operationResult = new OperationResult<Unit>();
-
-        var tag = await _repository.FindEntityByConditionAsync<Tag>(t => t.Id == request.TagId);
+        
         try
         {
-            await _repository.DeleteAsync<Tag>(tag);
+            await _repository.DeleteAsync<Tag>(request.TagId);
         }
         catch (Exception e)
         {

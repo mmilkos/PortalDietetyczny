@@ -17,7 +17,7 @@ public class PdRepository : IPDRepository
         _db = db;
     }
     public async Task<T?> FindEntityByConditionAsync<T>(Expression<Func<T, bool>> condition,
-        params Expression<Func<T, object>>[] include) where T : class
+        params Expression<Func<T, object>>[] include) where T : Entity
     {
         var query = _db.Set<T>().Where(condition);
 
@@ -27,7 +27,7 @@ public class PdRepository : IPDRepository
     }
 
     public async Task<List<T>> FindEntitiesByConditionAsync<T>(Expression<Func<T, bool>> condition,
-        params Expression<Func<T, object>>[] include) where T : class
+        params Expression<Func<T, object>>[] include) where T : Entity
     {
         var query = _db.Set<T>().Where(condition);
         foreach (var includeProperty in include) query = query.Include(includeProperty);
@@ -35,41 +35,41 @@ public class PdRepository : IPDRepository
         return await query.ToListAsync();
     }
 
-    public Task<bool> AnyAsync<T>() where T : class
+    public Task<bool> AnyAsync<T>() where T : Entity
     {
         return _db.Set<T>().AnyAsync();
     }
 
-    public async Task AddAsync<T>(T entity) where T : class
+    public async Task AddAsync<T>(T entity) where T : Entity
     {
         _db.Set<T>().Add(entity);
         await _db.SaveChangesAsync();
     }
 
-    public async Task AddRangeAsync<T>(List<T> list) where T : class
+    public async Task AddRangeAsync<T>(List<T> list) where T : Entity
     {
         _db.Set<T>().AddRange(list);
         await _db.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync<T>(T entity) where T : class
+    public async Task UpdateAsync<T>(T entity) where T : Entity
     {
         _db.Set<T>().Update(entity);
         await _db.SaveChangesAsync();
     }
 
-    public async Task<List<T>> GetAllEntitiesAsync<T>(Expression<Func<T, bool>> condition) where T : class
+    public async Task<List<T>> GetAllEntitiesAsync<T>(Expression<Func<T, bool>> condition) where T : Entity
     { 
         return await _db.Set<T>().Where(condition).ToListAsync();
     }
     
-    public async Task DeleteAsync<T>(T entity) where T : class
+    public async Task DeleteAsync<T>(int id) where T : Entity
     {
-        _db.Set<T>().Remove(entity);
+        await _db.Set<T>().Where(e => e.Id == id).ExecuteDeleteAsync();
         await _db.SaveChangesAsync();
     }
 
-    public async Task DeleteRangeAsync<T>(List<T> list) where T : class
+    public async Task DeleteRangeAsync<T>(List<T> list) where T : Entity
     {
         _db.Set<T>().RemoveRange(list);
         await _db.SaveChangesAsync();
@@ -135,5 +135,8 @@ public class PdRepository : IPDRepository
         return list;
     }
 
-   
+    public async Task<int> CountAsync<T>() where T : Entity
+    {
+        return await _db.Set<T>().CountAsync();
+    }
 }

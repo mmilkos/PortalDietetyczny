@@ -9,6 +9,6 @@ public interface IKeyService
     AccessTokenDto GetVaultToken();
     void GetVaultTokenJob();
     Task<CloudinarySettings> GetCloudinarySettingsAsync();
-    
     Task<PortalSettings> GetPortalSettings();
+    Task<AutopaySettings> GetAutopaySettings();
 }

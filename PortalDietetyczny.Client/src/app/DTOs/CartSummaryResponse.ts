@@ -1,6 +1,7 @@
 ﻿export interface CartSummaryResponse
 {
-  products: number[]
+  products: CartProduct[],
+  total: number
 }
 
 export interface CartProduct
@@ -10,7 +11,6 @@ export interface CartProduct
   price: number
   photoUrl: string
 }
-
 
 export interface CartSummaryRequest
 {

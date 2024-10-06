@@ -46,7 +46,7 @@ public class DeleteFileCommandHandler : IRequestHandler<DeleteFileCommand, Opera
         
         try
         { 
-            await _repository.DeleteAsync<StoredFile>(fileInDb);
+            await _repository.DeleteAsync<StoredFile>(fileInDb.Id);
         }
         catch (Exception e)
         {

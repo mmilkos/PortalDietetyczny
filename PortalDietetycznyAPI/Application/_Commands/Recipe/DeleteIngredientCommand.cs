@@ -27,9 +27,7 @@ public class DeleteIngredientCommandHandler : IRequestHandler<DeleteIngredientCo
     public async Task<OperationResult<uint>> Handle(DeleteIngredientCommand request, CancellationToken cancellationToken)
     {
         var operationResult = new OperationResult<uint>();
-
-        var ingredient = await _repository.FindEntityByConditionAsync<Ingredient>(i => i.Id == request.IngredientId);
-
+        
         var recipeWithThisIngredient =
             await _repository.FindEntityByConditionAsync<Recipe>(r =>
                 r.Ingredients.Any(i => i.IngredientId == request.IngredientId));
@@ -42,7 +40,7 @@ public class DeleteIngredientCommandHandler : IRequestHandler<DeleteIngredientCo
 
         try
         {
-            await _repository.DeleteAsync<Ingredient>(ingredient);
+            await _repository.DeleteAsync<Ingredient>(request.IngredientId);
         }
         catch (Exception e)
         {

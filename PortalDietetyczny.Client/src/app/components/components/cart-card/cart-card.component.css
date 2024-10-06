@@ -1,8 +1,5 @@
 .wrapper
 {
   width: 60vw;
-  height: 15vh;
   border-bottom: 1px solid lightgray;
-  padding-bottom: 10px;
-  background-color: gray
 }

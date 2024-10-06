@@ -3,3 +3,11 @@
   grid-template-columns: 1fr;
   gap: 1em;
 }
+.wrapper
+{
+  width: 60vw;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+
