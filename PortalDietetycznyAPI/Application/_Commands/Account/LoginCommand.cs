@@ -1,8 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Entities;
@@ -25,13 +25,15 @@ public class LoginCommand : IRequest<OperationResult<JwtTokenDto>>
 public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult<JwtTokenDto>>
 {
     private readonly IPDRepository _repository;
+    private readonly UserManager<User> _userManager;
     private readonly IKeyService _keyService;
  
 
-    public LoginCommandHandler(IPDRepository repository, IKeyService keyService)
+    public LoginCommandHandler(IPDRepository repository, IKeyService keyService, UserManager<User> userManager)
     {
         _repository = repository;
         _keyService = keyService;
+        _userManager = userManager;
     }
 
     public async Task<OperationResult<JwtTokenDto>> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -41,65 +43,42 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
             Data = new JwtTokenDto()
         };
 
-        var any = await _repository.AnyAsync<User>();
-
-        if (any == false)
-        {
-            using var hmac = new HMACSHA512();
-            
-            var user = new User(
-                userName: request.Dto.Username.ToLower(), 
-                passwordHash: hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Dto.Password)),
-                passwordSalt: hmac.Key);
-            
-          await  _repository.AddAsync(user);
-          return operationResult;
-        }
-
-        var settings = await _keyService.GetPortalSettings();
+        var dto = request.Dto;
         
-        var account = await _repository.FindEntityByConditionAsync<User>(u => u.UserName == request.Dto.Username.ToLower());
-        
-        if (account == null)
+        var anyUsers = await _repository.AnyUserAsync();
+
+        if (anyUsers == false)
         {
-            operationResult.AddError(ErrorsRes.IncorrectCredentials);
-            return operationResult;
+            var user = new User()
+            {
+                UserName = dto.Username.ToLower(),
+            };
+
+            var registerResult = await _userManager.CreateAsync(user, dto.Password);
+            if (registerResult.Succeeded == false)
+            {
+                operationResult.AddError(ErrorsRes.InvalidCredentials);
+                return operationResult;
+            }
         }
+        
+        var userInDb = await _userManager.FindByNameAsync(dto.Username.ToLower());
 
-        var isCorrectPassword = CheckCredentials(account, request.Dto);
-
+        var isCorrectPassword = await _userManager.CheckPasswordAsync(userInDb, dto.Password);
+        
         if (isCorrectPassword == false)
         {
-            var path = @"/Logs.txt";
-            File.WriteAllText(path, "test");
-            operationResult.AddError(ErrorsRes.IncorrectCredentials);
+            operationResult.AddError(ErrorsRes.InvalidCredentials);
             return operationResult;
         }
+        
+        var settings = await _keyService.GetPortalSettings();
 
-        var token = GenerateJwtToken(account, settings);
+        var token = GenerateJwtToken(userInDb, settings);
 
         operationResult.Data = token;
 
         return operationResult;
-    }
-    
-    private bool CheckCredentials(User? user, LoginUserRequestDto loginRequestDto)
-    {
-        var isValid = true;
-        if (user == null) return false;
-        
-        using var hmac = new HMACSHA512(user.PasswordSalt);
-        var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginRequestDto.Password));
-        
-        for (var i = 0; i < computedHash.Length; i++)
-        {
-            if (computedHash[i] != user.PasswordHash[i])
-            {
-                isValid = false;
-            }
-        }
-
-        return isValid;
     }
     
     private JwtTokenDto GenerateJwtToken(User user, PortalSettings settings)
@@ -119,17 +98,17 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
             claims: claims,
             expires: expires,
             signingCredentials: cred);
-
-        var tokenHandler = new JwtSecurityTokenHandler();
         
         var cookieOptions = new CookieOptions() 
         { 
             Expires = expires, 
             HttpOnly = true,
-            Secure = false,
+            Secure = true,
             IsEssential = true,
             SameSite = SameSiteMode.None
         };
+        
+        var tokenHandler = new JwtSecurityTokenHandler();
 
         var result = new JwtTokenDto()
         {

@@ -60,74 +60,11 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AM_TIMEOUT.
+        ///   Looks up a localized string similar to COMPLETED.
         /// </summary>
-        internal static string AM_TIMEOUT {
+        internal static string COMPLETED {
             get {
-                return ResourceManager.GetString("AM_TIMEOUT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ANOTHER_ERROR.
-        /// </summary>
-        internal static string ANOTHER_ERROR {
-            get {
-                return ResourceManager.GetString("ANOTHER_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AUTHORIZED.
-        /// </summary>
-        internal static string AUTHORIZED {
-            get {
-                return ResourceManager.GetString("AUTHORIZED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to BAD_PIN.
-        /// </summary>
-        internal static string BAD_PIN {
-            get {
-                return ResourceManager.GetString("BAD_PIN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CANCELLED.
-        /// </summary>
-        internal static string CANCELLED {
-            get {
-                return ResourceManager.GetString("CANCELLED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CARD_EXPIRED.
-        /// </summary>
-        internal static string CARD_EXPIRED {
-            get {
-                return ResourceManager.GetString("CARD_EXPIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CARD_LIMIT_EXCEEDED.
-        /// </summary>
-        internal static string CARD_LIMIT_EXCEEDED {
-            get {
-                return ResourceManager.GetString("CARD_LIMIT_EXCEEDED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CONNECTION_ERROR.
-        /// </summary>
-        internal static string CONNECTION_ERROR {
-            get {
-                return ResourceManager.GetString("CONNECTION_ERROR", resourceCulture);
+                return ResourceManager.GetString("COMPLETED", resourceCulture);
             }
         }
         
@@ -141,182 +78,20 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DO_NOT_HONOR.
+        ///   Looks up a localized string similar to STARTED.
         /// </summary>
-        internal static string DO_NOT_HONOR {
+        internal static string STARTED {
             get {
-                return ResourceManager.GetString("DO_NOT_HONOR", resourceCulture);
+                return ResourceManager.GetString("STARTED", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EXPIRED.
+        ///   Looks up a localized string similar to WAITING.
         /// </summary>
-        internal static string EXPIRED {
+        internal static string WAITING {
             get {
-                return ResourceManager.GetString("EXPIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to FRAUD_SUSPECT.
-        /// </summary>
-        internal static string FRAUD_SUSPECT {
-            get {
-                return ResourceManager.GetString("FRAUD_SUSPECT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INCORRECT_AMOUNT.
-        /// </summary>
-        internal static string INCORRECT_AMOUNT {
-            get {
-                return ResourceManager.GetString("INCORRECT_AMOUNT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INCORRECT_CARD_NUMBER.
-        /// </summary>
-        internal static string INCORRECT_CARD_NUMBER {
-            get {
-                return ResourceManager.GetString("INCORRECT_CARD_NUMBER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INSUFFICIENT_FUNDS.
-        /// </summary>
-        internal static string INSUFFICIENT_FUNDS {
-            get {
-                return ResourceManager.GetString("INSUFFICIENT_FUNDS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ISSUER_DECLINED.
-        /// </summary>
-        internal static string ISSUER_DECLINED {
-            get {
-                return ResourceManager.GetString("ISSUER_DECLINED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to LIMIT_EXCEEDED.
-        /// </summary>
-        internal static string LIMIT_EXCEEDED {
-            get {
-                return ResourceManager.GetString("LIMIT_EXCEEDED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PENDING.
-        /// </summary>
-        internal static string PENDING {
-            get {
-                return ResourceManager.GetString("PENDING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to REJECTED.
-        /// </summary>
-        internal static string REJECTED {
-            get {
-                return ResourceManager.GetString("REJECTED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to REJECTED_BY_USER.
-        /// </summary>
-        internal static string REJECTED_BY_USER {
-            get {
-                return ResourceManager.GetString("REJECTED_BY_USER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SEC_DECLINED.
-        /// </summary>
-        internal static string SEC_DECLINED {
-            get {
-                return ResourceManager.GetString("SEC_DECLINED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SECURITY_ERROR.
-        /// </summary>
-        internal static string SECURITY_ERROR {
-            get {
-                return ResourceManager.GetString("SECURITY_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to STOP_RECURRING.
-        /// </summary>
-        internal static string STOP_RECURRING {
-            get {
-                return ResourceManager.GetString("STOP_RECURRING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to THREEDS_NEGATIVE.
-        /// </summary>
-        internal static string THREEDS_NEGATIVE {
-            get {
-                return ResourceManager.GetString("THREEDS_NEGATIVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to TIMEOUT.
-        /// </summary>
-        internal static string TIMEOUT {
-            get {
-                return ResourceManager.GetString("TIMEOUT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UNCLASSIFIED.
-        /// </summary>
-        internal static string UNCLASSIFIED {
-            get {
-                return ResourceManager.GetString("UNCLASSIFIED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to USER_DECLINED.
-        /// </summary>
-        internal static string USER_DECLINED {
-            get {
-                return ResourceManager.GetString("USER_DECLINED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to USER_TIMEOUT.
-        /// </summary>
-        internal static string USER_TIMEOUT {
-            get {
-                return ResourceManager.GetString("USER_TIMEOUT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VOID.
-        /// </summary>
-        internal static string VOID {
-            get {
-                return ResourceManager.GetString("VOID", resourceCulture);
+                return ResourceManager.GetString("WAITING", resourceCulture);
             }
         }
     }

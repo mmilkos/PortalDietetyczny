@@ -26,10 +26,10 @@ public class RecipesController : ControllerBase
         var result = await _mediator.Send(new GetRecipeQuery(link));
         if (result.Success) return Ok(result.Data);
         
-        return StatusCode(result.StatusCode, result.ErrorsList);
+        return StatusCode(500, result.ErrorsList);
     }
     
-    /*[Authorize]*/
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> AddRecipe([FromBody] AddRecipeDto dto)
     {
@@ -48,7 +48,7 @@ public class RecipesController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     } 
     
-    /*[Authorize]*/
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteRecipe(int id)
     {
@@ -66,7 +66,7 @@ public class RecipesController : ControllerBase
         return Ok(result);
     }
     
-    /*[Authorize]*/
+    [Authorize]
     [HttpPost("tags")]
     public async Task<ActionResult> AddTag([FromBody] AddTagDto dto)
     {
@@ -86,7 +86,7 @@ public class RecipesController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     }
 
-    /*[Authorize]*/
+    [Authorize]
     [HttpDelete("tags/{id}")]
     public async Task<ActionResult> DeleteTag(int id)
     {
@@ -97,7 +97,7 @@ public class RecipesController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     }
     
-    /*[Authorize]*/
+    [Authorize]
     [HttpPost("ingredients")]
     public async Task<ActionResult> AddIngredient([FromBody] AddIngredientDto dto)
     {
@@ -118,6 +118,7 @@ public class RecipesController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     }
     
+    [Authorize]
     [HttpDelete("ingredients/{id}")]
     public async Task<ActionResult> DeleteIngredient(int id)
     {

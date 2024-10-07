@@ -35,9 +35,17 @@ public class PdRepository : IPDRepository
         return await query.ToListAsync();
     }
 
-    public Task<bool> AnyAsync<T>() where T : Entity
+    public List<T> FindEntitiesByCondition<T>(Expression<Func<T, bool>> condition, params Expression<Func<T, object>>[] include) where T : Entity
     {
-        return _db.Set<T>().AnyAsync();
+        var query = _db.Set<T>().Where(condition);
+        foreach (var includeProperty in include) query = query.Include(includeProperty);
+
+        return query.ToList();
+    }
+
+    public async Task<bool> AnyUserAsync()
+    {
+        return await _db.Users.AnyAsync();
     }
 
     public async Task AddAsync<T>(T entity) where T : Entity
@@ -55,6 +63,16 @@ public class PdRepository : IPDRepository
     public async Task UpdateAsync<T>(T entity) where T : Entity
     {
         _db.Set<T>().Update(entity);
+        await _db.SaveChangesAsync();
+    }
+
+    public async Task UpdateRange<T>(List<T> entities) where T : Entity
+    {
+        foreach (var entitiy in entities)
+        {
+            _db.Update(entitiy);
+        }
+
         await _db.SaveChangesAsync();
     }
 

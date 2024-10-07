@@ -6,11 +6,7 @@ public class OperationResult<T>
 {
     public bool Success { get; private set; } = true;
     public List<string> ErrorsList { get; }
-    
     public T? Data { get; set; }
-
-    public int StatusCode { get; private set; } = 500;
-    
     
     public OperationResult()
     {
@@ -23,7 +19,7 @@ public class OperationResult<T>
         Success = false;
     }
 
-    public void AddErrorRange(List<String> errors)
+    public void AddErrorRange(List<string> errors)
     {
         foreach (var error in errors)
         {
@@ -31,10 +27,5 @@ public class OperationResult<T>
         }
 
         Success = false;
-    }
-
-    public void SetStatusCode(HttpStatusCode code)
-    {
-        StatusCode = (int)code;
     }
 }

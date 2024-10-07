@@ -31,9 +31,11 @@ public class ShopController(IMediator mediator) : ControllerBase
     {
         var status = requestDto.status;
 
-        if (status == OrderStatus.PENDING) return Ok();
+        if (status == OrderStatus.STARTED) _mediator.Send(new ChangeOrderStatusCommand(requestDto.orderId, OrderStatus.STARTED));
+
+        if (status == OrderStatus.WAITING) _mediator.Send(new ChangeOrderStatusCommand(requestDto.orderId, OrderStatus.WAITING));
         
-        if (status == OrderStatus.AUTHORIZED) return Ok();
+        if (status == OrderStatus.COMPLETED) _mediator.Send(new ChangeOrderStatusCommand(requestDto.orderId, OrderStatus.COMPLETED));
 
         return Ok();
     }
@@ -41,8 +43,6 @@ public class ShopController(IMediator mediator) : ControllerBase
     [HttpPost("order")]
     public async Task<ActionResult> StartOrder([FromBody] OrderDto dto)
     {
-        string katalogRoboczy = Environment.CurrentDirectory;
-        
         var startOrderResult = await _mediator.Send(new StartOrderCommand(dto));
         
         var order = startOrderResult.Data;

@@ -157,5 +157,23 @@ namespace PortalDietetycznyAPI.Domain.Resources {
                 return ResourceManager.GetString("PortalSettings_JwtKey", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mail.
+        /// </summary>
+        internal static string PortalSettings_Mail {
+            get {
+                return ResourceManager.GetString("PortalSettings_Mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MailSecret.
+        /// </summary>
+        internal static string PortalSettings_MailSecret {
+            get {
+                return ResourceManager.GetString("PortalSettings_MailSecret", resourceCulture);
+            }
+        }
     }
 }
