@@ -1,0 +1,29 @@
+
+p, h1, h3
+{
+  margin: 30px;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  word-wrap: break-word;
+  line-height: 26px;
+  text-align: justify;
+}
+
+li
+{
+  padding-top: 4px;
+  text-align: justify
+}
+
+ol
+{
+  padding-left: 64px
+}
+@media (max-width: 440px)
+{
+  p, h1, h3
+  {
+    width: 80%;
+  }
+
+}

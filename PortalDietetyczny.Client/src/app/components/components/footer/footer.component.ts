@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { RoutesEnum } from '../../../enums/RoutesEnum';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +9,14 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent
 {
-
+  public routes  = RoutesEnum;
+  constructor(private router: Router) {
+  }
+  navigateTo(url : string)
+  {
+    console.log(url)
+    this.router.navigate([url])
+  }
   openLinkedin() {
     window.open('https://www.linkedin.com/in/mateusz-milkowski2002/', '_blank');
   }

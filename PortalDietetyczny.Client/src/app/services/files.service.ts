@@ -15,7 +15,7 @@ export class FilesService
 
   addFile(file: AddFileDto): Observable<any>
   {
-    return this.http.post<any>(this.apiUrl, file);
+    return this.http.post<any>(this.apiUrl, file, {withCredentials: true});
   }
 
   getAllFiles(): Observable<NamesListDto>
@@ -25,7 +25,7 @@ export class FilesService
 
   deleteFile(id: number): Observable<any>
   {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, {withCredentials: true});
   }
 
   getDownloadableFile(id: number) : Observable<HttpResponse<Blob>> {
@@ -36,5 +36,4 @@ export class FilesService
         responseType: 'blob'
       });
   }
-
 }

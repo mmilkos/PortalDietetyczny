@@ -10,5 +10,6 @@
   downloads = "do-pobrania",
   adminPanel = "admin",
   login = "login",
-  shopping_cart = "koszyk"
+  shopping_cart = "koszyk",
+  terms_of_service = "regulamin"
 }

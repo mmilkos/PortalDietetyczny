@@ -18,7 +18,7 @@ export class DietsService {
 
   addDiet(dto: AddDietDto): Observable<any>
   {
-    return this.http.post(this.apiUrl, dto);
+    return this.http.post(this.apiUrl, dto, {withCredentials: true});
   }
 
   getTags(): Observable<NamesListDto>
@@ -34,16 +34,16 @@ export class DietsService {
   addTag(tag: AddTagDto): Observable<any>
   {
     console.log(tag)
-    return this.http.post<any>(this.apiUrl + '/tags', tag);
+    return this.http.post<any>(this.apiUrl + '/tags', tag, {withCredentials: true});
   }
   deleteTag(id: number): Observable<any>
   {
-    return this.http.delete(this.apiUrl + `/tags/${id}`)
+    return this.http.delete(this.apiUrl + `/tags/${id}`, {withCredentials: true})
   }
 
   deleteDiet(id: number): Observable<any>
   {
-    return this.http.delete(this.apiUrl + `/${id}`)
+    return this.http.delete(this.apiUrl + `/${id}`, {withCredentials: true})
   }
 
   getDietsPaged(params: DietsPreviewPageRequest): Observable<PagedResult<DietPreviewDto>>

@@ -60,6 +60,8 @@ import { DietCardComponent } from './components/components/diet-card/diet-card.c
 import { CartComponent } from './components/pages/cart/cart.component';
 import { ShopGridComponent } from './components/grids/shop-grid/shop-grid.component';
 import { CartCardComponent } from './components/components/cart-card/cart-card.component';
+import { TermsOfServiceComponent } from './components/pages/terms-of-service/terms-of-service.component';
+import { TermsOfServiceIntroComponent } from './components/components/terms-of-service-intro/terms-of-service-intro.component';
 
 
 @NgModule({
@@ -110,7 +112,9 @@ import { CartCardComponent } from './components/components/cart-card/cart-card.c
     DietCardComponent,
     CartComponent,
     ShopGridComponent,
-    CartCardComponent
+    CartCardComponent,
+    TermsOfServiceComponent,
+    TermsOfServiceIntroComponent
   ],
   imports: [
     BrowserModule,

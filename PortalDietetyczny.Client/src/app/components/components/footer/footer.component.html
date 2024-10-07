@@ -1,14 +1,24 @@
-<div class="container-fluid bg-light text-dark text-center mt-4 py-3">
-  <div class="row p-2 align-items-center">
-    <div class="col-md-6 text-md-left text-center">
-      <p class="mb-0">2024 &copy; PortalDietetyczny.pl. Wszelkie prawa zastrzeżone.</p>
+<div class="container-fluid wrapper mt-1 px-5">
+  <div class="w-100 box">
+    <div class="row">
+      <div class="col">
+        <p>2024 &copy; PortalDietetyczny.pl. Wszelkie prawa zastrzeżone.</p>
+      </div>
     </div>
 
-    <div class="col-md-6 text-md-right text-center" (click)="openLinkedin()" style="cursor: pointer">
-      <p class="mb-0 d-flex align-items-center justify-content-center">
-        Projekt i wykonanie - Mateusz Miłkowski
-        <i class="fa-brands fa-linkedin ml-2" style="padding-left: 2px"></i>
-      </p>
+    <div class="row">
+      <div class="col ">
+        <p class="pointer" (click)="navigateTo(routes.terms_of_service)">Regulamin</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 text-md-right text-center pointer" (click)="openLinkedin()">
+        <p class="mb-0 d-flex align-items-center  text-start">
+          Projekt i wykonanie - Mateusz Miłkowski
+          <i class="fa-brands fa-linkedin ml-2" style="padding-left: 2px"></i>
+        </p>
+      </div>
     </div>
   </div>
 </div>

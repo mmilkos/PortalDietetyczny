@@ -18,8 +18,9 @@ export class AdminPanelComponent implements OnInit
 
   ngOnInit(): void
   {
-   /* this.accountService.isLogedIn().pipe(
+    this.accountService.isLogedIn().pipe(
       catchError(error => {
+        console.log(error)
         if (error.status === 401) {
 
 
@@ -27,8 +28,6 @@ export class AdminPanelComponent implements OnInit
         }
         return of(error);
       })
-    ).subscribe();*/
+    ).subscribe();
   }
-
-
 }

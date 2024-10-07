@@ -21,7 +21,7 @@ export class RecipesService
 
   addRecipe(recipe: AddRecipeDto): Observable<any>
   {
-    return this.http.post<any>(this.apiUrl, recipe);
+    return this.http.post<any>(this.apiUrl, recipe, {withCredentials: true});
   }
 
   getRecipesPaged(params: RecipesPreviewPageRequest) : Observable<PagedResult<RecipePreviewDto>>
@@ -41,7 +41,7 @@ export class RecipesService
 
   deleteRecipe(id: number): Observable<any>
   {
-    return this.http.delete(this.apiUrl + `/${id}`)
+    return this.http.delete(this.apiUrl + `/${id}`, {withCredentials: true})
   }
 
   getIngredients() : Observable<NamesListDto>
@@ -52,17 +52,17 @@ export class RecipesService
   addIngredient(recipe: AddIngredientDto): Observable<any>
   {
     console.log(recipe)
-    return this.http.post<any>(this.apiUrl + '/ingredients', recipe);
+    return this.http.post<any>(this.apiUrl + '/ingredients', recipe, {withCredentials: true});
   }
 
   deleteIngredient(id: number): Observable<any>
   {
-    return this.http.delete(this.apiUrl + `/ingredients/${id}`)
+    return this.http.delete(this.apiUrl + `/ingredients/${id}`, {withCredentials: true})
   }
 
   addTag(tag: AddTagDto): Observable<any>
   {
-    return this.http.post<any>(this.apiUrl + '/tags', tag);
+    return this.http.post<any>(this.apiUrl + '/tags', tag, {withCredentials: true});
   }
 
   getTags(): Observable<NamesListDto>
@@ -72,7 +72,7 @@ export class RecipesService
 
   deleteTag(id: number): Observable<any>
   {
-    return this.http.delete(this.apiUrl + `/tags/${id}`)
+    return this.http.delete(this.apiUrl + `/tags/${id}`, {withCredentials: true})
   }
 
 }

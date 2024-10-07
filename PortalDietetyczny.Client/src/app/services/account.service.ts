@@ -20,7 +20,6 @@ export class AccountService
 
   isLogedIn(): Observable<any>
   {
-
     return this.http.post(this.apiUrl,null , { withCredentials: true })
   }
 

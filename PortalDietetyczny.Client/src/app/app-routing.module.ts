@@ -14,6 +14,7 @@ import { DownloadsComponent } from './components/pages/downloads/downloads.compo
 import { LoginComponent } from './components/pages/login/login.component';
 import { DietsComponent } from './components/pages/diets/diets.component';
 import { CartComponent } from './components/pages/cart/cart.component';
+import { TermsOfServiceComponent } from './components/pages/terms-of-service/terms-of-service.component';
 
 
 
@@ -32,6 +33,7 @@ const routes: Routes =
     {path: RoutesEnum.downloads, component: DownloadsComponent},
     {path: RoutesEnum.login, component: LoginComponent},
     {path: RoutesEnum.shopping_cart, component: CartComponent},
+    {path: RoutesEnum.terms_of_service, component: TermsOfServiceComponent},
     {path: "**", component: StartComponent}
   ];
 
