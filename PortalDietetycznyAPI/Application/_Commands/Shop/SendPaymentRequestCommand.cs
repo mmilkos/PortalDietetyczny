@@ -52,7 +52,7 @@ public class SendPaymentRequestCommandHandler : IRequestHandler<SendPaymentReque
             Hash = GenerateHash(order: order, settings: autopaySettings, validityTime: validityTime)
         };
 
-        var postResult = await _apiUrl.PostJsonAsync(paymentRequest);
+        //var postResult = await _apiUrl.PostJsonAsync(paymentRequest);
 
         return operationResult;
     }

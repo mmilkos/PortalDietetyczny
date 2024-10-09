@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortalDietetycznyAPI.Application._Commands;
 using PortalDietetycznyAPI.Application._Queries;
@@ -20,6 +21,7 @@ public class DietController : ControllerBase
         _mediator = mediator;
     }
     
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> AddDiet([FromBody] AddDietDto dto)
     {
@@ -40,7 +42,7 @@ public class DietController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     }
     
-    /*[Authorize]*/
+    [Authorize]
     [HttpPost("tags")]
     public async Task<ActionResult<NamesListDto>> AddTags([FromBody] AddTagDto dto)
     {
@@ -50,7 +52,7 @@ public class DietController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     }
     
-    /*[Authorize]*/
+    [Authorize]
     [HttpDelete("tags/{id}")]
     public async Task<ActionResult> DeleteTag(int id)
     {
@@ -61,6 +63,7 @@ public class DietController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     }
     
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteDiet(int id)
     {

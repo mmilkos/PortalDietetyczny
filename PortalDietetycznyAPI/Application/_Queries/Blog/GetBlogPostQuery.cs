@@ -42,7 +42,6 @@ public class GetBlogPostQueryHandler : IRequestHandler<GetBlogPostQuery, Operati
         
         if (blogPost == null || blogPost.Url != request.Url)
         {
-            result.SetStatusCode(HttpStatusCode.NotFound);
             result.AddError(ErrorsRes.BlogPostNotFound);
             return result;
         }

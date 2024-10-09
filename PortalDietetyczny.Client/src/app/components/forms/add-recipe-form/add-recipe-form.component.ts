@@ -55,7 +55,6 @@ export class AddRecipeFormComponent
     this.tagsForm = this.fb.group(
       {
         tagName: ['', Validators.required]
-
       })
 
     this.recipeForm = this.fb.group({
@@ -128,7 +127,6 @@ export class AddRecipeFormComponent
     this.recipesService.getTags().subscribe(
       dto  =>
       {
-
         this.tagsNames = dto.names;
       },
       error => console.log(error)

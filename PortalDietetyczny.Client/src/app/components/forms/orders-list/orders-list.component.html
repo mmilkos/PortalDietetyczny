@@ -1,0 +1,78 @@
+<div class="d-flex flex-row mt-5">
+  <div class="card mx-auto" style="width: 80%; ">
+
+    <div class="card-header text-center" style="background-color: #007bff;">
+      <h3 class="mb-0">Lista zamówień</h3>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col text-end">
+          <button class="btn btn-primary mt-1 mb-1 w-25 align-self-end"(click)="getInvoice()" >Pobierz fakturę</button>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Nr zamówienia</th>
+        <th scope="col">Kwota</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Status</th>
+        <th scope="col">Diety</th>
+        <th scope="col">Faktura</th>
+        <th scope="col">Zaznacz</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.orderId }}</td>
+        <td>{{ order.amount / 100 }} zł</td>
+        <td>{{ order.customerEmail }}</td>
+        <td>{{ order.orderStatus }}</td>
+        <td>{{ order.dietsNames }}</td>
+        <td>{{ order.hasInvoice }}</td>
+        <td>
+
+          <div class="form-check mb-3 mt-2">
+            <input type="radio"
+                   [value]="order.invoiceId"
+                   name="invoice"
+                   (change)="onInvoiceChange(order.invoiceId)"
+                   class="form-check-input">
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex">
+      <button type="button" class="btn btn-secondary" (click)="previousPage()"> < </button>
+      <p style="padding-top: 15px">{{currentPage}}</p>
+      <button type="button" class="btn btn-secondary" (click)="nextPage()"> > </button>
+    </div>
+  </div>
+
+  <div class="card mx-auto" style="width: 40%; ">
+    <div class="form-group mt-2">
+
+      <form [formGroup]="range" class="form-inline">
+        <div class="form-group">
+          <input type="date" class="form-control" formControlName="start" placeholder="Od">
+        </div>
+
+        <div class="form-group">
+          <input type="date"
+                 class="form-control"
+                 formControlName="end"
+                 placeholder="Do">
+
+        </div>
+      </form>
+
+      <button (click)="submit()" class="btn btn-warning w-100 mt-1">Szukaj</button>
+      <button (click)="clear()" class="btn btn-secondary w-100 mt-1">Wyczyść wyszukiwanie</button>
+    </div>
+  </div>
+</div>

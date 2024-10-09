@@ -1,0 +1,110 @@
+﻿<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faktura</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .container {
+            width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .header div {
+            text-align: right;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .details {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .seller, .buyer {
+            width: 50%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .summary {
+            text-align: right;
+            font-weight: bold;
+        }
+        .payment {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div>
+            <p>Data wystawienia: <b>[IssueDate]</b></p>
+            <p>Data sprzedaży: <b>[SaleDate]</b></p>
+            <p>Miejsce wystawienia: <b>Warszawa</b></p>
+        </div>
+    </div>
+    <div class="title">
+        <h1>FAKTURA</h1>
+        <p>Numer: <b>[InvoiceId]</b></p>
+    </div>
+    <div class="details">
+        <div class="seller">
+            <h2>Sprzedawca</h2>
+            <p><b>[Seller.Name] [Seller.LastName]</b></p>
+            <p>[Seller.Street]</p>
+            <p>[Seller.City]</p>
+            <p>NIP: <b>[Seller.Nip]</b></p>
+        </div>
+        <div class="buyer">
+            <h2>Nabywca</h2>
+            <p><b>[Buyer.Name] [Buyer.LastName]</b></p>
+            <p>[Buyer.Street]</p>
+            <p>[Buyer.City]</p>
+            <p>NIP: <b>[Buyer.Nip]</b></p>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>LP</th>
+            <th>Nazwa towaru</th>
+            <th>Cena netto</th>
+            <th>VAT %</th>
+            <th>Wartość VAT</th>
+            <th>Wartość brutto</th>
+        </tr>
+        </thead>
+        <tbody>
+            [Table]
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5" class="summary">Suma wartości brutto:</td>
+            <td>[Amount]</td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <div class="payment">
+        <p>Do zapłaty: <b>[Amount]</b></p>
+        <p>Termin płatności: <b>[SaleDate]</b></p>
+        <p>Uwagi: [Comments]</p>
+    </div>
+</div>
+</body>
+</html>

@@ -34,13 +34,12 @@ public class GetRecipeQueryHandler : IRequestHandler<GetRecipeQuery, OperationRe
 
         var uid = int.Parse(request.Url.Split('-').Last(), System.Globalization.NumberStyles.HexNumber);
         
-        var recipe = await _repository.GetRecipe(uid);
+        var recipe = await _repository.GetRecipeAsync(uid);
 
         if (recipe == null || recipe.Url != request.Url)
         {
             
             operationResult.AddError(ErrorsRes.RecipeNotFound);
-            operationResult.SetStatusCode(HttpStatusCode.NotFound);
             return operationResult;
         }
 

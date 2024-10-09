@@ -10,10 +10,10 @@ namespace PortalDietetycznyAPI.Controllers;
 
 [Controller]
 [Route("api/account")]
-public class AccountController(IMediator mediator, IKeyService keyService) : ControllerBase
+public class AccountController(IMediator mediator) : ControllerBase
 {
     private IMediator _mediator = mediator;
-    private IKeyService _keyService = keyService;
+
 
     [HttpPost("login")]
     public async Task<ActionResult> Login([FromBody] LoginUserRequestDto dto)
@@ -27,19 +27,23 @@ public class AccountController(IMediator mediator, IKeyService keyService) : Con
             return Ok();
         }
 
-        return StatusCode(500);
+        return Unauthorized();
     }
     
     [HttpPost("logout")]
     public ActionResult Logout()
     {
-       Response.Cookies.Delete("JwtToken");
+        var cookieOptions = new CookieOptions() 
+        { 
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.None
+        };
+       Response.Cookies.Delete("token", cookieOptions);
        return Ok();
     }
 
-    /*
     [Authorize]
-    */
     [HttpPost()]
     public ActionResult Authorize()
     {

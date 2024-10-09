@@ -32,10 +32,6 @@ public class DeleteFileCommandHandler : IRequestHandler<DeleteFileCommand, Opera
     {
         var operationResult = new OperationResult<Unit>();
         
-        var token = await _keyService.GetDropBoxToken();
-        
-        var dbx = new DropboxClient(token.Access_token);
-
         var fileInDb = await _repository.FindEntityByConditionAsync<StoredFile>(file => file.Id == request.Id);
 
         if (fileInDb == null)

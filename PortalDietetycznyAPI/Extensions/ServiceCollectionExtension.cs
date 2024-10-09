@@ -9,6 +9,7 @@ using PortalDietetycznyAPI.Infrastructure.Context;
 using PortalDietetycznyAPI.Infrastructure.Repositories;
 using PortalDietetycznyAPI.Application.Services;
 using PortalDietetycznyAPI.Domain.Common;
+using PortalDietetycznyAPI.Domain.Entities;
 using PortalDietetycznyAPI.Infrastructure.Seeders;
 
 namespace PortalDietetycznyAPI.Extensions;
@@ -26,10 +27,12 @@ public static class ServiceCollectionExtension
 
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
+        Microsoft.Playwright.Program.Main(["install"]);
         const string bearer = "Bearer";
         var connectionString = configuration.GetConnectionString("Database");
         
         services.AddSingleton<IKeyService,KeyService>();
+        services.AddScoped<IEmailService,EmailService>();
 
         services.Configure<HashicorpSettings>(configuration.GetSection("hashicorpSettings"));
 
@@ -43,6 +46,9 @@ public static class ServiceCollectionExtension
         });
         
         services.AddHangfireServer();
+        
+        services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = false)
+            .AddEntityFrameworkStores<Db>(); 
 
         services.AddAuthentication(oprion =>
         {

@@ -1,3 +1,4 @@
+using Flurl.Http;
 using Hangfire;
 using MediatR;
 using PortalDietetycznyAPI.Extensions;
@@ -15,12 +16,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-/*
-var scope = app.Services.CreateScope();
-var seeder = scope.ServiceProvider.GetRequiredService<AccountSeeder>();
-await seeder.SeedAsync();
-*/
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -46,6 +41,6 @@ app.MapControllers();
 
 app.UseHangfireDashboard();
 
-
-
 app.Run();
+
+"https://localhost:44317/api/account/login".GetAsync();

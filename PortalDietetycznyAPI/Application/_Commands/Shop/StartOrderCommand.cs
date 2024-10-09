@@ -31,56 +31,56 @@ public class StartOrderCommandHandler : IRequestHandler<StartOrderCommand, Opera
 
         var dto = request.Dto;
         
-        var products = await _repository.FindEntitiesByConditionAsync<Diet>(p => dto.ProductsIds.Contains(p.Id));
-        var id = await _repository.CountAsync<Order>();
+        var products = await _repository
+            .FindEntitiesByConditionAsync<Diet>(d => dto.ProductsIds.Contains(d.Id), include: d => d.File);
         var date = DateTime.Now;
         var amount = products.Select(p => p.Price).Sum();
 
-        Invoice? invoice = null;
-
         var hasInvoice = dto.InvoiceDto != null;
         
-        if (hasInvoice)
+        var invoice = new Invoice()
         {
-            invoice = new Invoice()
+            IssueDate = date,
+            SaleDate = date,
+            Buyer = new InvoiceParty()
             {
-                IssueDate = date,
-                SaleDate = date,
-                Buyer = new InvoiceParty()
-                {
-                    Name = dto.InvoiceDto.Name,
-                    LastName = dto.InvoiceDto.LastName,
-                    Street = dto.InvoiceDto.Street,
-                    City = dto.InvoiceDto.City
-                },
-                Seller = new InvoiceParty()
-                {
-                    Name = "Agnieszka",
-                    LastName = "Miłkowska",
-                    Street = "Dziewanny 17a",
-                    City = "05-077 WARSZAWA - WESOŁA"
-                },
-                Diets = products,
-                Amount = amount
-            };
-        }
+                Name = dto.InvoiceDto?.Name ?? "",
+                LastName = dto.InvoiceDto?.LastName ?? "",
+                Street = dto.InvoiceDto?.Street ?? "",
+                City = dto.InvoiceDto?.City ?? ""
+            },
+            Seller = new InvoiceParty()
+            {
+                Name = "Agnieszka",
+                LastName = "Miłkowska",
+                Street = "Dziewanny 17a",
+                City = "05-077 WARSZAWA - WESOŁA"
+            },
+            Diets = products,
+            Amount = amount
+        };
 
         var order = new Order()
         {
-            OrderId = $"{id}-{date.ToString("dd-MM-yyyy").Replace("-", "")}",
-            Amount = products.Select(p => p.Price).Sum(),
+            OrderId = "",
+            Amount = amount,
             CustomerEmail = dto.CustomerEmail,
             OrderStatus = OrderStatus.CREATED,
-            OrderedDiets = products,
+            StoredFiles = products.Select(d => d.File).ToList(),
             DietsNames = string.Join(";",products.Select(p =>p.Name)),
             HasInvoice = hasInvoice,
-            InvoiceId = invoice?.Id,
+            InvoiceId = invoice.Id,
             Invoice = invoice,
         };
 
         try
         {
             await _repository.AddAsync(order);
+            order.OrderId = $"{order.Id + 100}-{date.ToString("dd-MM-yyyy").Replace("-", "")}";
+            invoice.InvoiceId = order.OrderId;
+            
+            await _repository.UpdateAsync(order);
+            await _repository.UpdateAsync(invoice);
         }
         catch (Exception e)
         {

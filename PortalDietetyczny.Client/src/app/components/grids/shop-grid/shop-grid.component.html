@@ -7,12 +7,34 @@
    <h2 *ngIf="!products?.length">Twój koszyk jest pusty</h2>
   <form [formGroup]="orderForm" class="d-flex flex-row container h-100 w-20" style="width: 60vw" *ngIf="summary">
     <div class="form-floating mb-3 w-100">
-      <input type="email" id="email" name="email" class="form-control w-25" placeholder="Adres e-mail" >
+      <input type="email" formControlName="email"  id="email" name="email" class="form-control w-25" placeholder="Adres e-mail" >
       <label for="email">Adres e-mail</label>
+      <div class="form-check mb-3 mt-2">
+        <input type="checkbox" id="consent" formControlName="consent" class="form-check-input">
+        <label for="consent" class="form-check-label">Zapoznałem/am się z <a style="color: blue; text-decoration: underline; cursor: pointer" (click)="navigateTo(routes.terms_of_service)">regulaminem</a> </label>
+      </div>
       <br>
-      <button [ngClass]="{'btn-success': invoice, 'btn-secondary' : !invoice}" class="btn" (click)="toggleInvoice()">Chcę fakturę</button>
-      <ng-container *ngIf="invoice">
-      <p>DAJ FAKTURE</p>
+      <button [ngClass]="{'btn-success': invoice, 'btn-secondary' : !invoice}" class="btn" (click)="toggleInvoice()">Faktura</button>
+      <ng-container *ngIf="invoice" class="mt-2">
+          <div class="form-floating mb-3 mt-2">
+            <input type="text" id="name" formControlName="name" class="form-control w-25" placeholder="Imię">
+            <label for="name">Imie</label>
+          </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" id="lastName" formControlName="lastName" class="form-control w-25" placeholder="Nazwisko">
+          <label for="lastName">Nazwisko</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" id="street" formControlName="street" class="form-control w-25" placeholder="Ulica">
+          <label for="street">Ulica</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="text" id="city" formControlName="city" class="form-control w-25" placeholder="Miasto">
+          <label for="city">Miasto</label>
+        </div>
       </ng-container>
     </div>
   </form>
@@ -47,12 +69,12 @@
           <p> Razem: {{total}} zł</p>
         </div>
         <div class="col d-flex align-items-center">
-          <button *ngIf="summary" [disabled]="!products?.length" class="btn btn-outline-secondary h-100" (click)="toggleSummary()">Wróć do koszyka </button>
+          <button *ngIf="summary" [disabled]="!products?.length" class="btn btn-outline-secondary h-100" (click)="toggleSummary()">Wróć </button>
 
           <button *ngIf="!summary" [disabled]="!products?.length" class="btn btn-outline-success h-100" (click)="toggleSummary()">Podsumowanie </button>
         </div>
         <div class="col d-flex align-items-center">
-          <button *ngIf="summary" [disabled]="!products?.length" class="btn btn-outline-success h-100" (click)="toggleSummary()">Płatność </button>
+          <button *ngIf="summary" [disabled]="!orderForm.valid" class="btn btn-outline-success h-100" (click)="submit()">Płatność </button>
         </div>
       </div>
     </div>

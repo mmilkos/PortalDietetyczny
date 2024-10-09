@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginUserRequestDto } from '../../../DTOs/LoginUserRequestDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { LoginUserRequestDto } from '../../../DTOs/LoginUserRequestDto';
 })
 export class LoginComponent
 {
-  constructor(private accountService: AccountService)
+  constructor(private accountService: AccountService, private router : Router)
   {
 
   }
@@ -29,7 +30,7 @@ export class LoginComponent
       }
 
       this.accountService.login(dto).subscribe(
-        ()=> console.log("Logged in"),
+        ()=> this.router.navigate(["/admin"]),
         (error)=> console.log(error.error)
       )
 

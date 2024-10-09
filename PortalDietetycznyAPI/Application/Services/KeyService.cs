@@ -44,7 +44,7 @@ public class KeyService : IKeyService
 
     public async Task<AccessTokenDto> GetDropBoxToken()
     {
-        OperationResult<AccessTokenDto> result;
+        var result = new OperationResult<AccessTokenDto>();
 
         if (_dropboxToken == null)
         {

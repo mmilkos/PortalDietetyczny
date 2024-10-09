@@ -72,7 +72,6 @@ export class AddBlogFormComponent implements OnInit
       (response) =>
       {
         this.postNames = response.names
-        console.log(this.postNames)
       },
       (error) => { console.log(error.error) }
     )
@@ -80,10 +79,9 @@ export class AddBlogFormComponent implements OnInit
 
   deletePost()
   {
-    console.log(this.selectedPostToDelete)
     this.blogService.deleteBlogPost(this.selectedPostToDelete).subscribe(
       () => {},
-      (error) => { console.log(error.error) }
+      (error) =>  console.log(error.error)
     );
   }
 }

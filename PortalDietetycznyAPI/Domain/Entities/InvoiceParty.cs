@@ -6,4 +6,5 @@ public class InvoiceParty
     public string LastName { get; set; }
     public string Street { get; set; }
     public string City { get; set; }
+    public int Nip { get; set; }
 }

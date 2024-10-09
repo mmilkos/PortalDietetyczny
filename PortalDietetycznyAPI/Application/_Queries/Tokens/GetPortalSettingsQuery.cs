@@ -44,13 +44,23 @@ public class GetPortalSettingsQueryHandler : IRequestHandler<GetPortalSettingsQu
         
         var jwtExpireHours = int.Parse(secrets.Secrets
             .FirstOrDefault(secret => secret.Name == SecretsNamesRes.PortalSettings_JwtExpireHours)
-            ?.Version.Value) ;
+            ?.Version.Value);
+        
+        var mail = secrets.Secrets
+            .FirstOrDefault(secret => secret.Name == SecretsNamesRes.PortalSettings_Mail)
+            ?.Version.Value;
+        
+        var mailSecret = secrets.Secrets
+            .FirstOrDefault(secret => secret.Name == SecretsNamesRes.PortalSettings_MailSecret)
+            ?.Version.Value;
 
         var settings = new PortalSettings()
         {
             JwtKey = jwtKey,
             JwtExpireHours = jwtExpireHours,
-            JwtIssuer = jwtIssuer
+            JwtIssuer = jwtIssuer,
+            MailSecret = mailSecret,
+            Mail = mail
         };
 
         operationResult.Data = settings;

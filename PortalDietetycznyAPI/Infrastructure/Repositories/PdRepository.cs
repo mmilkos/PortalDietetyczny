@@ -54,12 +54,6 @@ public class PdRepository : IPDRepository
         await _db.SaveChangesAsync();
     }
 
-    public async Task AddRangeAsync<T>(List<T> list) where T : Entity
-    {
-        _db.Set<T>().AddRange(list);
-        await _db.SaveChangesAsync();
-    }
-
     public async Task UpdateAsync<T>(T entity) where T : Entity
     {
         _db.Set<T>().Update(entity);
@@ -87,12 +81,6 @@ public class PdRepository : IPDRepository
         await _db.SaveChangesAsync();
     }
 
-    public async Task DeleteRangeAsync<T>(List<T> list) where T : Entity
-    {
-        _db.Set<T>().RemoveRange(list);
-        await _db.SaveChangesAsync();
-    }
-
     public async Task<IPagedList<Recipe>> GetRecipesPagedAsync(RecipesPreviewPageRequest dto)
     {
         var wantedTags = dto.TagsIds;
@@ -114,7 +102,7 @@ public class PdRepository : IPDRepository
         return list;
     }
 
-    public async Task<Recipe?> GetRecipe(int uid)
+    public async Task<Recipe?> GetRecipeAsync(int uid)
     {
         var recipe = await _db.Recipe.Where(r => r.Uid == uid)
             .Include(r => r.RecipeTags)
@@ -153,8 +141,20 @@ public class PdRepository : IPDRepository
         return list;
     }
 
-    public async Task<int> CountAsync<T>() where T : Entity
+    public async Task<IPagedList<Order>> GetOrdersPagedAsync(OrdersSummaryRequestDto dto)
     {
-        return await _db.Set<T>().CountAsync();
+        var query = _db.Orders.AsQueryable();
+
+        if (dto.DateFrom != null)
+            query = query.Where(o => o.Invoice.IssueDate >= DateTime.Parse(dto.DateFrom) );
+
+        if (dto.DateTo != null)
+            query = query.Where(o => o.Invoice.IssueDate <= DateTime.Parse(dto.DateTo).AddDays(1));
+
+        query = query.OrderByDescending(o => o.Id);
+        
+        var list = await query.ToPagedListAsync(dto.PageNumber, dto.PageSize);
+
+        return list;
     }
 }

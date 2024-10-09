@@ -30,7 +30,7 @@ export class AddFileFormComponent implements
   {
     this.fileService.getAllFiles().subscribe(
       (response)=> this.filesNames = response.names,
-      (error)=> { console.log(error.error)}
+      (error)=> console.log(error.error)
     )
   }
   onFileSelected(event: Event): void {
@@ -63,7 +63,7 @@ export class AddFileFormComponent implements
 
     this.fileService.addFile(dto).subscribe(
       ()=> {},
-      (error)=> { console.log(error.error)}
+      (error)=> console.log(error.error)
     )
   }
 

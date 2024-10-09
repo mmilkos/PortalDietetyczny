@@ -78,6 +78,15 @@ namespace PortalDietetycznyAPI.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DELIVERED.
+        /// </summary>
+        internal static string DELIVERED {
+            get {
+                return ResourceManager.GetString("DELIVERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to STARTED.
         /// </summary>
         internal static string STARTED {

@@ -123,9 +123,7 @@ export class AddDietFormComponent implements OnInit{
     this.dietService.getDiets().subscribe(
       dto  =>
       {
-
         this.dietsNames = dto.names;
-        console.log(this.dietsNames)
       },
       error => console.log(error)
     )

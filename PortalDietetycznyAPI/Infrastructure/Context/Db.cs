@@ -108,7 +108,7 @@ public class Db : DbContext
             .IsUnique();
 
         modelBuilder.Entity<Order>()
-            .HasMany(o => o.OrderedDiets)
+            .HasMany(o => o.StoredFiles)
             .WithOne()
             .OnDelete(DeleteBehavior.NoAction);
 

@@ -19,12 +19,11 @@ public class PostConfigureService : IPostConfigureOptions<JwtBearerOptions>
     public void PostConfigure(string? name, JwtBearerOptions options)
     {
         _keyService.GetVaultTokenJob();
+        var portalSettings =  _keyService.GetPortalSettings().Result;
+        
         RecurringJob.AddOrUpdate(()=> _keyService.GetVaultTokenJob(), Cron.Hourly);
 
         var cloudinarySettings = _keyService.GetCloudinarySettingsAsync().Result;
-
-        var portalSettings =  _keyService.GetPortalSettings().Result;
-        
         
         options.RequireHttpsMetadata = false;
         options.SaveToken = true;

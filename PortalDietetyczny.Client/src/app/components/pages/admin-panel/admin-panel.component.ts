@@ -30,4 +30,11 @@ export class AdminPanelComponent implements OnInit
       })
     ).subscribe();
   }
+
+  logout()
+  {
+    this.accountService.logout().subscribe(() => {
+      this.router.navigate([this.login]);
+    });
+  }
 }

@@ -1,5 +1,16 @@
 <div>
   <div class="" style="padding: 5vh; background-color: #f5f3ee">
+    <div class="w-100 container">
+      <div class="row">
+        <div class="col-10"></div>
+        <div class="col" (click)="logout()">
+          <li class="d-flex"><button  type="button" class="btn btn-outline-dark me-2"><i class="fa-solid fa-power-off"></i></button></li>
+        </div>
+      </div>
+    </div>
+    <app-orders-list></app-orders-list>
+    <br>
+    <br>
     <app-add-diet-form></app-add-diet-form>
     <br>
     <br>

@@ -62,6 +62,8 @@ import { ShopGridComponent } from './components/grids/shop-grid/shop-grid.compon
 import { CartCardComponent } from './components/components/cart-card/cart-card.component';
 import { TermsOfServiceComponent } from './components/pages/terms-of-service/terms-of-service.component';
 import { TermsOfServiceIntroComponent } from './components/components/terms-of-service-intro/terms-of-service-intro.component';
+import { OrdersListComponent } from './components/forms/orders-list/orders-list.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -114,7 +116,8 @@ import { TermsOfServiceIntroComponent } from './components/components/terms-of-s
     ShopGridComponent,
     CartCardComponent,
     TermsOfServiceComponent,
-    TermsOfServiceIntroComponent
+    TermsOfServiceIntroComponent,
+    OrdersListComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,7 +133,8 @@ import { TermsOfServiceIntroComponent } from './components/components/terms-of-s
     MatIconModule,
     MatInputModule,
     FileUploadModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     provideAnimationsAsync()

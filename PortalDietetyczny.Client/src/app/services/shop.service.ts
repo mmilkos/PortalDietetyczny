@@ -1,7 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {CartSummaryRequest, CartSummaryResponse} from '../DTOs/CartSummaryResponse';
+import { OrderDto } from '../DTOs/OrderDto';
+import { OrderSummaryDto } from '../DTOs/OrderSummaryDto';
+import { PagedResult } from '../models/PagedResult';
+import { OrdersSummaryRequestDto } from '../DTOs/OrdersSummaryRequestDto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +23,11 @@ export class ShopService {
   getCartSummary(ids: CartSummaryRequest): Observable<CartSummaryResponse>
   {
     return this.http.post<CartSummaryResponse>(this.apiUrl, ids)
+  }
+
+  sendOrder(order: OrderDto) : Observable<any>
+  {
+    return this.http.post(this.apiUrl + "order", order)
   }
 
   addToIdsList(id: number)
@@ -46,5 +55,20 @@ export class ShopService {
   {
     let list : number[] = JSON.parse(sessionStorage.getItem("productIds"))
     return list
+  }
+
+  getOrdersPaged(request: OrdersSummaryRequestDto) : Observable<PagedResult<OrderSummaryDto>>
+  {
+    return this.http.post<PagedResult<OrderSummaryDto>>(this.apiUrl + "orders/paged", request, {withCredentials: true});
+  }
+
+  getInvoice(id: number) : Observable<HttpResponse<Blob>> {
+
+    return this.http.post(`${this.apiUrl}order/invoice/${id}`, null,
+      {
+        observe: 'response',
+        responseType: 'blob',
+        withCredentials: true
+      });
   }
 }

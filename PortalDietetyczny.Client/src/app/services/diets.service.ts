@@ -18,6 +18,7 @@ export class DietsService {
 
   addDiet(dto: AddDietDto): Observable<any>
   {
+    console.log(dto)
     return this.http.post(this.apiUrl, dto, {withCredentials: true});
   }
 

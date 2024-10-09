@@ -18,6 +18,11 @@ export class AccountService
     return this.http.post<any>(this.apiUrl + "/login", dto, { withCredentials: true })
   }
 
+  logout() : Observable<any>
+  {
+    return this.http.post(this.apiUrl + "/logout", null,{ withCredentials: true } )
+  }
+
   isLogedIn(): Observable<any>
   {
     return this.http.post(this.apiUrl,null , { withCredentials: true })

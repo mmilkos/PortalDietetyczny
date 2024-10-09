@@ -76,9 +76,9 @@ public class AddRecipeCommandHandler : IdentifierGenerator, IRequestHandler<AddR
             return result;
         }
 
-        recipe.RecipeTags =  await GetRecipeTags(dto.TagsIds, recipe);
+        recipe.RecipeTags =  await GetRecipeTagsAsync(dto.TagsIds, recipe);
         
-        recipe.Ingredients = await GetRecipeIngredients(dto.Ingredients, recipe);
+        recipe.Ingredients = await GetRecipeIngredientsAsync(dto.Ingredients, recipe);
 
         try
         {
@@ -93,12 +93,12 @@ public class AddRecipeCommandHandler : IdentifierGenerator, IRequestHandler<AddR
         return result;
     }
     
-    private async Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
+    private Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
     { 
-        return await _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Recipes_photos), cancellationToken);
+        return _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Recipes_photos), cancellationToken);
     }
 
-    private async Task<List<RecipeTag>> GetRecipeTags(List<int> tagsIds, Recipe recipe)
+    private async Task<List<RecipeTag>> GetRecipeTagsAsync(List<int> tagsIds, Recipe recipe)
     {
         List<RecipeTag> recipeTags = [];
         var tags = await _repository.GetAllEntitiesAsync<Tag>(tag => tagsIds.Contains(tag.Id));
@@ -119,7 +119,7 @@ public class AddRecipeCommandHandler : IdentifierGenerator, IRequestHandler<AddR
         return recipeTags;
     }
 
-    private async Task<List<RecipeIngredient>> GetRecipeIngredients(List<RecipeIngredientDto> ingredientDtos, Recipe recipe)
+    private async Task<List<RecipeIngredient>> GetRecipeIngredientsAsync(List<RecipeIngredientDto> ingredientDtos, Recipe recipe)
     {
         var ingredientIds = ingredientDtos.Select(i => i.Id).ToList();
 

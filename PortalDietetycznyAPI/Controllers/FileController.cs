@@ -19,7 +19,7 @@ public class FileController : ControllerBase
         _mediator = mediator;
     }
     
-    /*[Authorize]*/
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> AddFile([FromBody] AddFileDto dto)
     {
@@ -31,8 +31,9 @@ public class FileController : ControllerBase
         return StatusCode(500, result.ErrorsList);
     }
     
+    [Authorize]
     [HttpDelete("{id}")]
-    public async Task<ActionResult> AddFile([FromRoute] int id)
+    public async Task<ActionResult> DeleteFile([FromRoute] int id)
     {
         var result = await _mediator.Send(new DeleteFileCommand(id));
         if (result.Success) return Ok();

@@ -99,14 +99,14 @@ public class AddDietCommandHandler : IRequestHandler<AddDietCommand, OperationRe
         return operationResult;
     }
     
-    private async Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
+    private Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
     {
-         return await _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Diets_photos), cancellationToken);
+         return _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Diets_photos), cancellationToken);
     }
 
-    private async Task<OperationResult<StoredFile>> SendFile(AddFileDto fileDto)
+    private Task<OperationResult<StoredFile>> SendFile(AddFileDto fileDto)
     {
-        return await _mediator.Send(new UploadFileCommand(fileDto));
+        return _mediator.Send(new UploadFileCommand(fileDto));
     }
     
     private async Task<List<DietTag>> GetDietTags(List<int> tagsIds, Diet diet)

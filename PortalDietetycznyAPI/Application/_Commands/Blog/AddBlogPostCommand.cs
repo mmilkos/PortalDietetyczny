@@ -86,14 +86,11 @@ public class AddBlogPostCommandHandler : IdentifierGenerator, IRequestHandler<Ad
         return operationResult;
     }
     
-    private async Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
+    private Task<OperationResult<Photo>> GetPhoto(byte[] fileBytes, string fileName, CancellationToken cancellationToken)
     {
-        if (fileBytes.Length > 0) return await _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Blog_photos), cancellationToken);
+        if (fileBytes.Length > 0) return _mediator.Send(new UploadPhotoCommand(fileBytes, fileName, FoldersNamesRes.Blog_photos), cancellationToken);
 
-        return new OperationResult<Photo>()
-        {
-            Data = null
-        };
+        return Task.FromResult(new OperationResult<Photo>() { Data = null });
     }
 }
 

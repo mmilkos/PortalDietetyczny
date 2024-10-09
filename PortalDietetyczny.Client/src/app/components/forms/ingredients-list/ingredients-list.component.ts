@@ -25,13 +25,10 @@ export class IngredientsListComponent
         Name: this.addIngredients.get("name").value
       }
 
-      console.log(ingredient)
-
       this.recipesService.addIngredient(ingredient).subscribe(
         (response)=> this.addIngredients.reset(),
         (error) => console.log(error)
       )
-
   }
 
 }

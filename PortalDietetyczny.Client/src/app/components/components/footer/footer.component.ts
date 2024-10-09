@@ -14,7 +14,6 @@ export class FooterComponent
   }
   navigateTo(url : string)
   {
-    console.log(url)
     this.router.navigate([url])
   }
   openLinkedin() {

@@ -198,6 +198,9 @@ namespace PortalDietetycznyAPI.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<string>("InvoiceId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("IssueDate")
                         .HasColumnType("datetime2");
 
@@ -383,10 +386,15 @@ namespace PortalDietetycznyAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Files");
                 });
@@ -413,22 +421,49 @@ namespace PortalDietetycznyAPI.Migrations
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("PasswordSalt")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -454,9 +489,8 @@ namespace PortalDietetycznyAPI.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("PortalDietetycznyAPI.Domain.Entities.Order", null)
-                        .WithMany("OrderedDiets")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .WithMany("Diets")
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("PortalDietetycznyAPI.Domain.Entities.StoredFile", "File")
                         .WithMany()
@@ -515,6 +549,9 @@ namespace PortalDietetycznyAPI.Migrations
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
+                            b1.Property<int>("Nip")
+                                .HasColumnType("int");
+
                             b1.Property<string>("Street")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
@@ -543,6 +580,9 @@ namespace PortalDietetycznyAPI.Migrations
                             b1.Property<string>("Name")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("Nip")
+                                .HasColumnType("int");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
@@ -652,6 +692,14 @@ namespace PortalDietetycznyAPI.Migrations
                     b.Navigation("Tag");
                 });
 
+            modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.StoredFile", b =>
+                {
+                    b.HasOne("PortalDietetycznyAPI.Domain.Entities.Order", null)
+                        .WithMany("StoredFiles")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.BlogPost", b =>
                 {
                     b.Navigation("Photo");
@@ -672,7 +720,9 @@ namespace PortalDietetycznyAPI.Migrations
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Order", b =>
                 {
-                    b.Navigation("OrderedDiets");
+                    b.Navigation("Diets");
+
+                    b.Navigation("StoredFiles");
                 });
 
             modelBuilder.Entity("PortalDietetycznyAPI.Domain.Entities.Recipe", b =>
