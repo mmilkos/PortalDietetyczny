@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PortalDietetycznyAPI.Domain.Common;
@@ -54,7 +53,7 @@ public class AddIngredientCommandHandler : IRequestHandler<AddIngredientCommand,
         }
         catch (DbUpdateException e)
         {
-            if (e.InnerException is SqlException { Number: 2601 })
+            if (e.InnerException is Npgsql.PostgresException pgException && pgException.SqlState == "23505")
                 operationResult.AddError(ErrorsRes.IngredientAlreadyInDb);
 
             return operationResult;

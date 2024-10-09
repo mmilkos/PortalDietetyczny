@@ -37,7 +37,7 @@ public class BaseTests : IDisposable
         var services = new ServiceCollection();
 
         var dbContextOptions = new DbContextOptionsBuilder<Db>()
-            .UseSqlServer("Server=LAPTOP-MMILKOS;Database=PortalDietetycznyDbTests;Trusted_Connection=True;TrustServerCertificate=True")
+            .UseNpgsql("Server=LAPTOP-MMILKOS;Database=PortalDietetycznyDbTests;Trusted_Connection=True;TrustServerCertificate=True")
             .Options;
         
         _dbContext = new Db(dbContextOptions);

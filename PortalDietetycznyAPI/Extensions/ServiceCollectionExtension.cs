@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using Hangfire.PostgreSql;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +19,11 @@ public static class ServiceCollectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Database");
-        services.AddDbContext<Db>(options => options.UseSqlServer(connectionString));
+        var password = Environment.GetEnvironmentVariable("password");
+        var connectionString = configuration.GetConnectionString("Dev");
+        connectionString = connectionString.Replace("[password]", password);
+        
+        services.AddDbContext<Db>(options => options.UseNpgsql(connectionString));
         services.AddScoped<IPDRepository, PdRepository>();
 
         services.AddScoped<AccountSeeder>();
@@ -29,7 +33,9 @@ public static class ServiceCollectionExtension
     {
         Microsoft.Playwright.Program.Main(["install"]);
         const string bearer = "Bearer";
-        var connectionString = configuration.GetConnectionString("Database");
+        var password = Environment.GetEnvironmentVariable("password");
+        var connectionString = configuration.GetConnectionString("Prod");
+        connectionString = connectionString.Replace("[password]", password);
         
         services.AddSingleton<IKeyService,KeyService>();
         services.AddScoped<IEmailService,EmailService>();
@@ -42,7 +48,7 @@ public static class ServiceCollectionExtension
         
         services.AddHangfire(cfg =>
         {
-            cfg.UseSqlServerStorage(connectionString);
+            cfg.UsePostgreSqlStorage(connectionString);
         });
         
         services.AddHangfireServer();
