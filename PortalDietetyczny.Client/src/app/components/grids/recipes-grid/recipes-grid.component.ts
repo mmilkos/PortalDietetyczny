@@ -92,7 +92,6 @@ export class RecipesGridComponent implements OnInit
       dto =>
       {
         this.ingredientNames = dto.names;
-        console.log(this.ingredientNames)
       },
       error => console.log(error)
     )

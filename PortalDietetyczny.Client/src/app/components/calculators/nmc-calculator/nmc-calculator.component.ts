@@ -32,8 +32,6 @@ export class NmcCalculatorComponent
 
     let result = 0;
 
-    console.log(gender)
-
 
     if (gender == 0)
     {

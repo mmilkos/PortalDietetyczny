@@ -68,7 +68,6 @@ export class DietsGridComponent implements OnInit
       dto =>
       {
         this.tagsNames = dto.names;
-        console.log(this.tagsNames)
       },
       error => console.log(error)
     )

@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AddFileDto } from '../DTOs/AddFileDto';
 import { NamesListDto } from '../DTOs/IdAndName';
+import { config } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilesService
 {
-  apiUrl: string = "https://localhost:44317/api/file"
+  apiUrl: string =  config.API_URL + "file"
 
   constructor(private http: HttpClient) { }
 

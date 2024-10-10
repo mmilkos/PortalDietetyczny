@@ -19,7 +19,6 @@ export class DietCardComponent
 
   addToCart()
   {
-    console.log(this.info.id)
     this.shopService.addToIdsList(this.info.id);
   }
 }

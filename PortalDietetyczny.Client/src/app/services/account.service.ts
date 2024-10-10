@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginUserRequestDto } from '../DTOs/LoginUserRequestDto';
 import { JwtTokenDto } from '../DTOs/JwtTokenDto';
+import { config } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService
 {
-  apiUrl: string = "https://localhost:44317/api/account"
+  apiUrl: string = config.API_URL + "account"
 
   constructor(private http: HttpClient) { }
 

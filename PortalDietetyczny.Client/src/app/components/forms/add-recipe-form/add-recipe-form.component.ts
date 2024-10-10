@@ -117,7 +117,6 @@ export class AddRecipeFormComponent
   }
 
   addStep() {
-    console.log(this.newStep)
       this.steps.push(this.newStep);
       this.newStep = ''; // clear the input
   }

@@ -7,18 +7,19 @@ import { AddTagDto } from '../DTOs/AddTagDto';
 import { PagedResult } from '../models/PagedResult';
 import { DietPreviewDto } from '../DTOs/DietPreviewDto';
 import { DietsPreviewPageRequest } from '../DTOs/DietsPreviewPageRequest';
+import { config } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DietsService {
-  apiUrl: string = "https://localhost:44317/api/diets"
+  apiUrl: string =  config.API_URL + "diets"
+
   dietsIds : number[] = []
   constructor(private http : HttpClient) { }
 
   addDiet(dto: AddDietDto): Observable<any>
   {
-    console.log(dto)
     return this.http.post(this.apiUrl, dto, {withCredentials: true});
   }
 
@@ -34,7 +35,6 @@ export class DietsService {
 
   addTag(tag: AddTagDto): Observable<any>
   {
-    console.log(tag)
     return this.http.post<any>(this.apiUrl + '/tags', tag, {withCredentials: true});
   }
   deleteTag(id: number): Observable<any>

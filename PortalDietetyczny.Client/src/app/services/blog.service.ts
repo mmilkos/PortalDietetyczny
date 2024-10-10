@@ -7,18 +7,18 @@ import { BlogPostPreviewDto } from '../DTOs/BlogPostPreviewDto';
 import { BlogPostsPreviewPageRequest } from '../DTOs/BlogPostsPreviewPageRequest';
 import { BlogPostDetailsDto } from '../DTOs/BlogPostDetailsDto';
 import { NamesListDto } from '../DTOs/IdAndName';
+import { config } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService
 {
-  apiUrl: string = "https://localhost:44317/api/blog"
+  apiUrl: string = config.API_URL + "blog"
   constructor(private http: HttpClient) { }
 
   addBlogPost(post: AddBlogPostDto): Observable<any>
   {
-    console.log(post)
     return this.http.post<any>(this.apiUrl, post, {withCredentials: true});
   }
 
@@ -39,7 +39,6 @@ export class BlogService
 
   deleteBlogPost(id: number): Observable<any>
   {
-    console.log(this.apiUrl + `/${id}}`)
     return this.http.delete(this.apiUrl + `/${id}`)
   }
 

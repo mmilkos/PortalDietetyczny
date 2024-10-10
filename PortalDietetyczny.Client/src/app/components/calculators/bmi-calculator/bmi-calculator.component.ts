@@ -35,8 +35,6 @@ export class BmiCalculatorComponent implements OnInit
 
     let fixed = result.toFixed(1)
 
-    console.log(result)
-
     switch (true)
     {
       case (result < 18.5):

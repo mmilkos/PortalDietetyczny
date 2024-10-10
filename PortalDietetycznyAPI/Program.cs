@@ -1,6 +1,7 @@
 using Flurl.Http;
 using Hangfire;
 using MediatR;
+using Microsoft.Extensions.FileProviders;
 using PortalDietetycznyAPI.Extensions;
 using PortalDietetycznyAPI.Infrastructure.Seeders;
 
@@ -14,6 +15,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.WebHost.UseUrls("https://localhost:7178");
 
 var app = builder.Build();
 
@@ -37,10 +40,27 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "wwwroot/browser")
+    ),
+    RequestPath = ""
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "wwwroot/browser")
+    ),
+    RequestPath = ""
+});
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapControllers();
+app.MapFallbackToController("Index", "FallBack");
 
 app.UseHangfireDashboard();
 
 app.Run();
-
-"https://localhost:44317/api/account/login".GetAsync();

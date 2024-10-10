@@ -6,12 +6,13 @@ import { OrderDto } from '../DTOs/OrderDto';
 import { OrderSummaryDto } from '../DTOs/OrderSummaryDto';
 import { PagedResult } from '../models/PagedResult';
 import { OrdersSummaryRequestDto } from '../DTOs/OrdersSummaryRequestDto';
+import { config } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-  apiUrl: string = "https://localhost:44317/api/shop/"
+  apiUrl: string = config.API_URL + "shop/"
   constructor(private http : HttpClient)
   {
     let list : number[] = []

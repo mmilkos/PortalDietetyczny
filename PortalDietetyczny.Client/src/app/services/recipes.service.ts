@@ -9,13 +9,14 @@ import { NamesListDto} from '../DTOs/IdAndName';
 import { AddRecipeDto } from '../DTOs/AddRecipeDto';
 import { RecipesPreviewPageRequest } from '../DTOs/RecipesPreviewPageRequest';
 import { RecipeDetailsDto } from '../DTOs/RecipeDetailsDto';
+import { config } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipesService
 {
-  apiUrl: string = "https://localhost:44317/api/recipes"
+  apiUrl: string = config.API_URL + "recipes"
 
   constructor(private http: HttpClient) { }
 
@@ -51,7 +52,6 @@ export class RecipesService
 
   addIngredient(recipe: AddIngredientDto): Observable<any>
   {
-    console.log(recipe)
     return this.http.post<any>(this.apiUrl + '/ingredients', recipe, {withCredentials: true});
   }
 

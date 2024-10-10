@@ -25,11 +25,9 @@ export class BlogDetailsComponent
       (response) =>
       {
         this.postDetails = response
-        console.log(response)
       },
       (error) => console.log(error.error)
     );
-    console.log("test: " + this.postDetails)
   }
 
   previousPage()

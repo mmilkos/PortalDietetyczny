@@ -36,7 +36,6 @@ export class PpmCalculatorComponent
 
     let result = 0;
 
-    console.log(gender)
 
 
     if (gender == 0)

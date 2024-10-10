@@ -107,9 +107,8 @@ export class ShopGridComponent implements OnInit
           } : null,
       }
 
-    console.log(orderDto)
     this.shopService.sendOrder(orderDto).subscribe(
-      respose=> console.log('działa'),
+      respose=> {},
         (error) => console.log(error))
 
     return 1
