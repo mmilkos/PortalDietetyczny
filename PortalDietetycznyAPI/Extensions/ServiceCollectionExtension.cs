@@ -19,11 +19,10 @@ public static class ServiceCollectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        var password = Environment.GetEnvironmentVariable("password");
-        var connectionString = configuration.GetConnectionString("Dev");
-        connectionString = connectionString.Replace("[password]", password);
+       var connection = Environment.GetEnvironmentVariable("connection");
+       
         
-        services.AddDbContext<Db>(options => options.UseNpgsql(connectionString));
+        services.AddDbContext<Db>(options => options.UseNpgsql(connection));
         services.AddScoped<IPDRepository, PdRepository>();
 
         services.AddScoped<AccountSeeder>();
@@ -33,9 +32,7 @@ public static class ServiceCollectionExtension
     {
         Microsoft.Playwright.Program.Main(["install"]);
         const string bearer = "Bearer";
-        var password = Environment.GetEnvironmentVariable("password");
-        var connectionString = configuration.GetConnectionString("Prod");
-        connectionString = connectionString.Replace("[password]", password);
+        var connection = Environment.GetEnvironmentVariable("connection");
         
         services.AddSingleton<IKeyService,KeyService>();
         services.AddScoped<IEmailService,EmailService>();
@@ -48,7 +45,7 @@ public static class ServiceCollectionExtension
         
         services.AddHangfire(cfg =>
         {
-            cfg.UsePostgreSqlStorage(connectionString);
+            cfg.UsePostgreSqlStorage(connection);
         });
         
         services.AddHangfireServer();

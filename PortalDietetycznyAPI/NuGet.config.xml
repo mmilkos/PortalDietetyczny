@@ -1,0 +1,4 @@
+﻿<packageSources>
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    <add key="Google Cloud" value="https://packages.cloud.google.com/nuget/repos" />
+</packageSources>
