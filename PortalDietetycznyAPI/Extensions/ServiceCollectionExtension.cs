@@ -11,28 +11,24 @@ using PortalDietetycznyAPI.Infrastructure.Repositories;
 using PortalDietetycznyAPI.Application.Services;
 using PortalDietetycznyAPI.Domain.Common;
 using PortalDietetycznyAPI.Domain.Entities;
-using PortalDietetycznyAPI.Infrastructure.Seeders;
-
 namespace PortalDietetycznyAPI.Extensions;
 
 public static class ServiceCollectionExtension
 {
-    public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
-    {
-       var connection = Environment.GetEnvironmentVariable("connection");
-       
+    public static void AddInfrastructure(this IServiceCollection services)
+    { 
+        var connection = Environment.GetEnvironmentVariable("connection");
         
         services.AddDbContext<Db>(options => options.UseNpgsql(connection));
         services.AddScoped<IPDRepository, PdRepository>();
-
-        services.AddScoped<AccountSeeder>();
     }
 
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        Microsoft.Playwright.Program.Main(["install"]);
         const string bearer = "Bearer";
-        var connection = Environment.GetEnvironmentVariable("connection");
+        const string token = "token";
+        
+        Microsoft.Playwright.Program.Main(["install"]);
         
         services.AddSingleton<IKeyService,KeyService>();
         services.AddScoped<IEmailService,EmailService>();
@@ -42,6 +38,8 @@ public static class ServiceCollectionExtension
         services.AddTransient<IPostConfigureOptions<JwtBearerOptions>, PostConfigureService>();
         
         services.AddMediatR(typeof(AddIngredientCommand));
+        
+        var connection = Environment.GetEnvironmentVariable("connection");
         
         services.AddHangfire(cfg =>
         {
@@ -58,11 +56,10 @@ public static class ServiceCollectionExtension
             oprion.DefaultAuthenticateScheme = bearer;
             oprion.DefaultScheme = bearer;
             oprion.DefaultChallengeScheme = bearer;
-
         })
         .AddCookie(cookie =>
         {
-            cookie.Cookie.Name = "token";
+            cookie.Cookie.Name = token;
         })
         .AddJwtBearer(options =>
         {
@@ -72,11 +69,10 @@ public static class ServiceCollectionExtension
             {
                 OnMessageReceived = context =>
                 {
-                    context.Token = context.Request.Cookies["token"];
+                    context.Token = context.Request.Cookies[token];
                     return Task.CompletedTask;
                 }
             };
-
         });
     }
 }
